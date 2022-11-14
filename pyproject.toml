@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "njab"
+description = "not Just Another Biomarker"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+license = { file="LICENSE" }
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "statsmodels",
+    "umap-learn",
+    "matplotlib",
+    "mrmr_selection",
+    "pingouin",
+    "seaborn"
+]
+dynamic = ["version"]
+
+
+[tool.setuptools]
+include-package-data = true
+license-files = ['LICENSE']
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["njab*"]
+
+[tools.setuptools.dynamic]
+version = {attr = "njab.__version__"}
