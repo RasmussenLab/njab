@@ -5,6 +5,8 @@ from sklearn.model_selection import RepeatedStratifiedKFold, cross_validate
 from mrmr import mrmr_classif
 
 from .types import Splits, ResultsSplit, Results, AucRocCurve, PrecisionRecallCurve
+from .pca import run_pca
+from .preprocessing import StandardScaler
 
 
 def run_model(splits: Splits,
@@ -74,3 +76,9 @@ def find_n_best_features(X, y, name,
         summary.append(results)
     summary_n_features = pd.concat(summary)
     return summary_n_features
+
+
+def transform_DataFrame(X:pd.DataFrame, fct):
+    ret = fct(X)
+    ret = pd.DataFrame(ret, index=X.index, columns=X.columns)
+    return ret
