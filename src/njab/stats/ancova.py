@@ -118,10 +118,7 @@ class Ancova():
 
 
 
-
-def filter_residuals_from_scores(scores,
-                                 filter_for='Residual',
-                                 random_seed=123):
+def filter_residuals_from_scores(scores:pd.DataFrame, filter_for='Residual') -> pd.DataFrame:
     """Remove residual from pingouin ANCOVA list."""
     scores = scores[scores.Source != filter_for]
     return scores
@@ -140,15 +137,14 @@ class AncovaAll(Ancova):
         return scores.set_index('Source', append=True)
 
 
-def filter_all_covars_from_scores(scores, filter_for: str, random_seed=123):
+def filter_all_covars_from_scores(scores:pd.DataFrame, filter_for: str) -> pd.DataFrame:
     """Only keep feature score from pingouin ANCOVA list."""
     scores = scores[scores.Source == filter_for]
-    scores = add_fdr_scores(scores, random_seed=random_seed)
     return scores
 
 
 class AncovaOnlyTarget(Ancova):
-    def ancova(self, random_seed=123):
+    def ancova(self, random_seed=123) -> pd.DataFrame:
         scores = self.get_scores()
         scores = filter_all_covars_from_scores(scores, filter_for=self.target)
         scores = add_fdr_scores(scores, random_seed=random_seed)
