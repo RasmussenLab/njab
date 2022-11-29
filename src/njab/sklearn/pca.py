@@ -23,3 +23,13 @@ def run_pca(df_wide:pd.DataFrame, n_components:int=2) -> tuple[pd.DataFrame, skl
             var_explained in enumerate(pca.explained_variance_ratio_)]
     PCs = pd.DataFrame(PCs, index=df_wide.index, columns=cols)
     return PCs, pca
+
+
+def plot_explained_variance(pca: sklearn.decomposition.PCA, ax=None):
+    exp_var = pd.Series(
+        pca.explained_variance_ratio_).to_frame('explained variance')
+    exp_var["explained variance (cummulated)"] = exp_var[
+        'explained variance'].cumsum()
+    exp_var.index.name = 'PC'
+    ax = exp_var.plot(ax=ax)
+    return ax

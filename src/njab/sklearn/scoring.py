@@ -57,3 +57,36 @@ def get_label_binary_classification(y_true:int, y_pred:int) -> str:
 #                                  np.array([1, 0, 1, 0]),
 #                                  ['TP', 'FN', 'FP', 'TN']):
 #     assert get_label_binary_classification(y_true, y_pred) == label
+
+
+def get_score(clf, X:pd.DataFrame, pos=1) -> pd.Series:
+    scores = clf.predict_proba(X)
+    if scores.shape[-1] > 2:
+        raise NotImplementedError
+    else:
+        scores = scores[:,pos]
+    scores = pd.Series(scores, index=X.index)
+    return scores
+
+
+def get_pred(clf, X:pd.DataFrame) -> pd.Series:
+    ret = clf.predict(X)
+    ret = pd.Series(ret, index=X.index)
+    return ret
+
+def get_custom_pred(clf, X: pd.DataFrame, cutoff=0.5) -> pd.Series:
+    scores = get_score(clf, X)
+    ret = (scores > 0.5).astype(int)
+    return ret
+    
+    
+
+def get_target_count_per_bin(score: pd.Series, y: pd.Series, n_bins: int = 10):
+    pred_bins = pd.DataFrame({
+        'score':
+        pd.cut(score, bins=list(x / n_bins for x in range(0, n_bins + 1))),
+        'y==1':
+        y
+    })
+    pred_bins = pred_bins.groupby(by='score').sum().astype(int)
+    return pred_bins
