@@ -7,15 +7,26 @@ from mrmr import mrmr_classif
 from .types import Splits, ResultsSplit, Results, AucRocCurve, PrecisionRecallCurve
 from .pca import run_pca
 from .preprocessing import StandardScaler
+from . import scoring
 
 
-def run_model(splits: Splits,
-              model: sklearn.base.BaseEstimator = sklearn.linear_model.LogisticRegression(random_state=42, solver='liblinear'),
-              n_feat_to_select=9,
-              ) -> Results:
-    selected_features = mrmr_classif(X=splits.X_train, y=splits.y_train, K=n_feat_to_select)
+def run_model(
+    splits: Splits,
+    model: sklearn.base.BaseEstimator = sklearn.linear_model.
+    LogisticRegression(random_state=42
+                       #   , solver='liblinear'
+                       ),
+    fit_params=None,
+    n_feat_to_select=9,
+) -> Results:
+    selected_features = mrmr_classif(X=splits.X_train,
+                                     y=splits.y_train,
+                                     K=n_feat_to_select)
 
-    model.fit(splits.X_train[selected_features], splits.y_train)
+    if fit_params is None:
+        fit_params = {}
+
+    model = model.fit(splits.X_train[selected_features], splits.y_train, **fit_params)
 
 
 
@@ -56,7 +67,8 @@ def find_n_best_features(X, y, name,
                          groups=None,
                          n_features_max=15,
                          random_state=42,
-                         scoring=['precision', 'recall', 'f1', 'balanced_accuracy', 'roc_auc']):
+                         scoring=['precision', 'recall', 'f1', 'balanced_accuracy', 'roc_auc', 'average_precision'],
+                         fit_params=None):
     summary = []
     cv = sklearn.model_selection.RepeatedStratifiedKFold(
         n_splits=5, n_repeats=10, random_state=random_state)
@@ -64,11 +76,15 @@ def find_n_best_features(X, y, name,
     # could have a warning in case
     _X = X.loc[in_both]
     _y = y.loc[in_both]
+    n_features_max = min(n_features_max, X.shape[-1])
     for n_features in range(1, n_features_max+1):
         selected_features = mrmr_classif(_X, _y, K=n_features)
         _X_mrmr = _X[selected_features]
         scores = sklearn.model_selection.cross_validate(
-            estimator=model, X=_X_mrmr, y=_y, groups=groups, scoring=scoring, cv=cv)
+            estimator=model, X=_X_mrmr, y=_y,
+            groups=groups, scoring=scoring, cv=cv,
+            fit_params=fit_params,
+            error_score='raise')
         scores['n_features'] = n_features
         scores['test_case'] = name
         scores['n_observations'] = _X.shape[0]
