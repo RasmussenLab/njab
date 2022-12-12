@@ -12,6 +12,8 @@ plt.rcParams['ps.fonttype'] = 42
 
 # seaborn.set_theme()
 
+figsize_a4 = (8.3, 11.7)
+
 logger = logging.getLogger(__name__)
 
 
@@ -21,6 +23,8 @@ def savefig(fig, name, folder: pathlib.Path = '.', pdf=True):
     fname = folder / name
     folder = fname.parent  # in case name specifies folders
     folder.mkdir(exist_ok=True, parents=True)
+    if not fig.get_constrained_layout():
+        fig.tight_layout()
     fig.savefig(fname.with_suffix('.png'))
     if pdf:
         fig.savefig(fname.with_suffix('.pdf'))
