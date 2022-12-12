@@ -17,7 +17,11 @@ def run_pca(df_wide:pd.DataFrame, n_components:int=2) -> tuple[pd.DataFrame, skl
         principal compoments of DataFrame with same indices as in original DataFrame,
         and fitted PCA model of sklearn
     """
-    pca = sklearn.decomposition.PCA(n_components=n_components)
+    n_comp_max = None
+    if n_components is not None:    
+        n_comp_max = min(df_wide.shape)
+        n_comp_max = min(n_comp_max, n_components)
+    pca = sklearn.decomposition.PCA(n_components=n_comp_max)
     PCs = pca.fit_transform(df_wide)
     cols = [f'principal component {i+1} ({var_explained*100:.2f} %)' for i,
             var_explained in enumerate(pca.explained_variance_ratio_)]

@@ -76,7 +76,7 @@ def get_pred(clf, X:pd.DataFrame) -> pd.Series:
 
 def get_custom_pred(clf, X: pd.DataFrame, cutoff=0.5) -> pd.Series:
     scores = get_score(clf, X)
-    ret = (scores > 0.5).astype(int)
+    ret = (scores > cutoff).astype(int)
     return ret
     
     
