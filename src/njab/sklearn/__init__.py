@@ -68,6 +68,7 @@ def find_n_best_features(X, y, name,
                          n_features_max=15,
                          random_state=42,
                          scoring=['precision', 'recall', 'f1', 'balanced_accuracy', 'roc_auc', 'average_precision'],
+                         return_train_score=False,
                          fit_params=None):
     summary = []
     cv = sklearn.model_selection.RepeatedStratifiedKFold(
@@ -81,8 +82,13 @@ def find_n_best_features(X, y, name,
         selected_features = mrmr_classif(_X, _y, K=n_features)
         _X_mrmr = _X[selected_features]
         scores = sklearn.model_selection.cross_validate(
-            estimator=model, X=_X_mrmr, y=_y,
-            groups=groups, scoring=scoring, cv=cv,
+            estimator=model,
+            X=_X_mrmr,
+            y=_y,
+            groups=groups,
+            scoring=scoring,
+            cv=cv,
+            return_train_score=return_train_score,
             fit_params=fit_params,
             error_score='raise')
         scores['n_features'] = n_features

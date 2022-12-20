@@ -15,7 +15,7 @@ class ConfusionMatrix():
         if not hasattr(self, 'df'):
             self.df = pd.DataFrame(self.cm_)
             self.df.index.name = 'true'
-            self.df.columns.name = 'pred'
+            self.df.columns = pd.MultiIndex.from_product([['pred'], self.df.columns])
         return self.df
 
     @property
