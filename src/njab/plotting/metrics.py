@@ -21,11 +21,13 @@ def plot_split_auc(result: ResultsSplit, name: str,
 
 def plot_auc(results: Results,
              ax: matplotlib.axes.Axes = None,
+             label_train='train',
+             label_test='test',
              **kwargs) -> matplotlib.axes.Axes:
     if ax is None:
         fig, ax = plt.subplots(1, 1, **kwargs)
-    ax = plot_split_auc(results.train, f"{results.name} (train)", ax)
-    ax = plot_split_auc(results.test, f"{results.name} (test)", ax)
+    ax = plot_split_auc(results.train, f"{label_train}", ax)
+    ax = plot_split_auc(results.test, f"{label_test}", ax)
     return ax
 
 
@@ -44,9 +46,13 @@ def plot_split_prc(result: ResultsSplit, name: str,
     return ax
 
 
-def plot_prc(results: ResultsSplit, ax: matplotlib.axes.Axes = None, **kwargs):
+def plot_prc(results: ResultsSplit,
+             ax: matplotlib.axes.Axes = None,
+             label_train='train',
+             label_test='test',
+             **kwargs):
     if ax is None:
         fig, ax = plt.subplots(1, 1, **kwargs)
-    ax = plot_split_prc(results.train, f"{results.name} (train)", ax)
-    ax = plot_split_prc(results.test, f"{results.name} (test)", ax)
+    ax = plot_split_prc(results.train, f"{label_train}", ax)
+    ax = plot_split_prc(results.test, f"{label_test}", ax)
     return ax

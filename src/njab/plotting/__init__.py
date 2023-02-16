@@ -25,9 +25,9 @@ def savefig(fig, name, folder: pathlib.Path = '.', pdf=True):
     folder.mkdir(exist_ok=True, parents=True)
     if not fig.get_constrained_layout():
         fig.tight_layout()
-    fig.savefig(fname.with_suffix('.png'))
+    fig.savefig(fname.with_suffix('.png'), bbox_inches = 'tight')
     if pdf:
-        fig.savefig(fname.with_suffix('.pdf'))
+        fig.savefig(fname.with_suffix('.pdf'), bbox_inches = 'tight')
     logger.info(f"Saved Figures to {fname}")
 
 
