@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from importlib.metadata import version
+
 from . import stats, sklearn, plotting
 
-version = "0.0.1"
+__version__ = version('njab')
