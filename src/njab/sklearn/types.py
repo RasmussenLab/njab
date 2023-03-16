@@ -5,13 +5,14 @@ import pandas as pd
 import sklearn
 
 AucRocCurve = namedtuple("AucRocCurve", 'fpr tpr cutoffs')
-PrecisionRecallCurve = namedtuple("PrecisionRecallCurve", 'precision recall cutoffs')
+PrecisionRecallCurve = namedtuple("PrecisionRecallCurve",
+                                  'precision recall cutoffs')
 
 
 @dataclass
 class ResultsSplit:
-    auc: float = None # receiver operation curve area under the curve
-    aps: float = None # average precision score
+    auc: float = None  # receiver operation curve area under the curve
+    aps: float = None  # average precision score
     roc: AucRocCurve = None
     prc: PrecisionRecallCurve = None
 

@@ -25,9 +25,9 @@ def savefig(fig, name, folder: pathlib.Path = '.', pdf=True):
     folder.mkdir(exist_ok=True, parents=True)
     if not fig.get_constrained_layout():
         fig.tight_layout()
-    fig.savefig(fname.with_suffix('.png'), bbox_inches = 'tight')
+    fig.savefig(fname.with_suffix('.png'), bbox_inches='tight')
     if pdf:
-        fig.savefig(fname.with_suffix('.pdf'), bbox_inches = 'tight')
+        fig.savefig(fname.with_suffix('.pdf'), bbox_inches='tight')
     logger.info(f"Saved Figures to {fname}")
 
 
@@ -79,19 +79,20 @@ def select_dates(date_series: pd.Series, max_ticks=30) -> np.array:
 
 
 def make_large_descriptors(size='xx-large'):
-    """Helper function to have very large titles, labes and tick texts for 
+    """Helper function to have very large titles, labes and tick texts for
     matplotlib plots per default.
-    
+
     size: str
         fontsize or allowed category. Change default if necessary, default 'xx-large'
     """
-    plt.rcParams.update({k: size for k in ['xtick.labelsize',
-                                           'ytick.labelsize',
-                                           'axes.titlesize',
-                                           'axes.labelsize',
-                                           'legend.fontsize',
-                                           'legend.title_fontsize']
-                         })
+    plt.rcParams.update({
+        k: size
+        for k in [
+            'xtick.labelsize', 'ytick.labelsize', 'axes.titlesize',
+            'axes.labelsize', 'legend.fontsize', 'legend.title_fontsize'
+        ]
+    })
+
 
 set_font_sizes = make_large_descriptors
 

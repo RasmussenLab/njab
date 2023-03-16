@@ -26,18 +26,18 @@ def run_model(
     if fit_params is None:
         fit_params = {}
 
-    model = model.fit(splits.X_train[selected_features], splits.y_train, **fit_params)
+    model = model.fit(splits.X_train[selected_features], splits.y_train,
+                      **fit_params)
 
-
-
-    pred_score_test = model.predict_proba(
-        splits.X_test[selected_features])[:, 1]
-    results_test = get_results_split(y_true=splits.y_test, y_score=pred_score_test)
+    pred_score_test = model.predict_proba(splits.X_test[selected_features])[:,
+                                                                            1]
+    results_test = get_results_split(y_true=splits.y_test,
+                                     y_score=pred_score_test)
 
     pred_score_train = model.predict_proba(
         splits.X_train[selected_features])[:, 1]
-    results_train = get_results_split(y_true=splits.y_train, y_score=pred_score_train)
-
+    results_train = get_results_split(y_true=splits.y_train,
+                                      y_score=pred_score_train)
 
     ret = Results(model=model,
                   selected_features=selected_features,
@@ -47,29 +47,35 @@ def run_model(
 
 
 def get_results_split(y_true, y_score):
-    ret = ResultsSplit(auc=sklearn.metrics.roc_auc_score(
-        y_true=y_true, y_score=y_score))
+    ret = ResultsSplit(
+        auc=sklearn.metrics.roc_auc_score(y_true=y_true, y_score=y_score))
 
     ret.roc = AucRocCurve(
         *sklearn.metrics.roc_curve(y_true=y_true, y_score=y_score))
     ret.prc = PrecisionRecallCurve(*sklearn.metrics.precision_recall_curve(
         y_true=y_true, probas_pred=y_score))
 
-    ret.aps = sklearn.metrics.average_precision_score(
-        y_true=y_true,
-        y_score=y_score)
+    ret.aps = sklearn.metrics.average_precision_score(y_true=y_true,
+                                                      y_score=y_score)
     return ret
 
 
 # model = LogisticRegression(random_state=random_state, solver='liblinear')
-def find_n_best_features(X, y, name,
-                         model=sklearn.linear_model.LogisticRegression(random_state=42, solver='liblinear'),
-                         groups=None,
-                         n_features_max=15,
-                         random_state=42,
-                         scoring=['precision', 'recall', 'f1', 'balanced_accuracy', 'roc_auc', 'average_precision'],
-                         return_train_score=False,
-                         fit_params=None):
+def find_n_best_features(
+        X,
+        y,
+        name,
+        model=sklearn.linear_model.LogisticRegression(random_state=42,
+                                                      solver='liblinear'),
+        groups=None,
+        n_features_max=15,
+        random_state=42,
+        scoring=[
+            'precision', 'recall', 'f1', 'balanced_accuracy', 'roc_auc',
+            'average_precision'
+        ],
+        return_train_score=False,
+        fit_params=None):
     summary = []
     cv = sklearn.model_selection.RepeatedStratifiedKFold(
         n_splits=5, n_repeats=10, random_state=random_state)
@@ -78,7 +84,7 @@ def find_n_best_features(X, y, name,
     _X = X.loc[in_both]
     _y = y.loc[in_both]
     n_features_max = min(n_features_max, X.shape[-1])
-    for n_features in range(1, n_features_max+1):
+    for n_features in range(1, n_features_max + 1):
         selected_features = mrmr_classif(_X, _y, K=n_features)
         _X_mrmr = _X[selected_features]
         scores = sklearn.model_selection.cross_validate(
@@ -100,7 +106,7 @@ def find_n_best_features(X, y, name,
     return summary_n_features
 
 
-def transform_DataFrame(X:pd.DataFrame, fct):
+def transform_DataFrame(X: pd.DataFrame, fct):
     ret = fct(X)
     ret = pd.DataFrame(ret, index=X.index, columns=X.columns)
     return ret

@@ -4,7 +4,6 @@ import sklearn.metrics as sklm
 
 class ConfusionMatrix():
     """Wrapper for `sklearn.metrics.confusion_matrix`"""
-
     def __init__(self, y_true, y_pred):
         self.cm_ = sklm.confusion_matrix(y_true, y_pred)
 
@@ -15,7 +14,8 @@ class ConfusionMatrix():
         if not hasattr(self, 'df'):
             self.df = pd.DataFrame(self.cm_)
             self.df.index.name = 'true'
-            self.df.columns = pd.MultiIndex.from_product([['pred'], self.df.columns])
+            self.df.columns = pd.MultiIndex.from_product([['pred'],
+                                                          self.df.columns])
         return self.df
 
     @property
@@ -32,7 +32,7 @@ class ConfusionMatrix():
         return repr(self.cm_)
 
 
-def get_label_binary_classification(y_true:int, y_pred:int) -> str:
+def get_label_binary_classification(y_true: int, y_pred: int) -> str:
     if y_true == 1:
         if y_pred == 1:
             return 'TP'
@@ -59,27 +59,27 @@ def get_label_binary_classification(y_true:int, y_pred:int) -> str:
 #     assert get_label_binary_classification(y_true, y_pred) == label
 
 
-def get_score(clf, X:pd.DataFrame, pos=1) -> pd.Series:
+def get_score(clf, X: pd.DataFrame, pos=1) -> pd.Series:
     scores = clf.predict_proba(X)
     if scores.shape[-1] > 2:
         raise NotImplementedError
     else:
-        scores = scores[:,pos]
+        scores = scores[:, pos]
     scores = pd.Series(scores, index=X.index)
     return scores
 
 
-def get_pred(clf, X:pd.DataFrame) -> pd.Series:
+def get_pred(clf, X: pd.DataFrame) -> pd.Series:
     ret = clf.predict(X)
     ret = pd.Series(ret, index=X.index)
     return ret
+
 
 def get_custom_pred(clf, X: pd.DataFrame, cutoff=0.5) -> pd.Series:
     scores = get_score(clf, X)
     ret = (scores > cutoff).astype(int)
     return ret
-    
-    
+
 
 def get_target_count_per_bin(score: pd.Series, y: pd.Series, n_bins: int = 10):
     pred_bins = pd.DataFrame({

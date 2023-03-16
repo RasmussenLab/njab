@@ -55,15 +55,18 @@ def diff_analysis(
     return ret
 
 
-def binomtest(var: pd.Series,
-              boolean_array: pd.Series,
-              alternative='two-sided',
-              event_names: tuple[str, str] = ('event', 'no-event')) -> pd.DataFrame:
+def binomtest(
+    var: pd.Series,
+    boolean_array: pd.Series,
+    alternative='two-sided',
+    event_names: tuple[str, str] = ('event', 'no-event')
+) -> pd.DataFrame:
     entry = {}
     entry['variable'] = var.name
 
     if var.dtype != 'category':
-        logger.warn(f"Passed on categorical data (which was expected): {var.name}")
+        logger.warn(
+            f"Passed on categorical data (which was expected): {var.name}")
         var = var.astype('category')
 
     assert len(

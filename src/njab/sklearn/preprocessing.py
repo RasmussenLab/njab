@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn import preprocessing
 
+
 class StandardScaler(preprocessing.StandardScaler):
     def transform(self, X, copy=None):
         res = super().transform(X, copy)

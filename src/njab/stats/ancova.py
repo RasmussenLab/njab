@@ -13,7 +13,7 @@ def ancova_pg(df_long: pd.DataFrame,
               fdr=0.05) -> pd.DataFrame:
     """ Analysis of covariance (ANCOVA) using pg.ancova
     https://pingouin-stats.org/generated/pingouin.ancova.html
-    
+
     Adds multiple hypothesis testing correction by Benjamini-Hochberg
     (qvalue, rejected)
 
@@ -117,8 +117,8 @@ class Ancova():
         raise NotImplementedError
 
 
-
-def filter_residuals_from_scores(scores:pd.DataFrame, filter_for='Residual') -> pd.DataFrame:
+def filter_residuals_from_scores(scores: pd.DataFrame,
+                                 filter_for='Residual') -> pd.DataFrame:
     """Remove residual from pingouin ANCOVA list."""
     scores = scores[scores.Source != filter_for]
     return scores
@@ -137,7 +137,8 @@ class AncovaAll(Ancova):
         return scores.set_index('Source', append=True)
 
 
-def filter_all_covars_from_scores(scores:pd.DataFrame, filter_for: str) -> pd.DataFrame:
+def filter_all_covars_from_scores(scores: pd.DataFrame,
+                                  filter_for: str) -> pd.DataFrame:
     """Only keep feature score from pingouin ANCOVA list."""
     scores = scores[scores.Source == filter_for]
     return scores
