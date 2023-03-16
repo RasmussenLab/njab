@@ -1,6 +1,6 @@
 import pandas as pd
 import sklearn
-from sklearn.model_selection import RepeatedStratifiedKFold, cross_validate
+import sklearn.model_selection
 
 from mrmr import mrmr_classif
 
@@ -9,13 +9,26 @@ from .pca import run_pca
 from .preprocessing import StandardScaler
 from . import scoring
 
+__all__ = [
+    'run_model',
+    'get_results_split',
+    'find_n_best_features',
+    'run_pca',
+    'scoring',
+    'StandardScaler',
+]
+
+RANDOM_STATE = 42
+
+default_log_reg = sklearn.linear_model.LogisticRegression(
+    random_state=RANDOM_STATE
+    #   , solver='liblinear'
+)
+
 
 def run_model(
     splits: Splits,
-    model: sklearn.base.BaseEstimator = sklearn.linear_model.
-    LogisticRegression(random_state=42
-                       #   , solver='liblinear'
-                       ),
+    model: sklearn.base.BaseEstimator = default_log_reg,
     fit_params=None,
     n_feat_to_select=9,
 ) -> Results:
@@ -60,22 +73,22 @@ def get_results_split(y_true, y_score):
     return ret
 
 
-# model = LogisticRegression(random_state=random_state, solver='liblinear')
-def find_n_best_features(
-        X,
-        y,
-        name,
-        model=sklearn.linear_model.LogisticRegression(random_state=42,
-                                                      solver='liblinear'),
-        groups=None,
-        n_features_max=15,
-        random_state=42,
-        scoring=[
-            'precision', 'recall', 'f1', 'balanced_accuracy', 'roc_auc',
-            'average_precision'
-        ],
-        return_train_score=False,
-        fit_params=None):
+default_log_reg = sklearn.linear_model.LogisticRegression(
+    random_state=RANDOM_STATE, solver='liblinear')
+
+
+def find_n_best_features(X,
+                         y,
+                         name,
+                         model=default_log_reg,
+                         groups=None,
+                         n_features_max=15,
+                         random_state=RANDOM_STATE,
+                         scoring=('precision', 'recall', 'f1',
+                                  'balanced_accuracy', 'roc_auc',
+                                  'average_precision'),
+                         return_train_score=False,
+                         fit_params=None):
     summary = []
     cv = sklearn.model_selection.RepeatedStratifiedKFold(
         n_splits=5, n_repeats=10, random_state=random_state)

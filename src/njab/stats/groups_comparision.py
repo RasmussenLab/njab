@@ -1,8 +1,6 @@
 import logging
-import numpy as np
 import pandas as pd
 import pingouin as pg
-import statsmodels
 
 from scipy.stats import binomtest as scipy_binomtest
 
@@ -43,10 +41,11 @@ def calc_stats(df: pd.DataFrame, boolean_array: pd.Series,
 
 
 def diff_analysis(
-        df: pd.DataFrame,
-        boolean_array: pd.Series,
-        event_names: tuple[str, str] = ('1', '0'),
-        ttest_vars=["alternative", "p-val", "cohen-d"]) -> pd.DataFrame:
+    df: pd.DataFrame,
+    boolean_array: pd.Series,
+    event_names: tuple[str, str] = ('1', '0'),
+    ttest_vars=("alternative", "p-val", "cohen-d")
+) -> pd.DataFrame:
     ret = means_between_groups(df,
                                boolean_array=boolean_array,
                                event_names=event_names)

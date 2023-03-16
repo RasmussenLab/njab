@@ -4,13 +4,10 @@ import matplotlib
 import logging
 import pathlib
 import matplotlib.pyplot as plt
-import seaborn
 
 plt.rcParams['figure.figsize'] = [16.0, 7.0]
 plt.rcParams['pdf.fonttype'] = 42
 plt.rcParams['ps.fonttype'] = 42
-
-# seaborn.set_theme()
 
 figsize_a4 = (8.3, 11.7)
 
@@ -143,9 +140,9 @@ def add_height_to_barplot(ax, size=15):
 
 
 def add_text_to_barplot(ax, text, size=15):
-    for bar, text in zip(ax.patches, text):
+    for bar, text_bar in zip(ax.patches, text):
         logger.debug(f"{bar = }, f{text = }, {bar.get_height() = }")
-        ax.annotate(text=text,
+        ax.annotate(text=text_bar,
                     xy=(bar.get_x() + bar.get_width() / 2, bar.get_height()),
                     xytext=(0, -5),
                     rotation=90,
