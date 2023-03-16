@@ -4,6 +4,7 @@ import sklearn.metrics as sklm
 
 class ConfusionMatrix():
     """Wrapper for `sklearn.metrics.confusion_matrix`"""
+
     def __init__(self, y_true, y_pred):
         self.cm_ = sklm.confusion_matrix(y_true, y_pred)
 

@@ -2,10 +2,11 @@
 
 ## Using tox with anaconda
 
-tox is recommended to use `pipx`. tox does not seem to work out of the box
+[tox](https://tox.wiki/en/latest/installation.html) is recommended to use `pipx`.
+tox does not seem to work out of the box
 with conda based python installation.
 
-- install pipx into your base environment
+Install pipx into your base environment:
 
 ```bash
 # to base

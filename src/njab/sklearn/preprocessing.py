@@ -3,6 +3,7 @@ from sklearn import preprocessing
 
 
 class StandardScaler(preprocessing.StandardScaler):
+
     def transform(self, X, copy=None):
         res = super().transform(X, copy)
         if isinstance(X, pd.DataFrame):
