@@ -1,3 +1,4 @@
+from __future__ import annotations
 import numpy as np
 import pandas as pd
 
@@ -62,10 +63,11 @@ def ancova_pg(df_long: pd.DataFrame,
 def add_fdr_scores(scores: pd.DataFrame,
                    random_seed: int = None,
                    alpha=0.05,
-                   method='indep') -> pd.DataFrame:
+                   method='indep',
+                   p_val_column='p-unc') -> pd.DataFrame:
     if random_seed is not None:
         np.random.seed(random_seed)
-    reject, qvalue = statsmodels.stats.multitest.fdrcorrection(scores['p-unc'],
+    reject, qvalue = statsmodels.stats.multitest.fdrcorrection(scores[p_val_column],
                                                                alpha=alpha,
                                                                method=method)
     scores['qvalue'] = qvalue
