@@ -4,6 +4,7 @@ import pandas as pd
 
 from njab.sklearn.types import ResultsSplit, Results
 
+LIMITS = (-0.05, 1.05)
 
 def plot_split_auc(result: ResultsSplit, name: str,
                    ax: matplotlib.axes.Axes) -> matplotlib.axes.Axes:
@@ -15,6 +16,8 @@ def plot_split_auc(result: ResultsSplit, name: str,
                     xlabel='false positive rate',
                     ylabel='true positive rate',
                     style='.-',
+                    ylim=LIMITS,
+                    xlim=LIMITS,
                     ax=ax)
     return ax
 
@@ -42,6 +45,8 @@ def plot_split_prc(result: ResultsSplit, name: str,
                     xlabel='true positive rate',
                     ylabel='precision',
                     style='.-',
+                    ylim=LIMITS,
+                    xlim=LIMITS,
                     ax=ax)
     return ax
 

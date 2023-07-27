@@ -8,16 +8,23 @@ class ConfusionMatrix():
     def __init__(self, y_true, y_pred):
         self.cm_ = sklm.confusion_matrix(y_true, y_pred)
 
-    @property
-    def as_dataframe(self):
+    def as_dataframe(self, names=('true', 'pred')) -> pd.DataFrame:
         """Create pandas.DataFrame and return.
         Names rows and columns."""
         if not hasattr(self, 'df'):
+            true_name, pred_name = names
             self.df = pd.DataFrame(self.cm_)
-            self.df.index.name = 'true'
-            self.df.columns = pd.MultiIndex.from_product([['pred'],
+            self.df.index.name = true_name
+            self.df.columns = pd.MultiIndex.from_product([[pred_name],
                                                           self.df.columns])
         return self.df
+
+    def classification_label(self) -> dict:
+        tn, fp, fn, tp = self.cm_.ravel()
+        return {'TN': tn, 'FP': fp, 'FN': fn, 'TP': tp}
+
+    def as_classification_series(self) -> pd.Series:
+        return pd.Series(self.classification_label())
 
     @property
     def as_array(self):

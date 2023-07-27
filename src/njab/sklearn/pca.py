@@ -39,6 +39,7 @@ def run_pca(
 def plot_explained_variance(pca: sklearn.decomposition.PCA, ax=None):
     exp_var = pd.Series(
         pca.explained_variance_ratio_).to_frame('explained variance')
+    exp_var.index += 1  # start at 1
     exp_var["explained variance (cummulated)"] = exp_var[
         'explained variance'].cumsum()
     exp_var.index.name = 'PC'
