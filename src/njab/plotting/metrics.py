@@ -6,6 +6,7 @@ from njab.sklearn.types import ResultsSplit, Results
 
 LIMITS = (-0.05, 1.05)
 
+
 def plot_split_auc(result: ResultsSplit, name: str,
                    ax: matplotlib.axes.Axes) -> matplotlib.axes.Axes:
     col_name = f"{name} (auc: {result.auc:.3f})"

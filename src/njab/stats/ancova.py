@@ -67,9 +67,8 @@ def add_fdr_scores(scores: pd.DataFrame,
                    p_val_column='p-unc') -> pd.DataFrame:
     if random_seed is not None:
         np.random.seed(random_seed)
-    reject, qvalue = statsmodels.stats.multitest.fdrcorrection(scores[p_val_column],
-                                                               alpha=alpha,
-                                                               method=method)
+    reject, qvalue = statsmodels.stats.multitest.fdrcorrection(
+        scores[p_val_column], alpha=alpha, method=method)
     scores['qvalue'] = qvalue
     scores['rejected'] = reject
     return scores
