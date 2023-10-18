@@ -72,7 +72,7 @@ if os.environ.get("READTHEDOCS") == "True":
     from pathlib import Path
 
     PROJECT_ROOT = Path(__file__).parent.parent
-    PACKAGE_ROOT = PROJECT_ROOT / "src" / "imppkg"
+    PACKAGE_ROOT = PROJECT_ROOT / "src" / "njab"
 
     def run_apidoc(_):
         from sphinx.ext import apidoc
