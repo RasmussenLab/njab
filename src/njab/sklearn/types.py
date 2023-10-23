@@ -11,6 +11,7 @@ PrecisionRecallCurve = namedtuple("PrecisionRecallCurve",
 
 @dataclass
 class ResultsSplit:
+    """Results for a single split of train and test data."""
     auc: float = None  # receiver operation curve area under the curve
     aps: float = None  # average precision score
     roc: AucRocCurve = None
@@ -19,6 +20,7 @@ class ResultsSplit:
 
 @dataclass
 class Results:
+    """Results for a model trained on a single split of train and test data."""
     model: sklearn.base.BaseEstimator = None
     selected_features: list = None
     train: ResultsSplit = None
@@ -28,6 +30,7 @@ class Results:
 
 @dataclass
 class Splits:
+    """Splits of train and test data with targets."""
     X_train: pd.DataFrame
     X_test: pd.DataFrame
     y_train: pd.Series

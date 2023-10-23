@@ -1,3 +1,4 @@
+"""Bionomial test and t-test for groups comparision."""
 from __future__ import annotations
 import logging
 import pandas as pd
@@ -29,6 +30,8 @@ def means_between_groups(
 
 def calc_stats(df: pd.DataFrame, boolean_array: pd.Series,
                vars: list[str]) -> pd.DataFrame:
+    """Calculate t-test for each variable in `vars` between two groups defined
+    by boolean array."""
     ret = []
     for var in vars:
         _ = pg.ttest(df.loc[boolean_array, var], df.loc[~boolean_array, var])
@@ -47,6 +50,8 @@ def diff_analysis(
     event_names: tuple[str, str] = ('1', '0'),
     ttest_vars=("alternative", "p-val", "cohen-d")
 ) -> pd.DataFrame:
+    """Differential analysis procedure between two groups. Calculaes
+    mean per group and t-test for each variable in `vars` between two groups."""
     ret = means_between_groups(df,
                                boolean_array=boolean_array,
                                event_names=event_names)
@@ -61,6 +66,8 @@ def binomtest(
     alternative='two-sided',
     event_names: tuple[str, str] = ('event', 'no-event')
 ) -> pd.DataFrame:
+    """Binomial test for categorical variable between two groups defined by a 
+    boolean array."""
     entry = {}
     entry['variable'] = var.name
 

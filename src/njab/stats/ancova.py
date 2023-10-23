@@ -1,3 +1,4 @@
+"""Analysis of covariance using pingouin and statsmodels."""
 from __future__ import annotations
 import numpy as np
 import pandas as pd
@@ -62,9 +63,10 @@ def ancova_pg(df_long: pd.DataFrame,
 
 def add_fdr_scores(scores: pd.DataFrame,
                    random_seed: int = None,
-                   alpha=0.05,
-                   method='indep',
-                   p_val_column='p-unc') -> pd.DataFrame:
+                   alpha: float = 0.05,
+                   method: str = 'indep',
+                   p_val_column: str = 'p-unc') -> pd.DataFrame:
+    """Add FDR scores based on p-values in p_val_column."""
     if random_seed is not None:
         np.random.seed(random_seed)
     reject, qvalue = statsmodels.stats.multitest.fdrcorrection(
@@ -148,6 +150,8 @@ def filter_all_covars_from_scores(scores: pd.DataFrame,
 
 
 class AncovaOnlyTarget(Ancova):
+    """Ancova with FDR on only the target variables p-values
+    in the set of hypothesis."""
 
     def ancova(self, random_seed=123) -> pd.DataFrame:
         scores = self.get_scores()

@@ -1,3 +1,10 @@
+"""Scikit-learn related functionality.
+
+Finds the a good set of features using minimum redundancy maximum relevance (MRMR)
+for a logistic regression model a binary target variable.
+"""
+from typing import Optional
+
 import pandas as pd
 import sklearn
 import sklearn.model_selection
@@ -32,6 +39,9 @@ def run_model(
     fit_params=None,
     n_feat_to_select=9,
 ) -> Results:
+    """Fit a model on the training split and calculate
+       performance metrics on both train and test split.
+    """
     selected_features = mrmr_classif(X=splits.X_train,
                                      y=splits.y_train,
                                      K=n_feat_to_select)
@@ -60,6 +70,7 @@ def run_model(
 
 
 def get_results_split(y_true, y_score):
+    """Calculate metrics for a single set of samples."""
     ret = ResultsSplit(
         auc=sklearn.metrics.roc_auc_score(y_true=y_true, y_score=y_score))
 
@@ -77,18 +88,19 @@ default_log_reg = sklearn.linear_model.LogisticRegression(
     random_state=RANDOM_STATE, solver='liblinear')
 
 
-def find_n_best_features(X,
-                         y,
-                         name,
-                         model=default_log_reg,
-                         groups=None,
-                         n_features_max=15,
-                         random_state=RANDOM_STATE,
-                         scoring=('precision', 'recall', 'f1',
-                                  'balanced_accuracy', 'roc_auc',
-                                  'average_precision'),
-                         return_train_score=False,
-                         fit_params=None):
+def find_n_best_features(X: pd.DataFrame,
+                         y: pd.Series,
+                         name: str,
+                         model: sklearn.base.BaseEstimator = default_log_reg,
+                         groups=None,  # ? Optional[array-like]
+                         n_features_max: int = 15,
+                         random_state: int = RANDOM_STATE,
+                         scoring: Optional[tuple] = ('precision', 'recall', 'f1',
+                                                     'balanced_accuracy', 'roc_auc',
+                                                     'average_precision'),
+                         return_train_score: bool = False,
+                         fit_params: Optional[dict] = None):
+    """Create a summary of model performance on 10 times 5-fold cross-validation."""
     summary = []
     cv = sklearn.model_selection.RepeatedStratifiedKFold(
         n_splits=5, n_repeats=10, random_state=random_state)
@@ -119,7 +131,22 @@ def find_n_best_features(X,
     return summary_n_features
 
 
-def transform_DataFrame(X: pd.DataFrame, fct):
+def transform_DataFrame(X: pd.DataFrame, fct: callable) -> pd.DataFrame:
+    """Set index and columns of a DataFrame after applying a callable
+    which might only return a numpy array.
+
+    Parameters
+    ----------
+    X : pd.DataFrame
+        Original DataFrame to be transformed
+    fct : callable
+        Callable to be applied to every element in the DataFrame.
+
+    Returns
+    -------
+    pd.DataFrame
+        Transformed DataFrame
+    """
     ret = fct(X)
     ret = pd.DataFrame(ret, index=X.index, columns=X.columns)
     return ret

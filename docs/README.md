@@ -18,7 +18,7 @@ Options:
 ```cmd	
 # pwd: ./njab/docs
 # apidoc
-sphinx-apidoc --force --implicit-namespaces --module-first -o reference ../vaep
+sphinx-apidoc --force --implicit-namespaces --module-first -o reference ../src/njab
 # build docs
 sphinx-build -n -W --keep-going -b html ./ ./_build/
 ```
