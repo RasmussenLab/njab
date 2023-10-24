@@ -88,18 +88,19 @@ default_log_reg = sklearn.linear_model.LogisticRegression(
     random_state=RANDOM_STATE, solver='liblinear')
 
 
-def find_n_best_features(X: pd.DataFrame,
-                         y: pd.Series,
-                         name: str,
-                         model: sklearn.base.BaseEstimator = default_log_reg,
-                         groups=None,  # ? Optional[array-like]
-                         n_features_max: int = 15,
-                         random_state: int = RANDOM_STATE,
-                         scoring: Optional[tuple] = ('precision', 'recall', 'f1',
-                                                     'balanced_accuracy', 'roc_auc',
-                                                     'average_precision'),
-                         return_train_score: bool = False,
-                         fit_params: Optional[dict] = None):
+def find_n_best_features(
+        X: pd.DataFrame,
+        y: pd.Series,
+        name: str,
+        model: sklearn.base.BaseEstimator = default_log_reg,
+        groups=None,  # ? Optional[array-like]
+        n_features_max: int = 15,
+        random_state: int = RANDOM_STATE,
+        scoring: Optional[tuple] = ('precision', 'recall', 'f1',
+                                    'balanced_accuracy', 'roc_auc',
+                                    'average_precision'),
+        return_train_score: bool = False,
+        fit_params: Optional[dict] = None):
     """Create a summary of model performance on 10 times 5-fold cross-validation."""
     summary = []
     cv = sklearn.model_selection.RepeatedStratifiedKFold(

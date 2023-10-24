@@ -133,7 +133,8 @@ def add_prop_as_second_yaxis(
     return ax2
 
 
-def add_height_to_barplot(ax: matplotlib.axes.Axes, size: int = 15) -> matplotlib.axes.Axes:
+def add_height_to_barplot(ax: matplotlib.axes.Axes,
+                          size: int = 15) -> matplotlib.axes.Axes:
     """Add height of bar to each bar in a barplot."""
     for bar in ax.patches:
         ax.annotate(text=format(bar.get_height(), '.2f'),

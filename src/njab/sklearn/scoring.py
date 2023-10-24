@@ -4,7 +4,6 @@ import sklearn.metrics as sklm
 
 class ConfusionMatrix():
     """Wrapper for `sklearn.metrics.confusion_matrix`"""
-
     def __init__(self, y_true, y_pred):
         self.cm_ = sklm.confusion_matrix(y_true, y_pred)
 
@@ -89,7 +88,9 @@ def get_custom_pred(clf, X: pd.DataFrame, cutoff=0.5) -> pd.Series:
     return ret
 
 
-def get_target_count_per_bin(score: pd.Series, y: pd.Series, n_bins: int = 10) -> pd.DataFrame:
+def get_target_count_per_bin(score: pd.Series,
+                             y: pd.Series,
+                             n_bins: int = 10) -> pd.DataFrame:
     """Created pivot table with y summed per equality sized bin of scores."""
     pred_bins = pd.DataFrame({
         'score':

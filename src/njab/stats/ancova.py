@@ -78,7 +78,6 @@ def add_fdr_scores(scores: pd.DataFrame,
 
 class Ancova():
     """Base Ancova class."""
-
     def __init__(self,
                  df_proteomics: pd.DataFrame,
                  df_clinic: pd.DataFrame,
@@ -132,7 +131,6 @@ class AncovaAll(Ancova):
     """Ancova with FDR on all variables except the constant
        of the linear regression for each.
     """
-
     def ancova(self, random_seed=123):
 
         scores = self.get_scores()
@@ -152,7 +150,6 @@ def filter_all_covars_from_scores(scores: pd.DataFrame,
 class AncovaOnlyTarget(Ancova):
     """Ancova with FDR on only the target variables p-values
     in the set of hypothesis."""
-
     def ancova(self, random_seed=123) -> pd.DataFrame:
         scores = self.get_scores()
         scores = filter_all_covars_from_scores(scores, filter_for=self.target)

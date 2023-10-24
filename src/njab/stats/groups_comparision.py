@@ -66,7 +66,7 @@ def binomtest(
     alternative='two-sided',
     event_names: tuple[str, str] = ('event', 'no-event')
 ) -> pd.DataFrame:
-    """Binomial test for categorical variable between two groups defined by a 
+    """Binomial test for categorical variable between two groups defined by a
     boolean array."""
     entry = {}
     entry['variable'] = var.name
