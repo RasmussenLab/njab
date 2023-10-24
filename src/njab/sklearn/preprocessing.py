@@ -4,6 +4,7 @@ from sklearn import preprocessing
 
 class StandardScaler(preprocessing.StandardScaler):
     """Standardscaler which keeps column names and indices of pandas DataFrames."""
+
     def transform(self, X, copy=None):
         res = super().transform(X, copy)
         if isinstance(X, pd.DataFrame):
