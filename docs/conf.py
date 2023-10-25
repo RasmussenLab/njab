@@ -34,7 +34,7 @@ release = PACKAGE_VERSION
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autodoc.typehints',
-    # 'myst_parser',
+    'myst_parser',
     'sphinx.ext.napoleon',
 ]
 
