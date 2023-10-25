@@ -1,4 +1,4 @@
-nJAB - not just another biomarkers
+(not) Just Another Biomarker (nJAB)
 ==========================================================
 
 Not Just Another Biomarkers (nJAB) is a Python package for the analysis of 
@@ -9,11 +9,12 @@ functionality used two papers.
 .. include:: ../README.md
    :parser: myst_parser.sphinx_
    :start-line: 1
-   .. :end-line: 20
+.. :end-line: 22
 
 .. toctree::
    :maxdepth: 2
    :caption: Python Package Reference:
+
    reference/modules
 
 
