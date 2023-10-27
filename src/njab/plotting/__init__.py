@@ -1,23 +1,26 @@
+"""Matplotlib functionality for custom plots."""
+
 import numpy as np
 import pandas as pd
 import matplotlib
 import logging
 import pathlib
+from typing import Iterable
 import matplotlib.pyplot as plt
-import seaborn
 
 plt.rcParams['figure.figsize'] = [16.0, 7.0]
 plt.rcParams['pdf.fonttype'] = 42
 plt.rcParams['ps.fonttype'] = 42
-
-# seaborn.set_theme()
 
 figsize_a4 = (8.3, 11.7)
 
 logger = logging.getLogger(__name__)
 
 
-def savefig(fig, name, folder: pathlib.Path = '.', pdf=True):
+def savefig(fig: matplotlib.figure.Figure,
+            name: str,
+            folder: pathlib.Path = '.',
+            pdf=True):
     """Save matplotlib Figure (having method `savefig`) as pdf and png."""
     folder = pathlib.Path(folder)
     fname = folder / name
@@ -25,9 +28,9 @@ def savefig(fig, name, folder: pathlib.Path = '.', pdf=True):
     folder.mkdir(exist_ok=True, parents=True)
     if not fig.get_constrained_layout():
         fig.tight_layout()
-    fig.savefig(fname.with_suffix('.png'), bbox_inches = 'tight')
+    fig.savefig(fname.with_suffix('.png'), bbox_inches='tight')
     if pdf:
-        fig.savefig(fname.with_suffix('.pdf'), bbox_inches = 'tight')
+        fig.savefig(fname.with_suffix('.pdf'), bbox_inches='tight')
     logger.info(f"Saved Figures to {fname}")
 
 
@@ -68,7 +71,7 @@ def select_dates(date_series: pd.Series, max_ticks=30) -> np.array:
     Returns
     -------
     np.array
-        _description_
+        array of selected dates
     """
     xticks = date_series.dt.date.unique()
     offset = len(xticks) // max_ticks
@@ -79,19 +82,20 @@ def select_dates(date_series: pd.Series, max_ticks=30) -> np.array:
 
 
 def make_large_descriptors(size='xx-large'):
-    """Helper function to have very large titles, labes and tick texts for 
+    """Helper function to have very large titles, labes and tick texts for
     matplotlib plots per default.
-    
+
     size: str
         fontsize or allowed category. Change default if necessary, default 'xx-large'
     """
-    plt.rcParams.update({k: size for k in ['xtick.labelsize',
-                                           'ytick.labelsize',
-                                           'axes.titlesize',
-                                           'axes.labelsize',
-                                           'legend.fontsize',
-                                           'legend.title_fontsize']
-                         })
+    plt.rcParams.update({
+        k: size
+        for k in [
+            'xtick.labelsize', 'ytick.labelsize', 'axes.titlesize',
+            'axes.labelsize', 'legend.fontsize', 'legend.title_fontsize'
+        ]
+    })
+
 
 set_font_sizes = make_large_descriptors
 
@@ -129,7 +133,9 @@ def add_prop_as_second_yaxis(
     return ax2
 
 
-def add_height_to_barplot(ax, size=15):
+def add_height_to_barplot(ax: matplotlib.axes.Axes,
+                          size: int = 15) -> matplotlib.axes.Axes:
+    """Add height of bar to each bar in a barplot."""
     for bar in ax.patches:
         ax.annotate(text=format(bar.get_height(), '.2f'),
                     xy=(bar.get_x() + bar.get_width() / 2, bar.get_height()),
@@ -141,10 +147,13 @@ def add_height_to_barplot(ax, size=15):
     return ax
 
 
-def add_text_to_barplot(ax, text, size=15):
-    for bar, text in zip(ax.patches, text):
+def add_text_to_barplot(ax: matplotlib.axes.Axes,
+                        text: Iterable[str],
+                        size=15) -> matplotlib.axes.Axes:
+    """Add custom text from Iterable to each bar in a barplot."""
+    for bar, text_bar in zip(ax.patches, text):
         logger.debug(f"{bar = }, f{text = }, {bar.get_height() = }")
-        ax.annotate(text=text,
+        ax.annotate(text=text_bar,
                     xy=(bar.get_x() + bar.get_width() / 2, bar.get_height()),
                     xytext=(0, -5),
                     rotation=90,
@@ -169,7 +178,7 @@ def format_large_numbers(ax: matplotlib.axes.Axes,
     Returns
     -------
     matplotlib.axes.Axes
-        _description_
+        Return reference to modified input Axes object.
     """
     ax.xaxis.set_major_formatter(
         matplotlib.ticker.StrMethodFormatter(format_str))

@@ -1,8 +1,8 @@
+"""Bionomial test and t-test for groups comparision."""
+from __future__ import annotations
 import logging
-import numpy as np
 import pandas as pd
 import pingouin as pg
-import statsmodels
 
 from scipy.stats import binomtest as scipy_binomtest
 
@@ -30,6 +30,8 @@ def means_between_groups(
 
 def calc_stats(df: pd.DataFrame, boolean_array: pd.Series,
                vars: list[str]) -> pd.DataFrame:
+    """Calculate t-test for each variable in `vars` between two groups defined
+    by boolean array."""
     ret = []
     for var in vars:
         _ = pg.ttest(df.loc[boolean_array, var], df.loc[~boolean_array, var])
@@ -43,10 +45,13 @@ def calc_stats(df: pd.DataFrame, boolean_array: pd.Series,
 
 
 def diff_analysis(
-        df: pd.DataFrame,
-        boolean_array: pd.Series,
-        event_names: tuple[str, str] = ('1', '0'),
-        ttest_vars=["alternative", "p-val", "cohen-d"]) -> pd.DataFrame:
+    df: pd.DataFrame,
+    boolean_array: pd.Series,
+    event_names: tuple[str, str] = ('1', '0'),
+    ttest_vars=("alternative", "p-val", "cohen-d")
+) -> pd.DataFrame:
+    """Differential analysis procedure between two groups. Calculaes
+    mean per group and t-test for each variable in `vars` between two groups."""
     ret = means_between_groups(df,
                                boolean_array=boolean_array,
                                event_names=event_names)
@@ -55,15 +60,20 @@ def diff_analysis(
     return ret
 
 
-def binomtest(var: pd.Series,
-              boolean_array: pd.Series,
-              alternative='two-sided',
-              event_names: tuple[str, str] = ('event', 'no-event')) -> pd.DataFrame:
+def binomtest(
+    var: pd.Series,
+    boolean_array: pd.Series,
+    alternative='two-sided',
+    event_names: tuple[str, str] = ('event', 'no-event')
+) -> pd.DataFrame:
+    """Binomial test for categorical variable between two groups defined by a
+    boolean array."""
     entry = {}
     entry['variable'] = var.name
 
     if var.dtype != 'category':
-        logger.warn(f"Passed on categorical data (which was expected): {var.name}")
+        logger.warn(
+            f"Passed on categorical data (which was expected): {var.name}")
         var = var.astype('category')
 
     assert len(

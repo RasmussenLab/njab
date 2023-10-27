@@ -1,3 +1,5 @@
+"""Analysis of covariance using pingouin and statsmodels."""
+from __future__ import annotations
 import numpy as np
 import pandas as pd
 
@@ -13,7 +15,7 @@ def ancova_pg(df_long: pd.DataFrame,
               fdr=0.05) -> pd.DataFrame:
     """ Analysis of covariance (ANCOVA) using pg.ancova
     https://pingouin-stats.org/generated/pingouin.ancova.html
-    
+
     Adds multiple hypothesis testing correction by Benjamini-Hochberg
     (qvalue, rejected)
 
@@ -61,13 +63,14 @@ def ancova_pg(df_long: pd.DataFrame,
 
 def add_fdr_scores(scores: pd.DataFrame,
                    random_seed: int = None,
-                   alpha=0.05,
-                   method='indep') -> pd.DataFrame:
+                   alpha: float = 0.05,
+                   method: str = 'indep',
+                   p_val_column: str = 'p-unc') -> pd.DataFrame:
+    """Add FDR scores based on p-values in p_val_column."""
     if random_seed is not None:
         np.random.seed(random_seed)
-    reject, qvalue = statsmodels.stats.multitest.fdrcorrection(scores['p-unc'],
-                                                               alpha=alpha,
-                                                               method=method)
+    reject, qvalue = statsmodels.stats.multitest.fdrcorrection(
+        scores[p_val_column], alpha=alpha, method=method)
     scores['qvalue'] = qvalue
     scores['rejected'] = reject
     return scores
@@ -75,6 +78,7 @@ def add_fdr_scores(scores: pd.DataFrame,
 
 class Ancova():
     """Base Ancova class."""
+
     def __init__(self,
                  df_proteomics: pd.DataFrame,
                  df_clinic: pd.DataFrame,
@@ -117,8 +121,8 @@ class Ancova():
         raise NotImplementedError
 
 
-
-def filter_residuals_from_scores(scores:pd.DataFrame, filter_for='Residual') -> pd.DataFrame:
+def filter_residuals_from_scores(scores: pd.DataFrame,
+                                 filter_for='Residual') -> pd.DataFrame:
     """Remove residual from pingouin ANCOVA list."""
     scores = scores[scores.Source != filter_for]
     return scores
@@ -128,6 +132,7 @@ class AncovaAll(Ancova):
     """Ancova with FDR on all variables except the constant
        of the linear regression for each.
     """
+
     def ancova(self, random_seed=123):
 
         scores = self.get_scores()
@@ -137,13 +142,17 @@ class AncovaAll(Ancova):
         return scores.set_index('Source', append=True)
 
 
-def filter_all_covars_from_scores(scores:pd.DataFrame, filter_for: str) -> pd.DataFrame:
+def filter_all_covars_from_scores(scores: pd.DataFrame,
+                                  filter_for: str) -> pd.DataFrame:
     """Only keep feature score from pingouin ANCOVA list."""
     scores = scores[scores.Source == filter_for]
     return scores
 
 
 class AncovaOnlyTarget(Ancova):
+    """Ancova with FDR on only the target variables p-values
+    in the set of hypothesis."""
+
     def ancova(self, random_seed=123) -> pd.DataFrame:
         scores = self.get_scores()
         scores = filter_all_covars_from_scores(scores, filter_for=self.target)

@@ -8,15 +8,25 @@ class ConfusionMatrix():
     def __init__(self, y_true, y_pred):
         self.cm_ = sklm.confusion_matrix(y_true, y_pred)
 
-    @property
-    def as_dataframe(self):
+    def as_dataframe(self, names=('true', 'pred')) -> pd.DataFrame:
         """Create pandas.DataFrame and return.
         Names rows and columns."""
         if not hasattr(self, 'df'):
+            true_name, pred_name = names
             self.df = pd.DataFrame(self.cm_)
-            self.df.index.name = 'true'
-            self.df.columns = pd.MultiIndex.from_product([['pred'], self.df.columns])
+            self.df.index.name = true_name
+            self.df.columns = pd.MultiIndex.from_product([[pred_name],
+                                                          self.df.columns])
         return self.df
+
+    def classification_label(self) -> dict:
+        """Classification labels as dict."""
+        tn, fp, fn, tp = self.cm_.ravel()
+        return {'TN': tn, 'FP': fp, 'FN': fn, 'TP': tp}
+
+    def as_classification_series(self) -> pd.Series:
+        """Classification labels as pandas.Series."""
+        return pd.Series(self.classification_label())
 
     @property
     def as_array(self):
@@ -32,7 +42,8 @@ class ConfusionMatrix():
         return repr(self.cm_)
 
 
-def get_label_binary_classification(y_true:int, y_pred:int) -> str:
+def get_label_binary_classification(y_true: int, y_pred: int) -> str:
+    """Get labels (TP, FN, TN, FP) for single case in binary classification."""
     if y_true == 1:
         if y_pred == 1:
             return 'TP'
@@ -51,37 +62,37 @@ def get_label_binary_classification(y_true:int, y_pred:int) -> str:
         raise ValueError(f"Unknown `y_true`: {y_true} ({ type(y_pred) })")
 
 
-# # for testing
-# import numpy as np
-# for y_true, y_pred, label in zip(np.array([1, 1, 0, 0]),
-#                                  np.array([1, 0, 1, 0]),
-#                                  ['TP', 'FN', 'FP', 'TN']):
-#     assert get_label_binary_classification(y_true, y_pred) == label
-
-
-def get_score(clf, X:pd.DataFrame, pos=1) -> pd.Series:
+def get_score(clf, X: pd.DataFrame, pos=1) -> pd.Series:
+    """Extract score from binary classifier for class one (target class)."""
     scores = clf.predict_proba(X)
     if scores.shape[-1] > 2:
         raise NotImplementedError
     else:
-        scores = scores[:,pos]
+        scores = scores[:, pos]
     scores = pd.Series(scores, index=X.index)
     return scores
 
 
-def get_pred(clf, X:pd.DataFrame) -> pd.Series:
+def get_pred(clf, X: pd.DataFrame) -> pd.Series:
+    """Predict class for binary classifier and keep indices of from data X."""
     ret = clf.predict(X)
     ret = pd.Series(ret, index=X.index)
     return ret
 
+
 def get_custom_pred(clf, X: pd.DataFrame, cutoff=0.5) -> pd.Series:
+    """Calculate predicted class for binary classifier using the specified cutoff.
+       Keep indices of from data X.
+    """
     scores = get_score(clf, X)
     ret = (scores > cutoff).astype(int)
     return ret
-    
-    
 
-def get_target_count_per_bin(score: pd.Series, y: pd.Series, n_bins: int = 10):
+
+def get_target_count_per_bin(score: pd.Series,
+                             y: pd.Series,
+                             n_bins: int = 10) -> pd.DataFrame:
+    """Created pivot table with y summed per equality sized bin of scores."""
     pred_bins = pd.DataFrame({
         'score':
         pd.cut(score, bins=list(x / n_bins for x in range(0, n_bins + 1))),
