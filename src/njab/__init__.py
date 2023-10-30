@@ -6,8 +6,8 @@ logistic regression as a simple and explainable model.
 """
 from importlib.metadata import version
 
-from . import stats, sklearn, plotting
+from . import stats, sklearn, plotting, pandas
 
 __version__ = version('njab')
 
-__all__ = ['stats', 'sklearn', 'plotting']
+__all__ = ['stats', 'sklearn', 'plotting', 'pandas']
