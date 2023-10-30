@@ -1,3 +1,4 @@
+from __future__ import annotations
 from matplotlib.axes import Axes
 import lifelines.statistics
 from lifelines import KaplanMeierFitter
