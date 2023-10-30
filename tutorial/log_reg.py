@@ -23,7 +23,7 @@
 # > Predict Alzheimer disease based on proteomics measurements.
 
 # %%
-# !pip install njab heatmapz openpyxl 
+# !pip install njab heatmapz openpyxl
 
 # %%
 import itertools
@@ -56,6 +56,9 @@ from njab.sklearn.scoring import get_score, get_pred, get_target_count_per_bin
 
 logger = logging.getLogger('njab')
 logger.setLevel(logging.INFO)
+
+njab.plotting.set_font_sizes('x-small')
+seaborn.set_style("whitegrid")
 
 # %% [markdown]
 # ## Set parameters
