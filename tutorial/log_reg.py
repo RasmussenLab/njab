@@ -23,6 +23,9 @@
 # > Predict Alzheimer disease based on proteomics measurements.
 
 # %%
+# !pip install njab heatmapz openpyxl 
+
+# %%
 import itertools
 import logging
 from pathlib import Path
@@ -366,7 +369,7 @@ cv_feat = njab.sklearn.find_n_best_features(
     return_train_score=True,
     # fit_params=dict(sample_weight=weights)
 )
-cv_feat = cv_feat.groupby('n_features').agg(['mean', 'std'])
+cv_feat = cv_feat.drop('test_case', axis=1).groupby('n_features').agg(['mean', 'std'])
 cv_feat
 
 # %% [markdown]
