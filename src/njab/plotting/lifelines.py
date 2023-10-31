@@ -12,13 +12,11 @@ def plot_lifelines(obs: pd.DataFrame,
                    start_col='DateDiagnose',
                    end_col='DateDeath',
                    status_col='dead') -> matplotlib.axes.Axes:
-    """Plot a line for each observation. 
-
-    obs: DataFrame
+    """Plot a lifeline for each observation.
     """
     if ax is None:
         _, ax = plt.subplots()
-    for i, (label, row) in enumerate(obs.iterrows()):
+    for i, (_, row) in enumerate(obs.iterrows()):
         start = row[start_col]
         end = row[end_col]
         status = row[status_col]
