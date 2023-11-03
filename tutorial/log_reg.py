@@ -73,10 +73,9 @@ VAL_IDS_query: str = ''
 weights: bool = True
 FOLDER = 'alzheimer'
 
-
 # %% [markdown]
-# # Setup
-# ## Load data
+# ## Setup
+# ### Load data
 
 # %%
 clinic = pd.read_csv(CLINIC, index_col=0)
@@ -100,8 +99,9 @@ freq_cutoff = 0.5
 M_before = omics.shape[1]
 omics = omics.dropna(thresh=int(len(omics) * freq_cutoff), axis=1)
 M_after = omics.shape[1]
-msg = (f"Removed {M_before-M_after} features with more than {freq_cutoff*100}% missing values."
-       f"\nRemaining features: {M_after} (of {M_before})")
+msg = (
+    f"Removed {M_before-M_after} features with more than {freq_cutoff*100}% missing values."
+    f"\nRemaining features: {M_after} (of {M_before})")
 print(msg)
 
 # %% [markdown]
@@ -121,10 +121,8 @@ njab.pandas.value_counts_with_margins(clinic[TARGET])
 target_counts = clinic[TARGET].value_counts()
 
 if target_counts.sum() < len(clinic):
-    print(
-        "Target has missing values."
-        f" Can only use {target_counts.sum()} of {len(clinic)} samples."
-    )
+    print("Target has missing values."
+          f" Can only use {target_counts.sum()} of {len(clinic)} samples.")
     mask = clinic[TARGET].notna()
     clinic, omics = clinic.loc[mask], omics.loc[mask]
 
@@ -135,24 +133,22 @@ y = pd.get_dummies(y_obj)["biochemical AD"].rename(TARGET_LABEL)
 
 target_counts
 
-
 # %% [markdown]
 # Encode some clincial variables as binary
 
 # %%
-dummies_collection_site = pd.get_dummies(clinic['_collection site'])  # reference is first column (Berlin)
+dummies_collection_site = pd.get_dummies(
+    clinic['_collection site'])  # reference is first column (Berlin)
 dummies_collection_site.describe()
 
 # %%
 clinic_for_ml = dummies_collection_site.iloc[:, 1:]
-clinic_for_ml = (clinic_for_ml
-                 .join(pd
-                       .get_dummies(clinic['_gender'])
-                       .rename(columns={'f': 'female', 'm': 'male'})
-                       .iloc[:, 1:])
-                 ).assign(age=clinic['_age at CSF collection'])
+clinic_for_ml = (clinic_for_ml.join(
+    pd.get_dummies(clinic['_gender']).rename(columns={
+        'f': 'female',
+        'm': 'male'
+    }).iloc[:, 1:])).assign(age=clinic['_age at CSF collection'])
 clinic_for_ml
-
 
 # %% [markdown]
 # ## Test IDs
@@ -216,10 +212,8 @@ if VAL_IDS:
     y = y.drop(VAL_IDS)
     y_obj = y_obj.drop(VAL_IDS)
 
-
 # %% [markdown]
 # ## Output folder
-
 
 # %%
 FOLDER = Path(FOLDER)
@@ -262,7 +256,6 @@ median_imputer = sklearn.impute.SimpleImputer(strategy='median')
 X = njab.sklearn.transform_DataFrame(X, median_imputer.fit_transform)
 X_val = njab.sklearn.transform_DataFrame(X_val, median_imputer.transform)
 
-
 # %%
 assert X.isna().sum().sum() == 0
 
@@ -270,7 +263,7 @@ assert X.isna().sum().sum() == 0
 X.shape, X_val.shape
 
 # %% [markdown]
-# # Principal Components
+# ## Principal Components
 #
 # - [ ]  base on selected data
 # - binary features do not strictly need to be normalized
@@ -298,7 +291,7 @@ _ = PCs.pop(TARGET_LABEL)
 njab.plotting.savefig(fig, files_out['scatter_first_5PCs.pdf'])
 
 # %% [markdown]
-# # UMAP
+# ## UMAP
 
 # %%
 reducer = umap.UMAP()
@@ -315,7 +308,7 @@ ax = embedding.plot.scatter('UMAP 1', 'UMAP 2', c=TARGET_LABEL, cmap='Paired')
 njab.plotting.savefig(ax.get_figure(), files_out['umap.pdf'])
 
 # %% [markdown]
-# # Baseline Model - Logistic Regression
+# ## Baseline Model - Logistic Regression
 # - `age`, `decompensated`, `MELD-score`
 # - use weigthing to counter class imbalances
 
@@ -333,13 +326,13 @@ else:
     weights = None
 
 # %% [markdown]
-# # Logistic Regression
+# ## Logistic Regression
 # Procedure:
 # 1. Select best set of features from entire feature set selected using CV on train split
 # 2. Retrain best model configuration using entire train split and evalute on test split
 
 # %%
-# # Scaled
+# ### Scaled Data
 splits = Splits(X_train=X_scaled,
                 X_test=scaler.transform(X_val),
                 y_train=y,
@@ -349,7 +342,8 @@ splits = Splits(X_train=X_scaled,
 #                 X_test=X_val,
 #                 y_train=y, y_test=y_val)
 
-model = sklearn.linear_model.LogisticRegression(penalty='l2', class_weight=weights)
+model = sklearn.linear_model.LogisticRegression(penalty='l2',
+                                                class_weight=weights)
 
 # %%
 scoring = [
@@ -372,7 +366,8 @@ cv_feat = njab.sklearn.find_n_best_features(
     return_train_score=True,
     # fit_params=dict(sample_weight=weights)
 )
-cv_feat = cv_feat.drop('test_case', axis=1).groupby('n_features').agg(['mean', 'std'])
+cv_feat = cv_feat.drop('test_case',
+                       axis=1).groupby('n_features').agg(['mean', 'std'])
 cv_feat
 
 # %% [markdown]
@@ -386,10 +381,6 @@ N_split = {
     'test': round(len(splits.X_train) * 0.2)
 }
 
-# IC_criteria[('test_log_loss', 'mean')] = cv_feat[
-#                      ('test_log_loss', 'mean')]
-# IC_criteria[('train_log_loss', 'mean')] = cv_feat[
-#                      ('train_log_loss', 'mean')]
 for _split in ('train', 'test'):
 
     IC_criteria[(f'{_split}_neg_AIC',
@@ -432,7 +423,6 @@ results_model = njab.sklearn.run_model(
 )
 
 results_model.name = model_name
-
 
 # %% [markdown]
 # ## ROC
@@ -492,7 +482,6 @@ njab.plotting.savefig(fig, files_out['corr_plot_train.pdf'])
 # %% [markdown]
 # ## Plot training data scores
 
-
 # %%
 N_BINS = 20
 score = get_score(clf=results_model.model,
@@ -508,7 +497,8 @@ pred_bins = get_target_count_per_bin(score, y, n_bins=N_BINS)
 ax = pred_bins.plot(kind='bar', ylabel='count')
 files_out[
     'hist_score_train_target.pdf'] = FOLDER / 'hist_score_train_target.pdf'
-njab.plotting.savefig(ax.get_figure(), files_out['hist_score_train_target.pdf'])
+njab.plotting.savefig(ax.get_figure(),
+                      files_out['hist_score_train_target.pdf'])
 # pred_bins
 
 # %% [markdown]
@@ -530,7 +520,6 @@ ax.locator_params(axis='y', integer=True)
 files_out['hist_score_test_target.pdf'] = FOLDER / 'hist_score_test_target.pdf'
 njab.plotting.savefig(ax.get_figure(), files_out['hist_score_test_target.pdf'])
 # pred_bins_val
-
 
 # %% [markdown]
 # # Performance evaluations
@@ -561,9 +550,8 @@ y_pred_val = njab.sklearn.scoring.get_custom_pred(
 predictions[model_name] = y_pred_val
 predictions['dead'] = y_val
 _ = ConfusionMatrix(y_val, y_pred_val).as_dataframe()
-_.columns = pd.MultiIndex.from_tuples([
-    (t[0] + f" - {cutoff:.3f}", t[1]) for t in _.columns
-])
+_.columns = pd.MultiIndex.from_tuples([(t[0] + f" - {cutoff:.3f}", t[1])
+                                       for t in _.columns])
 _.to_excel(writer, "CM_test_cutoff_adapted")
 _
 
@@ -573,9 +561,8 @@ y_pred_val = get_pred(clf=results_model.model,
 predictions[model_name] = y_pred_val
 predictions['dead'] = y_val
 _ = ConfusionMatrix(y_val, y_pred_val).as_dataframe()
-_.columns = pd.MultiIndex.from_tuples([
-    (t[0] + f" - {0.5}", t[1]) for t in _.columns
-])
+_.columns = pd.MultiIndex.from_tuples([(t[0] + f" - {0.5}", t[1])
+                                       for t in _.columns])
 _.to_excel(writer, "CM_test_cutoff_0.5")
 _
 
@@ -623,16 +610,17 @@ pivot['pred'] = results_model.model.predict(
 pivot.describe().iloc[:2]
 
 # %% [markdown]
-# # Plot TP, TN, FP and FN on PCA plot
+# ## Plot TP, TN, FP and FN on PCA plot
 #
-# ## UMAP
+# ### UMAP
 # %%
 reducer = umap.UMAP(random_state=42)
 # bug: how does UMAP works with only one feature?
 # make sure to have two or more features?
 M_sel = len(results_model.selected_features)
 if M_sel > 1:
-    embedding = reducer.fit_transform(X_scaled[results_model.selected_features])
+    embedding = reducer.fit_transform(
+        X_scaled[results_model.selected_features])
 
     embedding = pd.DataFrame(embedding,
                              index=X_scaled.index,
@@ -653,8 +641,8 @@ predictions.loc[mask].sort_values('score', ascending=False)
 # %%
 X_val_scaled = scaler.transform(X_val)
 if embedding is not None:
-    embedding_val = pd.DataFrame(reducer.transform(
-        X_val_scaled[results_model.selected_features]),
+    embedding_val = pd.DataFrame(
+        reducer.transform(X_val_scaled[results_model.selected_features]),
         index=X_val_scaled.index,
         columns=['UMAP dimension 1', 'UMAP dimension 2'])
     embedding_val.sample(3)
@@ -664,10 +652,8 @@ pred_train = (
     y.to_frame('true')
     # .join(get_score(clf=results_model.model, X=splits.X_train[results_model.selected_features], pos=1))
     .join(score.rename('score')).join(
-        get_pred(
-            results_model.model,
-            splits.X_train[results_model.selected_features]).rename(model_name))
-)
+        get_pred(results_model.model, splits.X_train[
+            results_model.selected_features]).rename(model_name)))
 pred_train['label'] = pred_train.apply(
     lambda x: njab.sklearn.scoring.get_label_binary_classification(
         x['true'], x[model_name]),
@@ -683,7 +669,7 @@ if embedding is not None:
     fig, axes = plt.subplots(1, 2, figsize=(8, 4), sharex=True, sharey=True)
     for _embedding, ax, _title, _model_pred_label in zip(
         [embedding, embedding_val], axes, [TRAIN_LABEL, TEST_LABEL],
-            [pred_train['label'], predictions['label']]):
+        [pred_train['label'], predictions['label']]):  # noqa: E129
         ax = seaborn.scatterplot(
             x=_embedding.iloc[:, 0],
             y=_embedding.iloc[:, 1],
@@ -706,7 +692,8 @@ if embedding is not None:
 if embedding is not None:
     embedding = embedding.join(X[results_model.selected_features])
     embedding_val = embedding_val.join(X_val[results_model.selected_features])
-    embedding['label'], embedding_val['label'] = pred_train['label'], predictions['label']
+    embedding['label'], embedding_val['label'] = pred_train[
+        'label'], predictions['label']
     embedding['group'], embedding_val['group'] = TRAIN_LABEL, TEST_LABEL
     combined_embeddings = pd.concat([embedding, embedding_val])
     combined_embeddings.index.name = 'ID'
@@ -736,7 +723,8 @@ if embedding is not None:
 # ## PCA
 
 # %%
-PCs_train, pca = njab_pca.run_pca(X_scaled[results_model.selected_features], n_components=None)
+PCs_train, pca = njab_pca.run_pca(X_scaled[results_model.selected_features],
+                                  n_components=None)
 ax = njab_pca.plot_explained_variance(pca)
 ax.locator_params(axis='x', integer=True)
 
@@ -746,17 +734,17 @@ njab.plotting.savefig(ax.get_figure(), fname)
 
 # %%
 PCs_val = pca.transform(X_val_scaled[results_model.selected_features])
-PCs_val = pd.DataFrame(PCs_val, index=X_val_scaled.index, columns=PCs_train.columns)
+PCs_val = pd.DataFrame(PCs_val,
+                       index=X_val_scaled.index,
+                       columns=PCs_train.columns)
 PCs_val
 
 # %%
 if M_sel > 1:
     fig, axes = plt.subplots(1, 2, figsize=(8, 4), sharex=True, sharey=True)
     for _embedding, ax, _title, _model_pred_label in zip(
-        [PCs_train, PCs_val],
-        axes,
-        [TRAIN_LABEL, TEST_LABEL],
-            [pred_train['label'], predictions['label']]):
+        [PCs_train, PCs_val], axes, [TRAIN_LABEL, TEST_LABEL],
+        [pred_train['label'], predictions['label']]):  # noqa: E129
         ax = seaborn.scatterplot(
             x=_embedding.iloc[:, 0],
             y=_embedding.iloc[:, 1],
@@ -770,19 +758,19 @@ if M_sel > 1:
     files_out[fname.name] = fname
     njab.plotting.savefig(ax.get_figure(), fname)
 
-
 # %%
 if M_sel > 1:
     max_rows = min(3, len(results_model.selected_features))
-    fig, axes = plt.subplots(max_rows, 2,
+    fig, axes = plt.subplots(max_rows,
+                             2,
                              figsize=(8.3, 11.7),
-                             sharex=False, sharey=False,
+                             sharex=False,
+                             sharey=False,
                              layout='constrained')
 
-    for axes_col, (_embedding, _title, _model_pred_label) in enumerate(zip(
-        [PCs_train, PCs_val],
-        [TRAIN_LABEL, TEST_LABEL],
-            [pred_train['label'], predictions['label']])):
+    for axes_col, (_embedding, _title, _model_pred_label) in enumerate(
+            zip([PCs_train, PCs_val], [TRAIN_LABEL, TEST_LABEL],
+                [pred_train['label'], predictions['label']])):
         _row = 0
         axes[_row, axes_col].set_title(_title)
         for (i, j) in itertools.combinations(range(max_rows), 2):
@@ -799,7 +787,6 @@ if M_sel > 1:
     files_out[fname.name] = fname
     njab.plotting.savefig(ax.get_figure(), fname)
 
-
 # %% [markdown]
 # ### Features
 # - top 3 scaled n_features_max (scatter)
@@ -808,17 +795,19 @@ if M_sel > 1:
 # %%
 if M_sel > 1:
     max_rows = min(3, len(results_model.selected_features))
-    fig, axes = plt.subplots(max_rows, 2,
+    fig, axes = plt.subplots(max_rows,
+                             2,
                              figsize=(8.3, 11.7),
                              sharex=False,
                              sharey=False,
                              layout='constrained')
 
-    for axes_col, (_embedding, _title, _model_pred_label) in enumerate(zip(
-        [X_scaled[results_model.selected_features],
-         X_val_scaled[results_model.selected_features]],
-        [TRAIN_LABEL, TEST_LABEL],
-            [pred_train['label'], predictions['label']])):
+    for axes_col, (_embedding, _title, _model_pred_label) in enumerate(
+            zip([
+                X_scaled[results_model.selected_features],
+                X_val_scaled[results_model.selected_features]
+            ], [TRAIN_LABEL, TEST_LABEL],
+                [pred_train['label'], predictions['label']])):
         _row = 0
         axes[_row, axes_col].set_title(_title)
         for (i, j) in itertools.combinations(range(max_rows), 2):
@@ -838,30 +827,27 @@ if M_sel > 1:
     files_out[fname.name] = fname
     njab.plotting.savefig(ax.get_figure(), fname)
 else:
-    fig, axes = plt.subplots(1, 1,
-                             figsize=(6, 2),
-                             layout='constrained'
-                             )
+    fig, axes = plt.subplots(1, 1, figsize=(6, 2), layout='constrained')
     single_feature = results_model.selected_features[0]
     data = pd.concat([
-        X[single_feature].to_frame().join(pred_train['label']).assign(group=TRAIN_LABEL),
-        X_val[single_feature].to_frame().join(predictions['label']).assign(group=TEST_LABEL)
+        X[single_feature].to_frame().join(
+            pred_train['label']).assign(group=TRAIN_LABEL),
+        X_val[single_feature].to_frame().join(
+            predictions['label']).assign(group=TEST_LABEL)
     ])
     ax = seaborn.swarmplot(data=data,
                            x='group',
                            y=single_feature,
                            hue='label',
-                           ax=axes
-                           )
+                           ax=axes)
     fname = FOLDER / f'sel_feat_{single_feature}.pdf'
     files_out[fname.name] = fname
     njab.plotting.savefig(ax.get_figure(), fname)
 
-
 # %% [markdown]
 # ## Annotation of Errors for manuel analysis
 #
-# -saved to excel table
+# Saved to excel table.
 
 # %%
 X[results_model.selected_features].join(pred_train).to_excel(
@@ -869,14 +855,11 @@ X[results_model.selected_features].join(pred_train).to_excel(
 X_val[results_model.selected_features].join(predictions).to_excel(
     writer, sheet_name='pred_test_annotated', float_format="%.3f")
 
-
 # %% [markdown]
-# # Outputs
+# ## Outputs
 
 # %%
 writer.close()
 
 # %%
 files_out
-
-# %%

@@ -27,7 +27,10 @@ meta.sample(5)
 #   - primary biochemical Alzheimer disease classification
 
 # %%
-cols = ['_age at CSF collection', '_gender', '_primary biochemical AD classification']
+cols = [
+    '_age at CSF collection', '_gender',
+    '_primary biochemical AD classification'
+]
 meta[cols].dropna().describe(include='all')
 
 # %%

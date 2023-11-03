@@ -15,11 +15,11 @@
 
 # %% [markdown]
 # # Explorative Analysis
-# Uses the `prostate`` time series dataset provided by the `SurvSet` package.
+# Uses the `prostate` time series dataset provided by the `SurvSet` package.
 # - [SurvSet package](https://github.com/ErikinBC/SurvSet/tree/main)
 
 # %%
-# !pip install njab pyopenxl
+# %pip install njab pyopenxl
 
 # %%
 from functools import partial
@@ -38,7 +38,6 @@ from lifelines.plotting import add_at_risk_counts
 
 import matplotlib.pyplot as plt
 
-
 from njab.plotting.km import compare_km_curves, log_rank_test
 import njab
 import njab.plotting
@@ -47,7 +46,7 @@ njab.plotting.set_font_sizes('x-small')
 seaborn.set_style("whitegrid")
 
 # %% [markdown]
-# ## Set parameters
+# ### Set parameters
 
 # %% tags=["parameters"]
 TARGET = 'event'
@@ -93,21 +92,14 @@ covar = check_isin_clinic(da_covar)
 covar
 
 # %%
-vars_cont = ['num_age',
-             'num_wt',
-             'num_sbp',
-             'num_dbp',
-             'num_hg',
-             'num_sz',
-             'num_sg',
-             'num_ap',
-             'num_sdate',
-             'fac_stage']
+vars_cont = [
+    'num_age', 'num_wt', 'num_sbp', 'num_dbp', 'num_hg', 'num_sz', 'num_sg',
+    'num_ap', 'num_sdate', 'fac_stage'
+]
 vars_cont
 
-
 # %% [markdown]
-# ## Collect outputs
+# ### Collect outputs
 
 # %%
 fname = FOLDER / '1_differential_analysis.xlsx'
@@ -116,7 +108,7 @@ writer = pd.ExcelWriter(fname)
 fname
 
 # %% [markdown]
-# # Differences between groups defined by target
+# ## Differences between groups defined by target
 
 # %%
 clinic
@@ -125,7 +117,7 @@ clinic
 happend = clinic[TARGET].astype(bool)
 
 # %% [markdown]
-# ## Continous
+# ### Continous
 
 # %%
 var = 'num_age'
@@ -142,7 +134,7 @@ ana_differential.to_excel(writer, "clinic continous", float_format='%.4f')
 ana_differential
 
 # %% [markdown]
-# ## Binary
+# ### Binary
 
 # %%
 clinic[vars_binary].describe()
@@ -216,17 +208,17 @@ ancova.columns = pd.MultiIndex.from_product([['ancova'], ancova.columns],
 ancova.to_excel(writer, "olink controlled", float_format='%.4f')
 ancova.head(20)
 
-
 # %%
 writer.close()
 
 # %% [markdown]
-# # KM plot for top marker
+# ## KM plot for top marker
 # Cutoff is defined using a univariate logistic regression
 #
 #
 # $$ \ln \frac{p}{1-p} = \beta_0 + \beta_1 \cdot x $$
 # the default cutoff `p=0.5` corresponds to a feature value of:
+#
 # $$ x = - \frac{\beta_0}{\beta_1} $$
 #
 # Optional: The cutoff could be adapted to the prevalence of the target.
@@ -253,14 +245,15 @@ log_rank_test = partial(
 TOP_N = 2  # None = all
 
 # %%
-for marker, name in rejected.index[:TOP_N]:  # first case done above currently
+for marker, _ in rejected.index[:TOP_N]:  # first case done above currently
     fig, ax = plt.subplots()
     class_weight = 'balanced'
     # class_weight=None
     model = sklearn.linear_model.LogisticRegression(class_weight=class_weight)
     model = model.fit(X=clinic[marker].to_frame(), y=happend)
     print(
-        f"Intercept {float(model.intercept_):5.3f}, coef.: {float(model.coef_):5.3f}")
+        f"Intercept {float(model.intercept_):5.3f}, coef.: {float(model.coef_):5.3f}"
+    )
     # offset = np.log(p/(1-p)) # ! could be adapted based on proportion of target (for imbalanced data)
     offset = np.log(0.5 / (1 - 0.5))  # ! standard cutoff of probability of 0.5
     cutoff = offset - float(model.intercept_) / float(model.coef_)
@@ -274,8 +267,7 @@ for marker, name in rejected.index[:TOP_N]:  # first case done above currently
     ax.set_title(
         f'KM curve for {TARGET.lower()}'
         f' and marker {marker} \n'
-        f'(cutoff{direction}{cutoff:.2f}, log-rank-test p={res.p_value:.3f})'
-    )
+        f'(cutoff{direction}{cutoff:.2f}, log-rank-test p={res.p_value:.3f})')
     ax.legend([
         f"KP pred=0 (N={(~pred).sum()})", '95% CI (pred=0)',
         f"KP pred=1 (N={pred.sum()})", '95% CI (pred=1)'
