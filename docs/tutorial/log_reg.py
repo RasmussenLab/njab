@@ -522,7 +522,7 @@ njab.plotting.savefig(ax.get_figure(), files_out['hist_score_test_target.pdf'])
 # pred_bins_val
 
 # %% [markdown]
-# # Performance evaluations
+# ## Performance evaluations
 
 # %%
 prc = pd.DataFrame(results_model.train.prc,
@@ -567,7 +567,7 @@ _.to_excel(writer, "CM_test_cutoff_0.5")
 _
 
 # %% [markdown]
-# # Multiplicative decompositon
+# ## Multiplicative decompositon
 
 # %%
 
