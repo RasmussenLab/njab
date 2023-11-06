@@ -18,7 +18,7 @@
 # Uses the `prostate` time series dataset provided by the `SurvSet` package.
 # - [SurvSet package](https://github.com/ErikinBC/SurvSet/tree/main)
 
-# %%
+# %% tags=["hide-output"]
 # %pip install njab openpyxl
 
 # %%

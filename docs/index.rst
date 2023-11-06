@@ -9,6 +9,7 @@ functionality used two papers.
 .. include:: ../README.md
    :parser: myst_parser.sphinx_
    :start-line: 1
+   :end-line: 22
 
 
 Try it yourself
@@ -16,6 +17,7 @@ Try it yourself
 
 The tutorial showcasing most of the basic functionality can be found on the following
 pages
+or directly in colab.
 
 .. toctree::
    :maxdepth: 2
@@ -27,9 +29,12 @@ pages
 Python Package reference
 ------------------------
 
+You can browse the documentation for each module of the package,
+including the API reference and the source code.
+
 .. toctree::
    :maxdepth: 2
-   :
+   :caption: Python Package
 
    reference/modules
 

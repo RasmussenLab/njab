@@ -22,7 +22,7 @@
 #
 # > Predict Alzheimer disease based on proteomics measurements.
 
-# %%
+# %% tags=["hide-output"]
 # Setup colab installation
 # %pip install njab heatmapz openpyxl "matplotlib<3.7"
 
@@ -65,8 +65,8 @@ seaborn.set_style("whitegrid")
 # ## Set parameters
 
 # %% tags=["parameters"]
-CLINIC: str = 'data/alzheimer/meta.csv'  # clincial data
-fname_omics: str = 'data/alzheimer/proteome.csv'  # omics data
+CLINIC: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/meta.csv'  # clincial data
+fname_omics: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/proteome.csv'  # omics data
 TARGET: str = '_primary biochemical AD classification'  # target column in CLINIC data
 n_features_max: int = 15
 VAL_IDS: str = ''  #
