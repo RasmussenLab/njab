@@ -35,9 +35,15 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autodoc.typehints',
     'sphinx.ext.viewcode',
-    'myst_parser',
+    'myst_nb',
     'sphinx.ext.napoleon',
 ]
+
+#  https://myst-nb.readthedocs.io/en/latest/computation/execute.html
+nb_execution_mode = "auto"
+
+myst_enable_extensions = ["dollarmath", "amsmath"]
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

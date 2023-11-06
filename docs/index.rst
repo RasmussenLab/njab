@@ -9,11 +9,27 @@ functionality used two papers.
 .. include:: ../README.md
    :parser: myst_parser.sphinx_
    :start-line: 1
-.. :end-line: 22
+
+
+Try it yourself
+---------------
+
+The tutorial showcasing most of the basic functionality can be found on the following
+pages
 
 .. toctree::
    :maxdepth: 2
-   :caption: Python Package Reference:
+   :caption: Tutorials
+   
+   tutorial/explorative_analysis
+   tutorial/log_reg
+
+Python Package reference
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :
 
    reference/modules
 

@@ -8,7 +8,7 @@ a paper on fatty liver disease.
 
 ## Installation
 
-Install using pip from [PyPi](https://pypi.org/project/njab) version
+Install using pip from [PyPi](https://pypi.org/project/njab) version.
 
 ```
 pip install njab

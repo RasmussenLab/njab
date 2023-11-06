@@ -8,9 +8,16 @@ import pathlib
 from typing import Iterable
 import matplotlib.pyplot as plt
 
-plt.rcParams['figure.figsize'] = [16.0, 7.0]
+from njab.plotting.lifelines import plot_lifelines
+from njab.plotting.km import compare_km_curves
+
+__all__ = ['plot_lifelines', 'compare_km_curves']
+
+plt.rcParams['figure.figsize'] = [4.0, 3.0]
 plt.rcParams['pdf.fonttype'] = 42
 plt.rcParams['ps.fonttype'] = 42
+
+plt.rcParams['figure.dpi'] = 147
 
 figsize_a4 = (8.3, 11.7)
 
