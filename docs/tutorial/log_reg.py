@@ -23,7 +23,8 @@
 # > Predict Alzheimer disease based on proteomics measurements.
 
 # %%
-# !pip install njab heatmapz openpyxl
+# Setup colab installation
+# %pip install njab heatmapz openpyxl "matplotlib<3.7"
 
 # %%
 import itertools
@@ -285,6 +286,8 @@ files_out['scatter_first_5PCs.pdf'] = FOLDER / 'scatter_first_5PCs.pdf'
 fig, axes = plt.subplots(5, 2, figsize=(8.3, 11.7), layout='constrained')
 PCs = PCs.join(y.astype('category'))
 up_to = min(PCs.shape[-1], 5)
+# https://github.com/matplotlib/matplotlib/issues/25538
+# colab: old pandas version and too new matplotlib version (2023-11-6)
 for (i, j), ax in zip(itertools.combinations(range(up_to), 2), axes.flatten()):
     PCs.plot.scatter(i, j, c=TARGET_LABEL, cmap='Paired', ax=ax)
 _ = PCs.pop(TARGET_LABEL)
@@ -818,9 +821,6 @@ if M_sel > 1:
                 hue_order=['TN', 'TP', 'FN', 'FP'],
                 palette=[colors[0], colors[2], colors[1], colors[3]],
                 ax=axes[_row, axes_col])
-            # ! scale each row and each column
-            # X_scaled[results_model.selected_features][i]
-            # X_val_scaled[results_model.selected_features][j]
             _row += 1
 
     fname = FOLDER / f'sel_feat_up_to_{max_rows}.pdf'

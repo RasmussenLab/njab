@@ -19,7 +19,7 @@
 # - [SurvSet package](https://github.com/ErikinBC/SurvSet/tree/main)
 
 # %%
-# %pip install njab pyopenxl
+# %pip install njab openpyxl
 
 # %%
 from functools import partial
