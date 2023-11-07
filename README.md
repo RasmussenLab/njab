@@ -23,7 +23,7 @@ pip install git+https://github.com/RasmussenLab/njab.git
 ## Tutorials
 
 The tutorial can be found on the documentation of the project with output
-or can be run directly in colab:
+or can be run directly in colab.
 
 ### Explorative Analysis of survival dataset
 
@@ -51,3 +51,7 @@ The main steps in the tutorial are:
 1. Load and prepare data for machine learning
 2. Find a good set of features using cross validation
 3. Evaluate and inspect your model retrained on the entire training data
+
+## Documentation
+
+Please find the documentation under [njab.readthedocs.io](https://njab.readthedocs.io)

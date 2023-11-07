@@ -24,6 +24,8 @@
 
 # %% tags=["hide-output"]
 # Setup colab installation
+# You need to restart the runtime after running this cell
+# (due to a pandas 1.5.3 and matplotlib >3.7 incompability - 23-11-07)
 # %pip install njab heatmapz openpyxl "matplotlib<3.7"
 
 # %%

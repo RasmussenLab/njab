@@ -9,15 +9,11 @@ functionality used two papers.
 .. include:: ../README.md
    :parser: myst_parser.sphinx_
    :start-line: 1
-   :end-line: 22
+   :end-line: 54
 
 
-Try it yourself
----------------
 
-The tutorial showcasing most of the basic functionality can be found on the following
-pages
-or directly in colab.
+You can also find an executed version on this website, see links below.
 
 .. toctree::
    :maxdepth: 2
