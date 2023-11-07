@@ -1,4 +1,4 @@
-# Docs
+# Docs creation
 
 In order to build the docs you need to 
 
@@ -15,7 +15,7 @@ Command to be run from `path/to/njab/docs`, i.e. from within the `docs` package 
 Options:
   - `--separate` to build separate pages for each (sub-)module
 
-```cmd	
+```bash	
 # pwd: ./njab/docs
 # apidoc
 sphinx-apidoc --force --implicit-namespaces --module-first -o reference ../src/njab

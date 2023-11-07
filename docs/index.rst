@@ -34,6 +34,12 @@ including the API reference and the source code.
 
    reference/modules
 
+.. toctree::
+   :hidden:
+   :caption: Technical notes
+
+   README.md
+   tutorial/data/README.md
 
 Indices and tables
 ------------------
