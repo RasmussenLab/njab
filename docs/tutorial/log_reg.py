@@ -181,7 +181,7 @@ VAL_IDS
 # ## Combine clinical and olink data
 #
 
-# %%
+# %% tags=["hide-output"]
 # in case you need to subselect
 feat_to_consider = clinic_for_ml.columns.to_list()
 feat_to_consider += omics.columns.to_list()
