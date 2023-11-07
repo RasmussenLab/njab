@@ -52,3 +52,40 @@ def value_counts_with_margins(y: pd.Series) -> pd.DataFrame:
     ret.index.name = y.name
     ret['prop'] = y.value_counts(normalize=True)
     return ret
+
+
+def get_overlapping_columns(df: pd.DataFrame, cols_expected: list) -> list:
+    """Get overlapping columns between DataFrame and list of expected columns."""
+    ret = df.columns.intersection(cols_expected)
+    diff = pd.Index(cols_expected).difference(df.columns)
+    if not diff.empty:
+        logging.warning(
+            f"Some columns are requested, but missing: {diff.to_list()}")
+    return ret.to_list()
+
+
+def combine_value_counts(X: pd.DataFrame, dropna=True) -> pd.DataFrame:
+    """Pass a selection of columns to combine it's value counts.
+
+    This performs no checks. Make sure the scale of the variables
+    you pass is comparable.
+
+    Parameters
+    ----------
+    X : pandas.DataFrame
+        A DataFrame of several columns with values in a similar range.
+    dropna : bool, optional
+        Exclude NA values from counting, by default True
+
+    Returns
+    -------
+    pandas.DataFrame
+        DataFrame of combined value counts.
+    """
+    """
+    """
+    _df = pd.DataFrame()
+    for col in X.columns:
+        _df = _df.join(X[col].value_counts(dropna=dropna), how='outer')
+    freq_targets = _df.sort_index()
+    return freq_targets
