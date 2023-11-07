@@ -70,7 +70,7 @@ seaborn.set_style("whitegrid")
 CLINIC: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/meta.csv'  # clincial data
 fname_omics: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/proteome.csv'  # omics data
 TARGET: str = '_primary biochemical AD classification'  # target column in CLINIC data
-n_features_max: int = 15
+n_features_max: int = 5
 VAL_IDS: str = ''  #
 VAL_IDS_query: str = ''
 weights: bool = True
