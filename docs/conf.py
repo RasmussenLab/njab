@@ -44,6 +44,11 @@ nb_execution_mode = "auto"
 
 myst_enable_extensions = ["dollarmath", "amsmath"]
 
+# https://myst-nb.readthedocs.io/en/latest/configuration.html
+# Execution
+nb_execution_raise_on_error = True
+# Rendering
+nb_merge_streams = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
