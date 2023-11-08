@@ -60,6 +60,7 @@ from njab.sklearn.scoring import get_score, get_pred, get_target_count_per_bin
 logger = logging.getLogger('njab')
 logger.setLevel(logging.INFO)
 
+njab.pandas.set_pandas_options()
 njab.plotting.set_font_sizes('x-small')
 seaborn.set_style("whitegrid")
 
@@ -81,7 +82,7 @@ FOLDER = 'alzheimer'
 # ### Load data
 
 # %%
-clinic = pd.read_csv(CLINIC, index_col=0)
+clinic = pd.read_csv(CLINIC, index_col=0).convert_dtypes()
 cols_clinic = njab.pandas.get_colums_accessor(clinic)
 omics = pd.read_csv(fname_omics, index_col=0)
 

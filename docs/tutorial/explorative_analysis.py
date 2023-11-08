@@ -42,6 +42,7 @@ from njab.plotting.km import compare_km_curves, log_rank_test
 import njab
 import njab.plotting
 
+njab.pandas.set_pandas_options()
 njab.plotting.set_font_sizes('x-small')
 seaborn.set_style("whitegrid")
 
@@ -74,6 +75,18 @@ FOLDER
 clinic = pd.read_csv(CLINIC, index_col=0).dropna(how='any')
 clinic.columns.name = 'feat_name'  # ! check needs to be implemented
 cols_clinic = njab.pandas.get_colums_accessor(clinic)
+clinic = clinic.astype({var: 'int'
+                        for var in ['event',
+                                    'time',
+                                    'num_age',
+                                    'num_wt',
+                                    'num_sbp',
+                                    'num_dbp',
+                                    'num_sz',
+                                    'num_sg',
+                                    'num_sdate',
+                                    'fac_stage']}
+                       )
 clinic
 
 # %%
