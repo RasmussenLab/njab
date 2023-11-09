@@ -3,8 +3,16 @@
 `njab` is a collection of some python function building on top of 
 `pandas`, `scikit-learn`, `statsmodels`, `pingoin`, `numpy` and more...
 
-It aims to provide a procedure for biomarker discovery which was first developed for 
-a paper on fatty liver disease. 
+It aims to formalize a procedure for biomarker discovery which was first developed for 
+a paper on alcohol-related liver disease:
+
+> Niu, L., Thiele, M., Geyer, P. E., Rasmussen, D. N., Webel, H. E.,  
+> Santos, A., Gupta, R., Meier, F., Strauss, M., Kjaergaard, M., Lindvig,  
+> K., Jacobsen, S., Rasmussen, S., Hansen, T., Krag, A., & Mann, M. (2022).  
+> “Noninvasive Proteomic Biomarkers for Alcohol-Related Liver Disease.”  
+> Nature Medicine 28 (6): 1277–87.  
+> [nature.com/articles/s41591-022-01850-y](https://www.nature.com/articles/s41591-022-01850-y)
+
 
 ## Installation
 

@@ -37,6 +37,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'myst_nb',
     'sphinx.ext.napoleon',
+    'sphinx_new_tab_link',
 ]
 
 #  https://myst-nb.readthedocs.io/en/latest/computation/execute.html
