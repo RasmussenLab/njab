@@ -17,6 +17,7 @@ def set_pandas_options() -> None:
     pd.options.display.float_format = '{:,.3f}'.format
 
     class IntArrayFormatter(pf.GenericArrayFormatter):
+
         def _format_strings(self):
             formatter = self.formatter or '{:,d}'.format
             fmt_values = [formatter(x) for x in self.values]
