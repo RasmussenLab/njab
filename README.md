@@ -4,7 +4,8 @@
 `pandas`, `scikit-learn`, `statsmodels`, `pingoin`, `numpy` and more...
 
 It aims to formalize a procedure for biomarker discovery which was first developed for 
-a paper on alcohol-related liver disease:
+a paper on alcohol-related liver disease, based on mass spectrometry-based proteomics
+measurements of blood plasma samples:
 
 > Niu, L., Thiele, M., Geyer, P. E., Rasmussen, D. N., Webel, H. E.,  
 > Santos, A., Gupta, R., Meier, F., Strauss, M., Kjaergaard, M., Lindvig,  
@@ -13,6 +14,12 @@ a paper on alcohol-related liver disease:
 > Nature Medicine 28 (6): 1277–87.  
 > [nature.com/articles/s41591-022-01850-y](https://www.nature.com/articles/s41591-022-01850-y)
 
+The approach was formalized for an analysis of inflammation markers of a cohort of patients with alcohol related cirrhosis, 
+based on OLink-based proteomics measurments of blood plasma samples:
+> Mynster Kronborg, T., Webel, H., O’Connell, M. B., Danielsen, K. V., Hobolth, L., Møller, S., Jensen, R. T., Bendtsen, F., Hansen, T., Rasmussen, S., Juel, H. B., & Kimer, N. (2023).  
+> Markers of inflammation predict survival in newly diagnosed cirrhosis: a prospective registry study.  
+> Scientific Reports, 13(1), 1–11.  
+> [nature.com/articles/s41598-023-47384-2](https://www.nature.com/articles/s41598-023-47384-2)
 
 ## Installation
 
