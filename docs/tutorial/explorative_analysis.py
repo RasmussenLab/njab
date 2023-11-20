@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.14.0
+#       jupytext_version: 1.15.2
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -17,11 +17,12 @@
 # # Explorative Analysis
 # Uses the `prostate` time series dataset provided by the `SurvSet` package.
 # - [SurvSet package](https://github.com/ErikinBC/SurvSet/tree/main)
+# First install the dependencies:
 
 # %% tags=["hide-output"]
 # %pip install njab openpyxl
 
-# %%
+# %% tags=["hide-cell"]
 from functools import partial
 from pathlib import Path
 import logging
@@ -31,7 +32,6 @@ from IPython.display import display
 import numpy as np
 import pandas as pd
 
-import pingouin as pg
 import sklearn
 import seaborn
 from lifelines.plotting import add_at_risk_counts
@@ -43,8 +43,10 @@ import njab
 import njab.plotting
 
 njab.pandas.set_pandas_options()
+pd.options.display.min_rows = 10
 njab.plotting.set_font_sizes('x-small')
 seaborn.set_style("whitegrid")
+plt.rcParams['figure.figsize'] = [4.0, 4.0]
 
 # %% [markdown]
 # ### Set parameters
@@ -63,15 +65,18 @@ clinic_binary = ['male', 'AD']
 # List of comma separated values or filepath
 da_covar = 'num_age,num_wt'
 
-# %%
-print(f"Time To Event: {TIME_KM} and rate variables for {TARGET}")
+# %% tags=["hide-input"]
+print(f"Time To Event: {TIME_KM}")
+print(f"event (target) variable: {TARGET}")
 
-# %%
+# %% tags=["hide-cell"]
 FOLDER = Path(FOLDER)
 FOLDER.mkdir(exist_ok=True, parents=True)
 FOLDER
+# %% [markdown]
+# Inspect the data:
 
-# %%
+# %% tags=["hide-input"]
 clinic = pd.read_csv(CLINIC, index_col=0).dropna(how='any')
 clinic.columns.name = 'feat_name'  # ! check needs to be implemented
 cols_clinic = njab.pandas.get_colums_accessor(clinic)
@@ -89,54 +94,60 @@ clinic = clinic.astype({var: 'int'
                        )
 clinic
 
+# %% [markdown]
+# Descriptive statistics of non-numeric variables:
+
 # %%
 clinic.describe(include='object')
 
+# %% [markdown]
+# Set the binary variables and convert them to categories:
 # %%
 vars_binary = ['fac_hx', 'fac_bm']
-vars_binary
-
-# %%
 clinic[vars_binary] = clinic[vars_binary].astype('category')
 
-# %%
+# %% [markdown]
+# Covariates to adjust for:
+
+# %% tags=["hide-input"]
 check_isin_clinic = partial(njab.pandas.col_isin_df, df=clinic)
 covar = check_isin_clinic(da_covar)
 covar
+
+# %% [markdown]
+# Set continous variables
 
 # %%
 vars_cont = [
     'num_age', 'num_wt', 'num_sbp', 'num_dbp', 'num_hg', 'num_sz', 'num_sg',
     'num_ap', 'num_sdate', 'fac_stage'
 ]
-vars_cont
 
 # %% [markdown]
 # ### Collect outputs
+# in an excel file:
 
-# %%
+# %% tags=["hide-input"]
 fname = FOLDER / '1_differential_analysis.xlsx'
 files_out = {fname.name: fname}
 writer = pd.ExcelWriter(fname)
-fname
+print(f"Output will be written to: {fname}")
 
 # %% [markdown]
 # ## Differences between groups defined by target
-
-# %%
-clinic
+# Perform an uncontrolled t-test for continous
+# and binomal test for binary variables.
+# Besides the test results, summary statistics of both groups are provided.
+#
+# First, set the binary target as a boolean mask:
 
 # %%
 happend = clinic[TARGET].astype(bool)
 
 # %% [markdown]
-# ### Continous
+# ### Univariate t-test for continous variables
 
-# %%
-var = 'num_age'
-pg.ttest(clinic.loc[happend, var], clinic.loc[~happend, var])
-
-# %%
+# %% tags=["hide-input"]
 ana_differential = njab.stats.groups_comparision.diff_analysis(
     clinic[vars_cont],
     happend,
@@ -147,19 +158,9 @@ ana_differential.to_excel(writer, "clinic continous", float_format='%.4f')
 ana_differential
 
 # %% [markdown]
-# ### Binary
+# ### Binomal test for binary variables:
 
-# %%
-clinic[vars_binary].describe()
-
-# %% [markdown]
-# Might focus on discriminative power of
-#   - DecompensatedAtDiagnosis
-#   - alcohol consumption
-#
-# but the more accute diseases as heart disease and cancer seem to be distinctive
-
-# %%
+# %% tags=["hide-input"]
 diff_binomial = []
 for var in vars_binary:
     if len(clinic[var].cat.categories) == 2:
@@ -179,16 +180,25 @@ diff_binomial.to_excel(writer, 'clinic binary', float_format='%.4f')
 with pd.option_context('display.max_rows', len(diff_binomial)):
     display(diff_binomial)
 
-# %%
+# %% [markdown]
+# ## Analaysis of covariance (ANCOVA)
+# Next, we select continous variables controlling for covariates.
+#
+# First the summary statistics for the target and covariates:
+
+# %% tags=["hide-input"]
 clinic_ancova = [TARGET, *covar]
 clinic_ancova = clinic[clinic_ancova].copy()
 clinic_ancova.describe(include='all')
 
-# %%
+# %% [markdown]
+# Discard all rows with a missing features (if present):
+
+# %% tags=["hide-input"]
 clinic_ancova = clinic_ancova.dropna(
-)  # for now discard all rows with a missing feature
+)
 categorical_columns = clinic_ancova.columns[clinic_ancova.dtypes == 'category']
-print("Available covariates", ", ".join(categorical_columns.to_list()))
+print("Available covariates: " ", ".join(categorical_columns.to_list()))
 for categorical_column in categorical_columns:
     # only works if no NA and only binary variables!
     clinic_ancova[categorical_column] = clinic_ancova[
@@ -198,7 +208,10 @@ desc_ancova = clinic_ancova.describe()
 desc_ancova.to_excel(writer, "covars", float_format='%.4f')
 desc_ancova
 
-# %%
+# %% [markdown]
+# Remove non-varying variables (if present):
+
+# %% tags=["hide-input"]
 if (desc_ancova.loc['std'] < 0.001).sum():
     non_varying = desc_ancova.loc['std'] < 0.001
     non_varying = non_varying[non_varying].index
@@ -207,7 +220,10 @@ if (desc_ancova.loc['std'] < 0.001).sum():
     for col in non_varying:
         covar.remove(col)
 
-# %%
+# %% [markdown]
+# Run ANCOVA:
+
+# %% tags=["hide-input"]
 ancova = njab.stats.ancova.AncovaOnlyTarget(
     df_proteomics=clinic[vars_cont].drop(covar, axis=1),
     df_clinic=clinic_ancova,
@@ -221,11 +237,11 @@ ancova.columns = pd.MultiIndex.from_product([['ancova'], ancova.columns],
 ancova.to_excel(writer, "olink controlled", float_format='%.4f')
 ancova.head(20)
 
-# %%
+# %% tags=["hide-input"]
 writer.close()
 
 # %% [markdown]
-# ## KM plot for top marker
+# ## Kaplan-Meier (KM) plot for top markers
 # Cutoff is defined using a univariate logistic regression
 #
 #
@@ -235,20 +251,24 @@ writer.close()
 # $$ x = - \frac{\beta_0}{\beta_1} $$
 #
 # Optional: The cutoff could be adapted to the prevalence of the target.
+#
+# List of markers with significant difference between groups as defined by ANCOVA:
 
-# %%
+# %% tags=["hide-input"]
 rejected = ancova.query("`('ancova', 'rejected')` == True")
 rejected
 
+# %% [markdown]
+# Settings for plots
 # %%
-# settings for plots
 class_weight = 'balanced'
 y_km = clinic[TARGET]
 time_km = clinic[TIME_KM]
 compare_km_curves = partial(compare_km_curves,
                             time=time_km,
                             y=y_km,
-                            xlabel='Days since inflammation sample',
+                            xlim=(0, 80),
+                            xlabel='time passed',
                             ylabel=f'rate {y_km.name}')
 log_rank_test = partial(
     log_rank_test,
@@ -257,7 +277,10 @@ log_rank_test = partial(
 )
 TOP_N = 2  # None = all
 
-# %%
+# %% [markdown]
+# Plot KM curves for `TOP_N` (here two) makers with log-rank test p-value:
+
+# %% tags=["hide-input"]
 for marker, _ in rejected.index[:TOP_N]:  # first case done above currently
     fig, ax = plt.subplots()
     class_weight = 'balanced'

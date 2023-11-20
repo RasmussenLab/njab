@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.14.0
+#       jupytext_version: 1.15.2
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -28,7 +28,7 @@
 # (due to a pandas 1.5.3 and matplotlib >3.7 incompability - 23-11-07)
 # %pip install njab heatmapz openpyxl "matplotlib<3.7" plotly
 
-# %%
+# %% tags=["hide-input"]
 import itertools
 import logging
 from pathlib import Path
@@ -61,6 +61,8 @@ logger = logging.getLogger('njab')
 logger.setLevel(logging.INFO)
 
 njab.pandas.set_pandas_options()
+pd.options.display.min_rows = 10
+pd.options.display.max_columns = 20
 njab.plotting.set_font_sizes('x-small')
 seaborn.set_style("whitegrid")
 
@@ -98,7 +100,7 @@ omics.shape, clinic.shape
 # %%
 ax = omics.notna().sum().sort_values().plot(rot=45)
 
-# %%
+# %% tags=["hide-input"]
 freq_cutoff = 0.5
 M_before = omics.shape[1]
 omics = omics.dropna(thresh=int(len(omics) * freq_cutoff), axis=1)
@@ -107,6 +109,13 @@ msg = (
     f"Removed {M_before-M_after} features with more than {freq_cutoff*100}% missing values."
     f"\nRemaining features: {M_after} (of {M_before})")
 print(msg)
+# keep a map of all proteins in protein group, but only display first protein
+# proteins are unique to protein groups
+pg_map = {k: k.split(";")[0] for k in omics.columns}
+omics = omics.rename(columns=pg_map)
+# log2 transform raw intensity data:
+omics = np.log2(omics + 1)
+omics
 
 # %% [markdown]
 # ## Clinical data
@@ -117,11 +126,11 @@ clinic
 
 # %% [markdown]
 # ## Target
-
+# Tabulate target and check for missing values
 # %%
 njab.pandas.value_counts_with_margins(clinic[TARGET])
 
-# %%
+# %% tags=["hide-input"]
 target_counts = clinic[TARGET].value_counts()
 
 if target_counts.sum() < len(clinic):
@@ -135,17 +144,15 @@ TARGET_LABEL = 'AD'
 y_obj = clinic[TARGET].rename(TARGET_LABEL)
 y = pd.get_dummies(y_obj)["biochemical AD"].rename(TARGET_LABEL)
 
-target_counts
-
 # %% [markdown]
 # Encode some clincial variables as binary
 
-# %%
+# %% tags=["hide-input"]
 dummies_collection_site = pd.get_dummies(
     clinic['_collection site'])  # reference is first column (Berlin)
 dummies_collection_site.describe()
 
-# %%
+# %% tags=["hide-input"]
 clinic_for_ml = dummies_collection_site.iloc[:, 1:]
 clinic_for_ml = (clinic_for_ml.join(
     pd.get_dummies(clinic['_gender']).rename(columns={
@@ -156,13 +163,14 @@ clinic_for_ml
 
 # %% [markdown]
 # ## Test IDs
+# Select some test samples:
 
-# %%
+# %% tags=["hide-input"]
 olink_val, clinic_val = None, None
 if not VAL_IDS:
     if VAL_IDS_query:
         logging.warning(f"Querying index using: {VAL_IDS_query}")
-        VAL_IDS = clinic.filter(like='Cflow', axis=0).index.to_list()
+        VAL_IDS = clinic.filter(like=VAL_IDS_query, axis=0).index.to_list()
         logging.warning(f"Found {len(VAL_IDS)} Test-IDs")
     else:
         logging.warning("Create train and test split.")
@@ -188,16 +196,19 @@ feat_to_consider = clinic_for_ml.columns.to_list()
 feat_to_consider += omics.columns.to_list()
 feat_to_consider
 
-# %%
-# predictors = feat_clinic + olink.columns.to_list()
+# %% [markdown]
+# View data for training
+
+# %% tags=["hide-input"]
 model_name = 'all'
 X = clinic_for_ml.join(omics)[feat_to_consider]
 X
 
 # %% [markdown]
-# ## Data Splits -> train and test split
+# ## Data Splits
+# Separate train and test split
 
-# %%
+# %% tags=["hide-input"]
 TRAIN_LABEL = 'train'
 TEST_LABEL = 'test'
 if VAL_IDS:
@@ -219,21 +230,22 @@ if VAL_IDS:
 # %% [markdown]
 # ## Output folder
 
-# %%
+# %% tags=["hide-input"]
 FOLDER = Path(FOLDER)
 FOLDER.mkdir(exist_ok=True, parents=True)
-FOLDER
+print(f"Output folder: {FOLDER}")
 
 # %% [markdown]
 # ### Outputs
+# Save outputs to excel file:
 
-# %%
+# %% tags=["hide-input"]
 # out
 files_out = {}
 fname = FOLDER / 'log_reg.xlsx'
 files_out[fname.stem] = fname
 writer = pd.ExcelWriter(fname)
-fname
+print(f"Excel-file for tables: {fname}")
 
 # %% [markdown]
 # ## Collect test predictions
@@ -242,37 +254,34 @@ fname
 predictions = y_val.to_frame('true')
 
 # %% [markdown]
-# ## Deal with missing values globally - impute
+# ## Fill missing values with training median
 
-# %%
+# %% tags=["hide-input"]
 feat_w_missings = X.isna().sum()
 feat_w_missings = feat_w_missings.loc[feat_w_missings > 0]
 feat_w_missings
 
-# %%
+# %% tags=["hide-input"]
 row_w_missing = X.isna().sum(axis=1).astype(bool)
 col_w_missing = X.isna().sum(axis=0).astype(bool)
 X.loc[row_w_missing, col_w_missing]
+
+# %% [markdown]
+# Impute using median of training data
 
 # %%
 median_imputer = sklearn.impute.SimpleImputer(strategy='median')
 
 X = njab.sklearn.transform_DataFrame(X, median_imputer.fit_transform)
 X_val = njab.sklearn.transform_DataFrame(X_val, median_imputer.transform)
-
-# %%
 assert X.isna().sum().sum() == 0
-
-# %%
 X.shape, X_val.shape
 
 # %% [markdown]
 # ## Principal Components
-#
-# - [ ]  base on selected data
-# - binary features do not strictly need to be normalized
+# on standard normalized training data:
 
-# %%
+# %% tags=["hide-input"]
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
@@ -283,7 +292,10 @@ ax.locator_params(axis='x', integer=True)
 njab.plotting.savefig(ax.get_figure(), files_out["var_explained_by_PCs.pdf"])
 X_scaled.shape
 
-# %%
+# %% [markdown]
+# Plot first 5 PCs with binary target label annotating each sample::
+
+# %% tags=["hide-input"]
 files_out['scatter_first_5PCs.pdf'] = FOLDER / 'scatter_first_5PCs.pdf'
 
 fig, axes = plt.subplots(5, 2, figsize=(8.3, 11.7), layout='constrained')
@@ -298,12 +310,12 @@ njab.plotting.savefig(fig, files_out['scatter_first_5PCs.pdf'])
 
 # %% [markdown]
 # ## UMAP
+# of training data:
 
-# %%
+# %% tags=["hide-input"]
 reducer = umap.UMAP()
 embedding = reducer.fit_transform(X_scaled)
 
-# %%
 files_out['umap.pdf'] = FOLDER / 'umap.pdf'
 
 embedding = pd.DataFrame(embedding,
@@ -315,14 +327,7 @@ njab.plotting.savefig(ax.get_figure(), files_out['umap.pdf'])
 
 # %% [markdown]
 # ## Baseline Model - Logistic Regression
-# - `age`, `decompensated`, `MELD-score`
-# - use weigthing to counter class imbalances
-
-# %%
-# run nb with parameters
-# name_model = 'baseline'
-# cols_base_model = [cols_clinic.Age, cols_clinic.DecomensatedAtDiagnosis, cols_clinic.MELD_score] # MELD score -> death
-
+# Based on parameters, use weighting:
 # %%
 if weights:
     weights = 'balanced'
@@ -336,22 +341,18 @@ else:
 # Procedure:
 # 1. Select best set of features from entire feature set selected using CV on train split
 # 2. Retrain best model configuration using entire train split and evalute on test split
+#
+# Define splits and models:
 
 # %%
-# ### Scaled Data
 splits = Splits(X_train=X_scaled,
                 X_test=scaler.transform(X_val),
                 y_train=y,
                 y_test=y_val)
-
-# splits = Splits(X_train=X,
-#                 X_test=X_val,
-#                 y_train=y, y_test=y_val)
-
 model = sklearn.linear_model.LogisticRegression(penalty='l2',
                                                 class_weight=weights)
 
-# %%
+# %% tags=["hide-input"]
 scoring = [
     'precision', 'recall', 'f1', 'balanced_accuracy', 'roc_auc',
     'average_precision'
@@ -379,7 +380,7 @@ cv_feat
 # %% [markdown]
 # Add AIC and BIC for model selection
 
-# %%
+# %% tags=["hide-input"]
 # AIC vs BIC on train and test data with bigger is better
 IC_criteria = pd.DataFrame()
 N_split = {
@@ -399,17 +400,26 @@ for _split in ('train', 'test'):
 IC_criteria.columns = pd.MultiIndex.from_tuples(IC_criteria.columns)
 IC_criteria
 
+# %% [markdown]
+# All cross-validation metrics:
+
 # %%
 cv_feat = cv_feat.join(IC_criteria)
 cv_feat = cv_feat.filter(regex="train|test", axis=1).style.highlight_max(
     axis=0, subset=pd.IndexSlice[:, pd.IndexSlice[:, 'mean']])
 cv_feat
 
+# %% [markdown]
+# Save:
+
 # %%
 cv_feat.to_excel(writer, 'CV', float_format='%.3f')
 cv_feat = cv_feat.data
 
-# %%
+# %% [markdown]
+# Optimal number of features to use based on cross-validation by metric:
+
+# %% tags=["hide-input"]
 mask = cv_feat.columns.levels[0].str[:4] == 'test'
 scores_cols = cv_feat.columns.levels[0][mask]
 n_feat_best = cv_feat.loc[:, pd.IndexSlice[scores_cols, 'mean']].idxmax()
@@ -417,23 +427,21 @@ n_feat_best.name = 'best'
 n_feat_best.to_excel(writer, 'n_feat_best')
 n_feat_best
 
+# %% [markdown]
+# Retrain model with best number of features by selected metric::
+
 # %%
 results_model = njab.sklearn.run_model(
     model=model,
     splits=splits,
-    # n_feat_to_select=n_feat_best.loc['test_f1', 'mean'],
     n_feat_to_select=n_feat_best.loc['test_roc_auc', 'mean'],
-    # n_feat_to_select=n_feat_best.loc['test_neg_AIC', 'mean'],
-    # n_feat_to_select=int(n_feat_best.mode()),
-    # fit_params=dict(sample_weight=weights)
 )
-
 results_model.name = model_name
 
 # %% [markdown]
-# ## ROC
+# ## Receiver Operating Curve of final model
 
-# %%
+# %% tags=["hide-input"]
 ax = plot_auc(results_model,
               label_train=TRAIN_LABEL,
               label_test=TEST_LABEL,
@@ -442,9 +450,9 @@ files_out['ROAUC'] = FOLDER / 'plot_roauc.pdf'
 njab.plotting.savefig(ax.get_figure(), files_out['ROAUC'])
 
 # %% [markdown]
-# ## PRC
+# ## Precision-Recall Curve for final model
 
-# %%
+# %% tags=["hide-input"]
 ax = plot_prc(results_model,
               label_train=TRAIN_LABEL,
               label_test=TEST_LABEL,
@@ -455,7 +463,7 @@ njab.plotting.savefig(ax.get_figure(), files_out['PRAUC'])
 # %% [markdown]
 # ## Coefficients with/out std. errors
 
-# %%
+# %% tags=["hide-input"]
 pd.DataFrame({
     'coef': results_model.model.coef_.flatten(),
     'name': results_model.model.feature_names_in_
@@ -464,22 +472,18 @@ pd.DataFrame({
 # %%
 results_model.model.intercept_
 
-# %%
-sm_logit = sm.Logit(endog=splits.y_train,
-                    exog=sm.add_constant(
-                        splits.X_train[results_model.selected_features]))
-sm_logit = sm_logit.fit()
-sm_logit.summary()
-
 # %% [markdown]
 # ## Selected Features
 
-# %%
+# %% tags=["hide-input"]
 des_selected_feat = splits.X_train[results_model.selected_features].describe()
 des_selected_feat.to_excel(writer, 'sel_feat', float_format='%.3f')
 des_selected_feat
 
-# %%
+# %% [markdown]
+# ### Heatmap of correlations
+
+# %% tags=["hide-input"]
 fig = plt.figure(figsize=(6, 6))
 files_out['corr_plot_train.pdf'] = FOLDER / 'corr_plot_train.pdf'
 _ = corrplot(X[results_model.selected_features].join(y).corr(), size_scale=300)
@@ -488,7 +492,7 @@ njab.plotting.savefig(fig, files_out['corr_plot_train.pdf'])
 # %% [markdown]
 # ## Plot training data scores
 
-# %%
+# %% tags=["hide-input"]
 N_BINS = 20
 score = get_score(clf=results_model.model,
                   X=splits.X_train[results_model.selected_features],
@@ -496,9 +500,6 @@ score = get_score(clf=results_model.model,
 ax = score.hist(bins=N_BINS)
 files_out['hist_score_train.pdf'] = FOLDER / 'hist_score_train.pdf'
 njab.plotting.savefig(ax.get_figure(), files_out['hist_score_train.pdf'])
-
-# %%
-# score_val
 pred_bins = get_target_count_per_bin(score, y, n_bins=N_BINS)
 ax = pred_bins.plot(kind='bar', ylabel='count')
 files_out[
@@ -510,7 +511,7 @@ njab.plotting.savefig(ax.get_figure(),
 # %% [markdown]
 # ## Test data scores
 
-# %%
+# %% tags=["hide-input"]
 score_val = get_score(clf=results_model.model,
                       X=splits.X_test[results_model.selected_features],
                       pos=1)
@@ -529,13 +530,15 @@ njab.plotting.savefig(ax.get_figure(), files_out['hist_score_test_target.pdf'])
 
 # %% [markdown]
 # ## Performance evaluations
+# Check if the cutoff can be adapted to maximize the F1 score
+# between precision and recall:
 
-# %%
+# %% tags=["hide-input"]
 prc = pd.DataFrame(results_model.train.prc,
                    index='precision recall cutoffs'.split())
 prc
 
-# %%
+# %% tags=["hide-input"]
 prc.loc['f1_score'] = 2 * (prc.loc['precision'] * prc.loc['recall']) / (
     1 / prc.loc['precision'] + 1 / prc.loc['recall'])
 f1_max = prc[prc.loc['f1_score'].argmax()]
@@ -544,11 +547,11 @@ f1_max
 # %% [markdown]
 # Cutoff set
 
-# %%
+# %% tags=["hide-input"]
 cutoff = float(f1_max.loc['cutoffs'])
 cutoff
 
-# %%
+# %% tags=["hide-input"]
 y_pred_val = njab.sklearn.scoring.get_custom_pred(
     clf=results_model.model,
     X=splits.X_test[results_model.selected_features],
@@ -561,7 +564,7 @@ _.columns = pd.MultiIndex.from_tuples([(t[0] + f" - {cutoff:.3f}", t[1])
 _.to_excel(writer, "CM_test_cutoff_adapted")
 _
 
-# %%
+# %% tags=["hide-input"]
 y_pred_val = get_pred(clf=results_model.model,
                       X=splits.X_test[results_model.selected_features])
 predictions[model_name] = y_pred_val
@@ -574,8 +577,8 @@ _
 
 # %% [markdown]
 # ## Multiplicative decompositon
-
-# %%
+# Decompose the model into its components for both splits:
+# %% tags=["hide-input"]
 
 
 def get_lr_multiplicative_decomposition(results, X, score, y):
@@ -598,7 +601,7 @@ components.to_excel(writer,
                     float_format='%.5f')
 components.head(10)
 
-# %%
+# %% tags=["hide-input"]
 components_test = get_lr_multiplicative_decomposition(results=results_model,
                                                       X=splits.X_test,
                                                       score=score_val,
@@ -609,17 +612,12 @@ components_test.to_excel(writer,
                          float_format='%.5f')
 components_test.head(10)
 
-# %%
-pivot = y.to_frame()
-pivot['pred'] = results_model.model.predict(
-    splits.X_train[results_model.selected_features])
-pivot.describe().iloc[:2]
 
 # %% [markdown]
 # ## Plot TP, TN, FP and FN on PCA plot
 #
 # ### UMAP
-# %%
+# %% tags=["hide-input"]
 reducer = umap.UMAP(random_state=42)
 # bug: how does UMAP works with only one feature?
 # make sure to have two or more features?
@@ -636,7 +634,10 @@ if M_sel > 1:
 else:
     embedding = None
 
-# %%
+# %% [markdown]
+# Annotate using target variable and predictions:
+
+# %% tags=["hide-input"]
 predictions['label'] = predictions.apply(
     lambda x: njab.sklearn.scoring.get_label_binary_classification(
         x['true'], x[model_name]),
@@ -644,7 +645,7 @@ predictions['label'] = predictions.apply(
 mask = predictions[['true', model_name]].sum(axis=1).astype(bool)
 predictions.loc[mask].sort_values('score', ascending=False)
 
-# %%
+# %% tags=["hide-input"]
 X_val_scaled = scaler.transform(X_val)
 if embedding is not None:
     embedding_val = pd.DataFrame(
@@ -653,7 +654,7 @@ if embedding is not None:
         columns=['UMAP dimension 1', 'UMAP dimension 2'])
     embedding_val.sample(3)
 
-# %%
+# %% tags=["hide-input"]
 pred_train = (
     y.to_frame('true')
     # .join(get_score(clf=results_model.model, X=splits.X_train[results_model.selected_features], pos=1))
@@ -666,11 +667,11 @@ pred_train['label'] = pred_train.apply(
     axis=1)
 pred_train.sample(5)
 
-# %%
+# %% tags=["hide-cell"]
 colors = seaborn.color_palette(n_colors=4)
 colors
 
-# %%
+# %% tags=["hide-input"]
 if embedding is not None:
     fig, axes = plt.subplots(1, 2, figsize=(8, 4), sharex=True, sharey=True)
     for _embedding, ax, _title, _model_pred_label in zip(
@@ -693,8 +694,9 @@ if embedding is not None:
 
 # %% [markdown]
 # ### Interactive UMAP plot
+# > Not displayed in online documentation
 
-# %%
+# %% tags=["hide-input"]
 if embedding is not None:
     embedding = embedding.join(X[results_model.selected_features])
     embedding_val = embedding_val.join(X_val[results_model.selected_features])
@@ -704,7 +706,7 @@ if embedding is not None:
     combined_embeddings = pd.concat([embedding, embedding_val])
     combined_embeddings.index.name = 'ID'
 
-# %%
+# %% tags=["hide-input"]
 if embedding is not None:
     cols = combined_embeddings.columns
 
@@ -724,11 +726,12 @@ if embedding is not None:
     files_out[fname.name] = fname
     fig.write_html(fname)
     print(fname)
+    display(fig)
 
 # %% [markdown]
 # ## PCA
 
-# %%
+# %% tags=["hide-input"]
 PCs_train, pca = njab_pca.run_pca(X_scaled[results_model.selected_features],
                                   n_components=None)
 ax = njab_pca.plot_explained_variance(pca)
@@ -738,14 +741,17 @@ fname = FOLDER / "feat_sel_PCA_var_explained_by_PCs.pdf"
 files_out[fname.name] = fname
 njab.plotting.savefig(ax.get_figure(), fname)
 
-# %%
+# %% [markdown]
+# Applied to the test split:
+
+# %% tags=["hide-input"]
 PCs_val = pca.transform(X_val_scaled[results_model.selected_features])
 PCs_val = pd.DataFrame(PCs_val,
                        index=X_val_scaled.index,
                        columns=PCs_train.columns)
 PCs_val
 
-# %%
+# %% tags=["hide-input"]
 if M_sel > 1:
     fig, axes = plt.subplots(1, 2, figsize=(8, 4), sharex=True, sharey=True)
     for _embedding, ax, _title, _model_pred_label in zip(
@@ -764,7 +770,7 @@ if M_sel > 1:
     files_out[fname.name] = fname
     njab.plotting.savefig(ax.get_figure(), fname)
 
-# %%
+# %% tags=["hide-input"]
 if M_sel > 1:
     max_rows = min(3, len(results_model.selected_features))
     fig, axes = plt.subplots(max_rows,
@@ -798,7 +804,7 @@ if M_sel > 1:
 # - top 3 scaled n_features_max (scatter)
 # - or unscalled single features (swarmplot)
 
-# %%
+# %% tags=["hide-input"]
 if M_sel > 1:
     max_rows = min(3, len(results_model.selected_features))
     fig, axes = plt.subplots(max_rows,
@@ -863,6 +869,4 @@ X_val[results_model.selected_features].join(predictions).to_excel(
 
 # %%
 writer.close()
-
-# %%
 files_out
