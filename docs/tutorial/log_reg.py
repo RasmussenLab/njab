@@ -711,7 +711,7 @@ if embedding is not None:
     cols = combined_embeddings.columns
 
     TEMPLATE = 'none'
-    defaults = dict(width=1600, height=700, template=TEMPLATE)
+    defaults = dict(width=800, height=400, template=TEMPLATE)
 
     fig = px.scatter(combined_embeddings.round(3).reset_index(),
                      x=cols[0],
@@ -729,7 +729,7 @@ if embedding is not None:
     display(fig)
 
 # %% [markdown]
-# ## PCA
+# ### PCA
 
 # %% tags=["hide-input"]
 PCs_train, pca = njab_pca.run_pca(X_scaled[results_model.selected_features],
@@ -854,7 +854,7 @@ else:
     njab.plotting.savefig(ax.get_figure(), fname)
 
 # %% [markdown]
-# ## Annotation of Errors for manuel analysis
+# ## Savee annotation of errors for manuel analysis
 #
 # Saved to excel table.
 
