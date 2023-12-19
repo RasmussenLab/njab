@@ -66,7 +66,9 @@ jobs:
 
       - name: Test tutorials
         run: | 
-          pip install papermill
+          python3 -m pip install papermill
           cd docs/tutorial
-          papermill explorative_analysis.ipynb explorative_analysis_tested.ipynb 
+          papermill explorative_analysis.ipynb --help-notebook
+          papermill log_reg.ipynb --help-notebook
+          papermill explorative_analysis.ipynb explorative_analysis_tested.ipynb
           papermill log_reg.ipynb log_reg_tested.ipynb
