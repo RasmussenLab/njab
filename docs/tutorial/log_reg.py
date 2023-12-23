@@ -32,6 +32,7 @@
 import itertools
 import logging
 from pathlib import Path
+from typing import Optional
 
 from IPython.display import display
 
@@ -66,14 +67,18 @@ pd.options.display.max_columns = 20
 njab.plotting.set_font_sizes('x-small')
 seaborn.set_style("whitegrid")
 
+njab.plotting.set_font_sizes(8)
+
 # %% [markdown]
 # ## Set parameters
 
 # %% tags=["parameters"]
-CLINIC: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/meta.csv'  # clincial data
+CLINIC: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/clinic_ml.csv'  # clincial data
 fname_omics: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/proteome.csv'  # omics data
-TARGET: str = '_primary biochemical AD classification'  # target column in CLINIC data
+TARGET: str = 'AD'  # target column in CLINIC data
+TARGET_LABEL: Optional[str] = None
 n_features_max: int = 5
+freq_cutoff: float = 0.5  # Omics cutoff for sample completeness
 VAL_IDS: str = ''  #
 VAL_IDS_query: str = ''
 weights: bool = True
@@ -101,7 +106,7 @@ omics.shape, clinic.shape
 ax = omics.notna().sum().sort_values().plot(rot=45)
 
 # %% tags=["hide-input"]
-freq_cutoff = 0.5
+
 M_before = omics.shape[1]
 omics = omics.dropna(thresh=int(len(omics) * freq_cutoff), axis=1)
 M_after = omics.shape[1]
@@ -139,27 +144,11 @@ if target_counts.sum() < len(clinic):
     mask = clinic[TARGET].notna()
     clinic, omics = clinic.loc[mask], omics.loc[mask]
 
-TARGET_LABEL = 'AD'
-
-y_obj = clinic[TARGET].rename(TARGET_LABEL)
-y = pd.get_dummies(y_obj)["biochemical AD"].rename(TARGET_LABEL)
-
-# %% [markdown]
-# Encode some clincial variables as binary
-
-# %% tags=["hide-input"]
-dummies_collection_site = pd.get_dummies(
-    clinic['_collection site'])  # reference is first column (Berlin)
-dummies_collection_site.describe()
-
-# %% tags=["hide-input"]
-clinic_for_ml = dummies_collection_site.iloc[:, 1:]
-clinic_for_ml = (clinic_for_ml.join(
-    pd.get_dummies(clinic['_gender']).rename(columns={
-        'f': 'female',
-        'm': 'male'
-    }).iloc[:, 1:])).assign(age=clinic['_age at CSF collection'])
-clinic_for_ml
+# %%
+if TARGET_LABEL is None:
+    TARGET_LABEL = TARGET
+y = clinic[TARGET].rename(TARGET_LABEL).astype(int)
+clinic_for_ml = clinic.drop(TARGET, axis=1)
 
 # %% [markdown]
 # ## Test IDs
@@ -223,9 +212,7 @@ if VAL_IDS:
     use_val_split = True
 
     y_val = y.loc[VAL_IDS]
-    y_obj_val = y_obj.loc[VAL_IDS]
     y = y.drop(VAL_IDS)
-    y_obj = y_obj.drop(VAL_IDS)
 
 # %% [markdown]
 # ## Output folder
@@ -298,7 +285,7 @@ X_scaled.shape
 # %% tags=["hide-input"]
 files_out['scatter_first_5PCs.pdf'] = FOLDER / 'scatter_first_5PCs.pdf'
 
-fig, axes = plt.subplots(5, 2, figsize=(8.3, 11.7), layout='constrained')
+fig, axes = plt.subplots(5, 2, figsize=(6, 8), layout='constrained')
 PCs = PCs.join(y.astype('category'))
 up_to = min(PCs.shape[-1], 5)
 # https://github.com/matplotlib/matplotlib/issues/25538
@@ -367,7 +354,7 @@ cv_feat = njab.sklearn.find_n_best_features(
     y=splits.y_train,
     model=model,
     name=TARGET_LABEL,
-    groups=y,
+    groups=splits.y_train,
     n_features_max=n_features_max,
     scoring=scoring,
     return_train_score=True,
@@ -753,7 +740,7 @@ PCs_val
 
 # %% tags=["hide-input"]
 if M_sel > 1:
-    fig, axes = plt.subplots(1, 2, figsize=(8, 4), sharex=True, sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(6, 3), sharex=True, sharey=True)
     for _embedding, ax, _title, _model_pred_label in zip(
         [PCs_train, PCs_val], axes, [TRAIN_LABEL, TEST_LABEL],
         [pred_train['label'], predictions['label']]):  # noqa: E129
@@ -775,7 +762,7 @@ if M_sel > 1:
     max_rows = min(3, len(results_model.selected_features))
     fig, axes = plt.subplots(max_rows,
                              2,
-                             figsize=(8.3, 11.7),
+                             figsize=(6, 8),
                              sharex=False,
                              sharey=False,
                              layout='constrained')
@@ -809,7 +796,7 @@ if M_sel > 1:
     max_rows = min(3, len(results_model.selected_features))
     fig, axes = plt.subplots(max_rows,
                              2,
-                             figsize=(8.3, 11.7),
+                             figsize=(6, 8),
                              sharex=False,
                              sharey=False,
                              layout='constrained')
