@@ -1,5 +1,8 @@
 import pandas as pd
 import sklearn.metrics as sklm
+import numpy as np
+
+from .types import Results
 
 
 class ConfusionMatrix():
@@ -101,3 +104,18 @@ def get_target_count_per_bin(score: pd.Series,
     })
     pred_bins = pred_bins.groupby(by='score').sum().astype(int)
     return pred_bins
+
+
+def get_lr_multiplicative_decomposition(results: Results, X: pd.DataFrame,
+                                        prob: pd.Series,
+                                        y: pd.Series) -> pd.DataFrame:
+    """Multiplicative decompositon of odds at the base of the
+    logistic regresion model."""
+    components = X[results.selected_features].multiply(results.model.coef_)
+    components['intercept'] = float(results.model.intercept_)
+    components = np.exp(components)
+    components['odds'] = prob / (1.0 - prob)
+    components['prob'] = prob
+    components[y.name] = y
+    components = components.sort_values('prob', ascending=False)
+    return components

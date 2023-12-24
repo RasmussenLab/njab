@@ -56,7 +56,10 @@ from njab.sklearn import pca as njab_pca
 from njab.sklearn.scoring import ConfusionMatrix
 from njab.sklearn.types import Splits
 from njab.plotting.metrics import plot_auc, plot_prc
-from njab.sklearn.scoring import get_score, get_pred, get_target_count_per_bin
+from njab.sklearn.scoring import (get_score,
+                                  get_pred,
+                                  get_target_count_per_bin,
+                                  get_lr_multiplicative_decomposition)
 
 logger = logging.getLogger('njab')
 logger.setLevel(logging.INFO)
@@ -75,14 +78,15 @@ njab.plotting.set_font_sizes(8)
 # %% tags=["parameters"]
 CLINIC: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/clinic_ml.csv'  # clincial data
 fname_omics: str = 'https://raw.githubusercontent.com/RasmussenLab/njab/HEAD/docs/tutorial/data/alzheimer/proteome.csv'  # omics data
-TARGET: str = 'AD'  # target column in CLINIC data
-TARGET_LABEL: Optional[str] = None
+TARGET: str = 'AD'  # target column in CLINIC dataset (binary)
+TARGET_LABEL: Optional[str] = None  # optional: rename target variable
 n_features_max: int = 5
 freq_cutoff: float = 0.5  # Omics cutoff for sample completeness
 VAL_IDS: str = ''  #
 VAL_IDS_query: str = ''
 weights: bool = True
 FOLDER = 'alzheimer'
+model_name = 'all'
 
 # %% [markdown]
 # ## Setup
@@ -189,7 +193,6 @@ feat_to_consider
 # View data for training
 
 # %% tags=["hide-input"]
-model_name = 'all'
 X = clinic_for_ml.join(omics)[feat_to_consider]
 X
 
@@ -565,22 +568,11 @@ _
 # %% [markdown]
 # ## Multiplicative decompositon
 # Decompose the model into its components for both splits:
+
 # %% tags=["hide-input"]
-
-
-def get_lr_multiplicative_decomposition(results, X, score, y):
-    components = X[results.selected_features].multiply(results.model.coef_)
-    components['intercept'] = float(results.model.intercept_)
-    components = np.exp(components)
-    components['score'] = score
-    components[TARGET] = y
-    components = components.sort_values('score', ascending=False)
-    return components
-
-
 components = get_lr_multiplicative_decomposition(results=results_model,
                                                  X=splits.X_train,
-                                                 score=score,
+                                                 prob=score,
                                                  y=y)
 components.to_excel(writer, 'decomp_multiplicative_train')
 components.to_excel(writer,
@@ -591,7 +583,7 @@ components.head(10)
 # %% tags=["hide-input"]
 components_test = get_lr_multiplicative_decomposition(results=results_model,
                                                       X=splits.X_test,
-                                                      score=score_val,
+                                                      prob=score_val,
                                                       y=y_val)
 components_test.to_excel(writer, 'decomp_multiplicative_test')
 components_test.to_excel(writer,
