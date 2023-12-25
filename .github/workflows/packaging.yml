@@ -66,7 +66,7 @@ jobs:
 
       - name: Test tutorials
         run: | 
-          python3 -m pip install papermill ipykernel
+          python3 -m pip install papermill ipykernel .
           cd docs/tutorial
           papermill explorative_analysis.ipynb --help-notebook
           papermill log_reg.ipynb --help-notebook
