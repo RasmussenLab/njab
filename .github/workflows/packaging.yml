@@ -1,7 +1,9 @@
 name: Packaging
 
 on:
-  - push
+  push:
+  schedule:
+    - cron: '0 2 * * 3'
 
 jobs:
   format:
@@ -61,3 +63,12 @@ jobs:
 
       - name: Run pytest
         run: tox -e ${{ matrix.python.toxenv }}
+
+      - name: Test tutorials
+        run: | 
+          python3 -m pip install papermill ipykernel .
+          cd docs/tutorial
+          papermill explorative_analysis.ipynb --help-notebook
+          papermill log_reg.ipynb --help-notebook
+          papermill explorative_analysis.ipynb explorative_analysis_tested.ipynb
+          papermill log_reg.ipynb log_reg_tested.ipynb
