@@ -15,16 +15,26 @@ def set_pandas_options() -> None:
     pd.options.display.max_rows = 30
     pd.options.display.min_rows = 20
     pd.options.display.float_format = '{:,.3f}'.format
+    # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.describe_option.html#pandas.describe_option
+    pd.options.styler.format.thousands = ','
+    # # https://github.com/pandas-dev/pandas/blob/main/pandas/io/formats/format.py#L1475
+    # Originally found: https://stackoverflow.com/a/29663750/9684872
 
-    # https://github.com/pandas-dev/pandas/blob/main/pandas/io/formats/format.py#L1475
-    class IntArrayFormatter(pf._GenericArrayFormatter):
+    try:
+        base_class = pf.GenericArrayFormatter
+    except AttributeError:
+        base_class = pf._GenericArrayFormatter
+
+    class IntArrayFormatter(base_class):
 
         def _format_strings(self):
             formatter = self.formatter or '{:,d}'.format
             fmt_values = [formatter(x) for x in self.values]
             return fmt_values
-
-    pf._IntArrayFormatter = IntArrayFormatter
+    try:
+        pf.IntArrayFormatter = IntArrayFormatter
+    except AttributeError:
+        pf._IntArrayFormatter = IntArrayFormatter
 
 
 def replace_with(string_key: str,
