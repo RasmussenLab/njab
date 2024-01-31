@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autodoc.typehints',
     'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx',
     'myst_nb',
     'sphinx.ext.napoleon',
     'sphinx_new_tab_link',
@@ -63,6 +64,14 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+
+# Intersphinx options
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+    "scikit-learn": ("https://scikit-learn.org/stable/", None),
+    "matplotlib": ("https://matplotlib.org/stable/", None),
+}
 
 # -- Options for HTML output -------------------------------------------------
 
