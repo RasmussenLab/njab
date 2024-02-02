@@ -33,6 +33,7 @@ def set_pandas_options() -> None:
             return fmt_values
 
     try:
+        pf.IntArrayFormatter
         pf.IntArrayFormatter = IntArrayFormatter
     except AttributeError:
         pf._IntArrayFormatter = IntArrayFormatter
