@@ -31,6 +31,7 @@ def set_pandas_options() -> None:
             formatter = self.formatter or '{:,d}'.format
             fmt_values = [formatter(x) for x in self.values]
             return fmt_values
+
     try:
         pf.IntArrayFormatter = IntArrayFormatter
     except AttributeError:
