@@ -37,7 +37,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'myst_nb',
     'sphinx.ext.napoleon',
-    'sphinx_new_tab_link',
+    # 'sphinx_new_tab_link',  # create infinite loop error
 ]
 
 #  https://myst-nb.readthedocs.io/en/latest/computation/execute.html
