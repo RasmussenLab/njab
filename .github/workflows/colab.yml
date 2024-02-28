@@ -1,0 +1,24 @@
+name: Test that tutorial runs on latest colab image
+
+on:
+  push:
+  schedule:
+    - cron: '0 2 * * 3'
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    # https://console.cloud.google.com/artifacts/docker/colab-images/europe/public/runtime
+    container:
+      image: europe-docker.pkg.dev/colab-images/public/runtime:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test tutorials
+        run: | 
+          python3 -m pip install papermill ipykernel njab
+          cd docs/tutorial
+          papermill explorative_analysis.ipynb --help-notebook
+          papermill log_reg.ipynb --help-notebook
+          papermill explorative_analysis.ipynb explorative_analysis_tested.ipynb
+          papermill log_reg.ipynb log_reg_tested.ipynb
