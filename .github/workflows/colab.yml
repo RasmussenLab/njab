@@ -21,4 +21,5 @@ jobs:
           papermill explorative_analysis.ipynb --help-notebook
           papermill log_reg.ipynb --help-notebook
           papermill explorative_analysis.ipynb explorative_analysis_tested.ipynb
+          pip install njab heatmapz openpyxl "matplotlib<3.7" plotly
           papermill log_reg.ipynb log_reg_tested.ipynb
