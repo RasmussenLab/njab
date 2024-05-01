@@ -25,8 +25,7 @@
 # %% tags=["hide-output"]
 # Setup colab installation
 # You need to restart the runtime after running this cell
-# (due to a pandas 1.5.3 and matplotlib >3.7 incompability - 23-11-07)
-# %pip install njab heatmapz openpyxl "matplotlib<3.7" plotly
+# %pip install njab heatmapz openpyxl plotly
 
 # %% tags=["hide-input"]
 import itertools
@@ -285,6 +284,7 @@ X_scaled.shape
 files_out['scatter_first_5PCs.pdf'] = FOLDER / 'scatter_first_5PCs.pdf'
 
 fig, axes = plt.subplots(5, 2, figsize=(6, 8), layout='constrained')
+PCs.columns = [s.replace("principal component", "PC") for s in PCs.columns]
 PCs = PCs.join(y.astype('category'))
 up_to = min(PCs.shape[-1], 5)
 # https://github.com/matplotlib/matplotlib/issues/25538
