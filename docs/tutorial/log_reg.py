@@ -34,32 +34,28 @@ import logging
 from pathlib import Path
 from typing import Optional
 
-from IPython.display import display
-
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 import plotly.express as px
-import matplotlib.pyplot as plt
 import seaborn
-from heatmap import corrplot
-import umap
-
 import sklearn
 import sklearn.impute
-from sklearn.metrics import make_scorer, log_loss
 import statsmodels.api as sm
+import umap
+from heatmap import corrplot
+from IPython.display import display
+from sklearn.metrics import log_loss, make_scorer
 
 import njab.sklearn
+from njab.plotting.metrics import plot_auc, plot_prc
 from njab.sklearn import StandardScaler
 from njab.sklearn import pca as njab_pca
-from njab.sklearn.scoring import ConfusionMatrix
+from njab.sklearn.scoring import (ConfusionMatrix,
+                                  get_lr_multiplicative_decomposition,
+                                  get_pred, get_score,
+                                  get_target_count_per_bin)
 from njab.sklearn.types import Splits
-from njab.plotting.metrics import plot_auc, plot_prc
-from njab.sklearn.scoring import (get_score,
-                                  get_pred,
-                                  get_target_count_per_bin,
-                                  get_lr_multiplicative_decomposition)
 
 logger = logging.getLogger('njab')
 logger.setLevel(logging.INFO)
