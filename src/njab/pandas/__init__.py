@@ -1,20 +1,26 @@
 import logging
 import typing
 
+import omegaconf
 import pandas as pd
 import pandas.io.formats.format as pf
-
-import omegaconf
 
 logger = logging.getLogger(__name__)
 
 
-def set_pandas_options() -> None:
+def set_pandas_options(max_columns: int = 100,
+                       max_row: int = 30,
+                       min_row: int = 20,
+                       float_format='{:,.3f}') -> None:
     """Update default pandas options for better display."""
-    pd.options.display.max_columns = 100
-    pd.options.display.max_rows = 30
-    pd.options.display.min_rows = 20
-    pd.options.display.float_format = '{:,.3f}'.format
+    pd.options.display.max_columns = max_columns
+    pd.options.display.max_rows = max_row
+    pd.options.display.min_rows = min_row
+    set_pandas_number_formatting(float_format=float_format)
+
+
+def set_pandas_number_formatting(float_format='{:,.3f}') -> None:
+    pd.options.display.float_format = float_format.format
     # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.describe_option.html#pandas.describe_option
     pd.options.styler.format.thousands = ','
     # # https://github.com/pandas-dev/pandas/blob/main/pandas/io/formats/format.py#L1475
