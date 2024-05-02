@@ -8,13 +8,13 @@ from typing import Optional
 import pandas as pd
 import sklearn
 import sklearn.model_selection
-
 from mrmr import mrmr_classif
 
-from .types import Splits, ResultsSplit, Results, AucRocCurve, PrecisionRecallCurve
+from . import scoring
 from .pca import run_pca
 from .preprocessing import StandardScaler
-from . import scoring
+from .types import (AucRocCurve, PrecisionRecallCurve, Results, ResultsSplit,
+                    Splits)
 
 __all__ = [
     'run_model',
