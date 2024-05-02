@@ -25,8 +25,7 @@
 # %% tags=["hide-output"]
 # Setup colab installation
 # You need to restart the runtime after running this cell
-# (due to a pandas 1.5.3 and matplotlib >3.7 incompability - 23-11-07)
-# %pip install njab heatmapz openpyxl "matplotlib<3.7" plotly
+# %pip install njab heatmapz openpyxl plotly
 
 # %% tags=["hide-input"]
 import itertools
@@ -34,32 +33,28 @@ import logging
 from pathlib import Path
 from typing import Optional
 
-from IPython.display import display
-
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 import plotly.express as px
-import matplotlib.pyplot as plt
 import seaborn
-from heatmap import corrplot
-import umap
-
 import sklearn
 import sklearn.impute
-from sklearn.metrics import make_scorer, log_loss
 import statsmodels.api as sm
+import umap
+from heatmap import corrplot
+from IPython.display import display
+from sklearn.metrics import log_loss, make_scorer
 
 import njab.sklearn
+from njab.plotting.metrics import plot_auc, plot_prc
 from njab.sklearn import StandardScaler
 from njab.sklearn import pca as njab_pca
-from njab.sklearn.scoring import ConfusionMatrix
+from njab.sklearn.scoring import (ConfusionMatrix,
+                                  get_lr_multiplicative_decomposition,
+                                  get_pred, get_score,
+                                  get_target_count_per_bin)
 from njab.sklearn.types import Splits
-from njab.plotting.metrics import plot_auc, plot_prc
-from njab.sklearn.scoring import (get_score,
-                                  get_pred,
-                                  get_target_count_per_bin,
-                                  get_lr_multiplicative_decomposition)
 
 logger = logging.getLogger('njab')
 logger.setLevel(logging.INFO)
@@ -289,6 +284,7 @@ X_scaled.shape
 files_out['scatter_first_5PCs.pdf'] = FOLDER / 'scatter_first_5PCs.pdf'
 
 fig, axes = plt.subplots(5, 2, figsize=(6, 8), layout='constrained')
+PCs.columns = [s.replace("principal component", "PC") for s in PCs.columns]
 PCs = PCs.join(y.astype('category'))
 up_to = min(PCs.shape[-1], 5)
 # https://github.com/matplotlib/matplotlib/issues/25538
