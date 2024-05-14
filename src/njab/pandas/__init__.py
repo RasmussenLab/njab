@@ -120,10 +120,8 @@ def combine_value_counts(X: pd.DataFrame, dropna=True) -> pd.DataFrame:
     pandas.DataFrame
         DataFrame of combined value counts.
     """
-    """
-    """
-    _df = pd.DataFrame()
+    freq_targets = list()
     for col in X.columns:
-        _df = _df.join(X[col].value_counts(dropna=dropna), how='outer')
-    freq_targets = _df.sort_index()
+        freq_targets.append(X[col].value_counts(dropna=dropna).rename(col))
+    freq_targets = pd.concat(freq_targets, axis=1, sort=True)
     return freq_targets
