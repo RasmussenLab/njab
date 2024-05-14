@@ -3,7 +3,7 @@ name: Test that tutorial runs on latest colab image
 on:
   push:
   schedule:
-    - cron: '0 2 * * 3'
+    - cron: '0 2 3 * *'
 
 jobs:
   test:
