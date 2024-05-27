@@ -1,8 +1,8 @@
 """Analysis of covariance using pingouin and statsmodels."""
 from __future__ import annotations
+
 import numpy as np
 import pandas as pd
-
 import pingouin as pg
 import statsmodels
 
@@ -52,6 +52,7 @@ def ancova_pg(df_long: pd.DataFrame,
     # num_covar = len(covar)
 
     for feat_name, data_feat in df_long.groupby(feat_col):
+        # ? drop duplicated colummns in long data format?
         ancova = pg.ancova(data=data_feat, dv=dv, between=between, covar=covar)
         ancova[feat_col] = feat_name
         scores.append(ancova)
@@ -137,6 +138,8 @@ class AncovaAll(Ancova):
 
         scores = self.get_scores()
         scores = filter_residuals_from_scores(scores)
+        # drop nan values (due to multicollinearity of features - i.e. duplicated features)
+        scores = scores.dropna()
         scores = add_fdr_scores(scores, random_seed=random_seed)
         self.scores = scores
         return scores.set_index('Source', append=True)
