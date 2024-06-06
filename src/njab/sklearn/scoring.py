@@ -1,8 +1,8 @@
+import numpy as np
 import pandas as pd
 import sklearn.metrics as sklm
-import numpy as np
 
-from .types import Results
+from njab.sklearn.types import Results
 
 
 class ConfusionMatrix():
