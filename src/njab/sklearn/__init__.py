@@ -8,13 +8,12 @@ from typing import Optional
 import pandas as pd
 import sklearn
 import sklearn.model_selection
-from mrmr import mrmr_classif
 
-from . import scoring
-from .pca import run_pca
-from .preprocessing import StandardScaler
-from .types import (AucRocCurve, PrecisionRecallCurve, Results, ResultsSplit,
-                    Splits)
+from njab.sklearn import scoring
+from njab.sklearn.pca import run_pca
+from njab.sklearn.preprocessing import StandardScaler
+from njab.sklearn.types import (AucRocCurve, PrecisionRecallCurve, Results,
+                                ResultsSplit, Splits)
 
 __all__ = [
     'run_model',
@@ -42,6 +41,7 @@ def run_model(
     """Fit a model on the training split and calculate
        performance metrics on both train and test split.
     """
+    from mrmr import mrmr_classif
     selected_features = mrmr_classif(X=splits.X_train,
                                      y=splits.y_train,
                                      K=n_feat_to_select)
@@ -102,6 +102,7 @@ def find_n_best_features(
         return_train_score: bool = False,
         fit_params: Optional[dict] = None):
     """Create a summary of model performance on 10 times 5-fold cross-validation."""
+    from mrmr import mrmr_classif
     summary = []
     cv = sklearn.model_selection.RepeatedStratifiedKFold(
         n_splits=5, n_repeats=10, random_state=random_state)
