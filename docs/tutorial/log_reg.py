@@ -25,7 +25,7 @@
 # %% tags=["hide-output"]
 # Setup colab installation
 # You need to restart the runtime after running this cell
-# %pip install njab heatmapz openpyxl plotly
+# %pip install njab heatmapz openpyxl plotly umap-learn
 
 # %% tags=["hide-input"]
 import itertools

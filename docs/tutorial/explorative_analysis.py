@@ -20,7 +20,7 @@
 # First install the dependencies:
 
 # %% tags=["hide-output"]
-# %pip install njab openpyxl
+# %pip install 'njab[all]' openpyxl
 
 # %% tags=["hide-cell"]
 from functools import partial
