@@ -15,12 +15,10 @@ classifiers = [
 ]
 dependencies = [
   "omegaconf",
-  "lifelines",
   "numpy",
   "pandas",
   "scikit-learn",
   "statsmodels",
-  "umap-learn",
   "matplotlib",
   "mrmr_selection",
   "pingouin",
@@ -29,6 +27,9 @@ dependencies = [
 dynamic = ["version"]
 
 [project.optional-dependencies]
+all = [
+  "lifelines",
+]
 docs = [
   "sphinx",
   "sphinx-book-theme",

@@ -1,8 +1,18 @@
 from __future__ import annotations
-from matplotlib.axes import Axes
-import lifelines.statistics
-from lifelines import KaplanMeierFitter
+
+try:
+    import lifelines.statistics
+    from lifelines import KaplanMeierFitter
+except ModuleNotFoundError as e:
+    msg = (
+        "lifelines not available. Please install all njab dependencies typing:"
+        "\n\tpip install 'njab[all]'"
+        "\nor separately typing:\n\tpip install lifelines"
+    )
+    e.args = (msg, *e.args[1:])
+    raise ModuleNotFoundError(*e.args) from e
 import pandas as pd
+from matplotlib.axes import Axes
 
 
 def compare_km_curves(

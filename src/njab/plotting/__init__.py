@@ -6,12 +6,15 @@ import matplotlib
 import logging
 import pathlib
 from typing import Iterable
+
+import matplotlib
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
 from njab.plotting.lifelines import plot_lifelines
-from njab.plotting.km import compare_km_curves
 
-__all__ = ['plot_lifelines', 'compare_km_curves']
+__all__ = ['plot_lifelines']
 
 plt.rcParams['figure.figsize'] = [4.0, 3.0]
 plt.rcParams['pdf.fonttype'] = 42
