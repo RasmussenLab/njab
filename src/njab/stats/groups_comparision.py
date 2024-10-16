@@ -1,5 +1,4 @@
 """Bionomial test and t-test for groups comparision."""
-from __future__ import annotations
 import logging
 import pandas as pd
 import pingouin as pg

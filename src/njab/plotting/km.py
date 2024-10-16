@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 try:
     import lifelines.statistics
     from lifelines import KaplanMeierFitter
