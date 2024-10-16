@@ -1,8 +1,5 @@
 """Matplotlib functionality for custom plots."""
 
-import numpy as np
-import pandas as pd
-import matplotlib
 import logging
 import pathlib
 from typing import Iterable

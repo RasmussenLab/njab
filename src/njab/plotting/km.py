@@ -7,8 +7,7 @@ except ModuleNotFoundError as e:
     msg = (
         "lifelines not available. Please install all njab dependencies typing:"
         "\n\tpip install 'njab[all]'"
-        "\nor separately typing:\n\tpip install lifelines"
-    )
+        "\nor separately typing:\n\tpip install lifelines")
     e.args = (msg, *e.args[1:])
     raise ModuleNotFoundError(*e.args) from e
 import pandas as pd
@@ -66,13 +65,16 @@ def compare_km_curves(
     mask = pred
     kmf_1 = KaplanMeierFitter()
     kmf_1.fit(time.loc[mask], event_observed=y.loc[mask])
-    ax = kmf_1.plot(xlim=xlim,
-                    ylim=ylim,
-                    xlabel=xlabel,
-                    ylabel=ylabel,
-                    legend=False)
+    ax = kmf_1.plot(
+        xlim=xlim,
+        ylim=ylim,
+        xlabel=xlabel,
+        ylabel=ylabel,
+        legend=False,
+    )
     if add_risk_counts:
         from lifelines.plotting import add_at_risk_counts
+
         add_at_risk_counts(kmf_0, kmf_1, ax=ax)
     return ax, kmf_0, kmf_1
 
