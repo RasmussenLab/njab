@@ -3,7 +3,7 @@ name = "njab"
 authors = [{ name = "Henry Webel", email = "henry.webel@cpr.ku.dk" }]
 description = "not Just Another Biomarker"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 keywords = ["bioinformatics", "biomarker"]
 license = { file = "LICENSE" }
 classifiers = [
