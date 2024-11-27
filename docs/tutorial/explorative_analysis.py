@@ -299,11 +299,13 @@ for marker, _ in rejected.index[:TOP_N]:  # first case done above currently
     # class_weight=None
     model = sklearn.linear_model.LogisticRegression(class_weight=class_weight)
     model = model.fit(X=clinic[marker].to_frame(), y=happend)
-    print(f"Intercept {float(model.intercept_):5.3f}, coef.: {float(model.coef_):5.3f}")
+    print(
+        f"Intercept {float(model.intercept_.squeeze()):5.3f}, coef.: {float(model.coef_.squeeze()):5.3f}"
+    )
     # ! could be adapted based on proportion of target (for imbalanced data):
     # offset = np.log(p/(1-p))
     offset = np.log(0.5 / (1 - 0.5))  # ! standard cutoff of probability of 0.5
-    cutoff = offset - float(model.intercept_) / float(model.coef_)
+    cutoff = offset - float(model.intercept_.squeeze()) / float(model.coef_.squeeze())
     direction = ">" if model.coef_ > 0 else "<"
     print(f"Custom cutoff defined by Logistic regressor for {marker:>10}: {cutoff:.3f}")
     pred = njab.sklearn.scoring.get_pred(model, clinic[marker].to_frame())
