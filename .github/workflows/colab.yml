@@ -14,9 +14,17 @@ jobs:
       image: europe-docker.pkg.dev/colab-images/public/runtime:latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install pimms-learn (from branch) and papermill
+        if: github.event_name == 'push'
+        run: |
+          echo $GITHUB_REF
+          pip install git+https://github.com/RasmussenLab/pimms.git@$GITHUB_REF
+          cd docs
+          echo python3 -c "import pimmslearn; print(pimmslearn.__version__)"
+          python3 -c "import pimmslearn; print(pimmslearn.__version__)"
       - name: Test tutorials
         run: | 
-          python3 -m pip install papermill ipykernel
+          python3 -m pip install papermill ipykernel njab
           cd docs/tutorial
           papermill explorative_analysis.ipynb --help-notebook
           papermill log_reg.ipynb --help-notebook
