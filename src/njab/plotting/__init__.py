@@ -27,8 +27,8 @@ def savefig(fig: matplotlib.figure.Figure,
             name: str,
             folder: str = '.',
             dpi: int = 300,
-            pdf:bool=True,
-            tight_layout:bool=True) -> None:
+            pdf: bool = True,
+            tight_layout: bool = True) -> None:
     """Save matplotlib Figure (having method `savefig`) as pdf and png."""
     folder = pathlib.Path(folder)
     fname = folder / name
@@ -37,7 +37,7 @@ def savefig(fig: matplotlib.figure.Figure,
     if tight_layout and not fig.get_constrained_layout():
         fig.tight_layout()
     fname = fname.with_suffix('.png')
-    fig.savefig(fname, dpi=dpi,bbox_inches='tight')
+    fig.savefig(fname, dpi=dpi, bbox_inches='tight')
     logger.info("Saved Figures to %s", fname)
     if pdf:
         fname = fname.with_suffix('.pdf')
