@@ -16,9 +16,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test tutorials
         run: | 
-          python3 -m pip install papermill ipykernel njab
+          python3 -m pip install papermill ipykernel
           cd docs/tutorial
           papermill explorative_analysis.ipynb --help-notebook
           papermill log_reg.ipynb --help-notebook
-          papermill explorative_analysis.ipynb explorative_analysis_tested.ipynb
           papermill log_reg.ipynb log_reg_tested.ipynb
+          papermill explorative_analysis.ipynb explorative_analysis_tested.ipynb
+
