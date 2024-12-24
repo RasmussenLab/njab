@@ -19,11 +19,10 @@ jobs:
         run: |
           echo $GITHUB_REF
           echo "Branch or Tag: ${{ github.ref }}"
-          pip install .
-          # pip install git+https://github.com/RasmussenLab/pimms.git@$GITHUB_SHA
+          # pip install .
+          pip install git+https://github.com/RasmussenLab/njab.git@$GITHUB_SHA
           cd docs
-          echo python3 -c "import pimmslearn; print(pimmslearn.__version__)"
-          python3 -c "import pimmslearn; print(pimmslearn.__version__)"
+          python3 -c "import njab; print(njab.__version__)"
       - name: Test tutorials
         run: | 
           python3 -m pip install papermill ipykernel njab
