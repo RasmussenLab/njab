@@ -14,14 +14,17 @@ jobs:
       image: europe-docker.pkg.dev/colab-images/public/runtime:latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install pimms-learn (from branch) and papermill
+      - name: Dev - Install njab (from branch) - optional
         if: github.event_name == 'push'
         run: |
-          echo $GITHUB_REF
+          echo GITHUB_REF= $GITHUB_REF
+          echo GITHUB_SHA= $GITHUB_SHA
           echo "Branch or Tag: ${{ github.ref }}"
-          # pip install .
-          pip install git+https://github.com/RasmussenLab/njab.git@$GITHUB_SHA
+          pip install .
+          # pip install git+https://github.com/RasmussenLab/njab.git@$GITHUB_SHA
           cd docs
+          echo
+          echo Installed version of njab:
           python3 -c "import njab; print(njab.__version__)"
       - name: Test tutorials
         run: | 
