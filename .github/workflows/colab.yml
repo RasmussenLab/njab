@@ -18,9 +18,9 @@ jobs:
         if: github.event_name == 'push'
         run: |
           echo $GITHUB_REF
-          echo $GITHUB_SHA
+          echo "Branch or Tag: ${{ github.ref }}"
           pip install .
-          pip install git+https://github.com/RasmussenLab/pimms.git@$GITHUB_SHA
+          # pip install git+https://github.com/RasmussenLab/pimms.git@$GITHUB_SHA
           cd docs
           echo python3 -c "import pimmslearn; print(pimmslearn.__version__)"
           python3 -c "import pimmslearn; print(pimmslearn.__version__)"
