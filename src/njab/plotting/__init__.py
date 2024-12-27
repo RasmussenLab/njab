@@ -8,7 +8,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 from njab.plotting.lifelines import plot_lifelines
 
 __all__ = ['plot_lifelines']
@@ -26,19 +25,24 @@ logger = logging.getLogger(__name__)
 
 def savefig(fig: matplotlib.figure.Figure,
             name: str,
-            folder: pathlib.Path = '.',
-            pdf=True):
+            folder: str = '.',
+            dpi: int = 300,
+            pdf: bool = True,
+            tight_layout: bool = True) -> None:
     """Save matplotlib Figure (having method `savefig`) as pdf and png."""
     folder = pathlib.Path(folder)
     fname = folder / name
     folder = fname.parent  # in case name specifies folders
     folder.mkdir(exist_ok=True, parents=True)
-    if not fig.get_constrained_layout():
+    if tight_layout and not fig.get_constrained_layout():
         fig.tight_layout()
-    fig.savefig(fname.with_suffix('.png'), bbox_inches='tight')
+    fname = fname.with_suffix('.png')
+    fig.savefig(fname, dpi=dpi, bbox_inches='tight')
+    logger.info("Saved Figures to %s", fname)
     if pdf:
-        fig.savefig(fname.with_suffix('.pdf'), bbox_inches='tight')
-    logger.info(f"Saved Figures to {fname}")
+        fname = fname.with_suffix('.pdf')
+        fig.savefig(fname, bbox_inches='tight')
+        logger.info("Saved Figures to %s", fname)
 
 
 def select_xticks(ax: matplotlib.axes.Axes, max_ticks: int = 50) -> list:

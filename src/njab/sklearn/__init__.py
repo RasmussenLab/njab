@@ -122,7 +122,7 @@ def find_n_best_features(
             scoring=scoring,
             cv=cv,
             return_train_score=return_train_score,
-            fit_params=fit_params,
+            params=fit_params,
             error_score='raise')
         scores['n_features'] = n_features
         scores['test_case'] = name
