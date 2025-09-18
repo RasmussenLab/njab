@@ -37,6 +37,18 @@ docs = [
   "ipywidgets",
   "sphinx-new-tab-link!=0.2.2",
 ]
+dev = [
+  "black",
+  "flake8",
+  "flake8-bugbear",
+  "flake8-comprehensions",
+  "flake8-isort",
+  "flake8-unused-arguments",
+  "isort",
+  "mypy",
+  "pytest",
+  "pytest-cov",
+]
 
 [project.urls]
 "Bug Tracker" = "https://github.com/RasmussenLab/njab/issues"
