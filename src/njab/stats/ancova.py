@@ -1,17 +1,19 @@
 """Analysis of covariance using pingouin and statsmodels."""
 from __future__ import annotations
+
 import numpy as np
 import pandas as pd
 import pingouin as pg
 import statsmodels
 
 
-def ancova_pg(df_long: pd.DataFrame,
-              feat_col: str,
-              dv: str,
-              between: str,
-              covar: list[str] | str,
-              fdr=0.05) -> pd.DataFrame:
+def ancova_pg(
+    df_long: pd.DataFrame,
+    feat_col: str,
+    dv: str,
+    between: str,
+    covar: list[str] | str,
+) -> pd.DataFrame:
     """ Analysis of covariance (ANCOVA) using pg.ancova
     https://pingouin-stats.org/generated/pingouin.ancova.html
 
@@ -117,7 +119,7 @@ class Ancova():
                            covar=self.covar)
         return scores.set_index(feat_col)
 
-    def ancova(self, random_seed=123):
+    def ancova(self):
         raise NotImplementedError
 
 
