@@ -53,7 +53,7 @@ plt.rcParams["figure.figsize"] = [4.0, 4.0]
 TARGET = "event"
 TIME_KM = "time"
 FOLDER = "prostate"
-CLINIC = "https://raw.githubusercontent.com/ErikinBC/SurvSet/main/SurvSet/_datagen/output/prostate.csv"
+CLINIC = "https://raw.githubusercontent.com/RasmussenLab/njab/main/docs/tutorial/data/prostate/prostate.csv"
 val_ids: str = ""  # List of comma separated values or filepath
 #
 # list or string of csv, eg. "var1,var2"

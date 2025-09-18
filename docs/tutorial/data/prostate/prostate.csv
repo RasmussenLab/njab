@@ -1,0 +1,503 @@
+pid,event,time,fac_stage,fac_rx,fac_pf,fac_hx,fac_ekg,fac_bm,num_age,num_wt,num_sbp,num_dbp,num_hg,num_sz,num_sg,num_ap,num_sdate
+0,0,72,3,0.2 mg estrogen,normal activity,0,heart strain,0,75.0,76.0,15,9,13.798828125,2.0,8.0,0.29998779296875,2778
+1,1,1,3,0.2 mg estrogen,normal activity,0,heart block or conduction def,0,54.0,116.0,13,7,14.599609375,42.0,,0.699951171875,2820
+2,1,40,3,5.0 mg estrogen,normal activity,1,heart strain,0,69.0,102.0,14,8,13.3984375,3.0,9.0,0.29998779296875,2933
+3,1,20,3,0.2 mg estrogen,in bed < 50% daytime,1,benign,0,75.0,94.0,14,7,17.59765625,4.0,8.0,0.89990234375,2999
+4,0,65,3,placebo,normal activity,0,normal,0,67.0,99.0,17,10,13.3984375,34.0,8.0,0.5,3002
+5,1,24,3,0.2 mg estrogen,normal activity,0,normal,0,71.0,98.0,19,10,15.099609375,10.0,11.0,0.5999755859375,3086
+6,1,46,3,placebo,normal activity,0,benign,0,75.0,100.0,14,10,13.0,13.0,9.0,0.7999267578125,3099
+7,0,62,3,placebo,normal activity,1,heart strain,0,73.0,114.0,17,11,12.599609375,3.0,9.0,0.5999755859375,3100
+8,0,61,3,1.0 mg estrogen,normal activity,0,normal,0,60.0,110.0,12,8,14.599609375,4.0,10.0,0.699951171875,3134
+9,0,60,3,1.0 mg estrogen,normal activity,1,old MI,0,78.0,107.0,13,8,13.0,21.0,6.0,0.39996337890625,3140
+10,0,60,3,1.0 mg estrogen,normal activity,0,normal,0,77.0,89.0,15,8,15.599609375,3.0,8.0,0.5999755859375,3141
+11,0,59,3,5.0 mg estrogen,normal activity,1,normal,0,74.0,105.0,18,14,13.599609375,6.0,8.0,0.39996337890625,3176
+12,0,59,3,0.2 mg estrogen,normal activity,0,old MI,0,74.0,107.0,14,9,14.3984375,6.0,9.0,0.29998779296875,3183
+13,1,49,3,placebo,normal activity,1,heart strain,0,55.0,112.0,16,9,13.8984375,4.0,9.0,1.0,3183
+14,1,20,3,5.0 mg estrogen,normal activity,0,heart strain,0,73.0,88.0,19,10,12.0,15.0,10.0,0.5999755859375,3196
+15,1,3,3,5.0 mg estrogen,in bed < 50% daytime,1,rhythmic disturb & electrolyte ch,0,87.0,81.0,17,12,13.3984375,3.0,9.0,0.39996337890625,3196
+16,0,58,3,placebo,normal activity,0,normal,0,64.0,90.0,14,8,16.19921875,6.0,9.0,0.699951171875,3218
+17,1,29,3,1.0 mg estrogen,normal activity,0,benign,0,79.0,104.0,13,8,15.0,5.0,8.0,0.5,3230
+18,1,26,3,5.0 mg estrogen,normal activity,1,benign,0,62.0,90.0,13,8,14.3984375,2.0,9.0,0.699951171875,3386
+19,0,52,3,5.0 mg estrogen,normal activity,0,heart strain,0,74.0,107.0,13,8,16.3984375,10.0,9.0,0.699951171875,3400
+20,1,20,3,5.0 mg estrogen,in bed < 50% daytime,1,heart strain,0,83.0,72.0,13,9,15.0,1.0,10.0,0.699951171875,3400
+21,0,51,3,1.0 mg estrogen,normal activity,0,normal,0,65.0,113.0,16,10,14.099609375,21.0,9.0,0.699951171875,3428
+22,0,51,3,placebo,normal activity,0,normal,0,61.0,97.0,11,8,13.5,8.0,8.0,0.5999755859375,3433
+23,1,31,4,5.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,1,56.0,95.0,15,10,14.798828125,26.0,13.0,35.6953125,2791
+24,1,42,4,1.0 mg estrogen,normal activity,0,normal,0,73.0,103.0,16,10,14.599609375,6.0,11.0,3.89990234375,2831
+25,1,38,4,0.2 mg estrogen,normal activity,0,heart strain,0,69.0,75.0,16,8,10.69921875,25.0,11.0,6.19921875,2861
+26,0,69,4,placebo,normal activity,0,old MI,0,76.0,82.0,12,8,11.69921875,12.0,10.0,2.5,2869
+27,1,39,4,placebo,normal activity,0,normal,0,71.0,103.0,12,7,14.3984375,11.0,11.0,12.0,2873
+28,1,33,4,1.0 mg estrogen,normal activity,0,heart strain,0,66.0,126.0,17,10,14.0,32.0,13.0,24.19921875,2884
+29,1,8,4,0.2 mg estrogen,normal activity,0,heart strain,0,76.0,90.0,15,9,12.798828125,40.0,13.0,2.2998046875,2895
+30,1,13,4,0.2 mg estrogen,in bed > 50% daytime,0,heart strain,1,74.0,77.0,16,9,10.5,17.0,13.0,316.0,2905
+31,1,33,4,5.0 mg estrogen,normal activity,1,old MI,0,71.0,150.0,16,10,15.0,9.0,11.0,1.89990234375,2924
+32,1,9,4,1.0 mg estrogen,normal activity,1,heart strain,0,71.0,88.0,16,9,12.298828125,38.0,13.0,35.3984375,2932
+33,1,21,4,placebo,normal activity,0,heart strain,0,79.0,89.0,16,9,12.798828125,26.0,12.0,12.099609375,2940
+34,1,66,4,5.0 mg estrogen,normal activity,0,normal,0,75.0,101.0,15,9,14.599609375,8.0,14.0,3.7998046875,2953
+35,1,5,4,5.0 mg estrogen,normal activity,1,heart strain,1,76.0,86.0,16,6,8.19921875,10.0,11.0,99.1875,2953
+36,1,27,4,placebo,normal activity,0,heart strain,0,72.0,93.0,16,10,13.0,2.0,11.0,1.2998046875,2933
+37,1,2,4,0.2 mg estrogen,normal activity,1,benign,1,69.0,84.0,12,8,10.3984375,15.0,13.0,28.8984375,2979
+38,1,20,4,0.2 mg estrogen,normal activity,0,benign,1,53.0,99.0,12,9,14.19921875,26.0,13.0,5.599609375,3050
+39,1,19,4,1.0 mg estrogen,normal activity,0,heart strain,1,76.0,85.0,14,9,13.0,6.0,11.0,1.39990234375,3141
+40,0,60,4,placebo,normal activity,1,heart strain,0,72.0,95.0,17,8,13.599609375,12.0,12.0,2.2998046875,3162
+41,0,58,4,1.0 mg estrogen,normal activity,0,heart strain,1,,76.0,15,8,12.798828125,35.0,13.0,30.0,3202
+42,1,32,4,5.0 mg estrogen,normal activity,0,normal,1,82.0,89.0,14,8,13.0,27.0,13.0,22.296875,3204
+43,0,53,4,placebo,normal activity,0,heart block or conduction def,0,74.0,124.0,16,8,9.3984375,26.0,15.0,1.2998046875,3350
+44,0,53,4,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,75.0,93.0,13,9,15.298828125,16.0,13.0,3.2998046875,3372
+45,1,43,4,5.0 mg estrogen,normal activity,0,heart strain,1,74.0,81.0,17,10,13.3984375,28.0,11.0,20.0,3395
+46,1,21,4,0.2 mg estrogen,normal activity,0,normal,0,60.0,96.0,12,8,14.298828125,27.0,13.0,7.0,3433
+47,1,30,3,5.0 mg estrogen,in bed < 50% daytime,0,heart strain,0,59.0,116.0,12,8,15.19921875,,9.0,0.699951171875,2730
+48,0,74,3,5.0 mg estrogen,normal activity,0,normal,0,49.0,99.0,13,7,14.798828125,14.0,8.0,0.5,2735
+49,0,72,3,placebo,in bed < 50% daytime,1,old MI,0,74.0,96.0,11,6,10.3984375,20.0,11.0,0.5999755859375,2779
+50,1,14,3,placebo,normal activity,0,normal,0,73.0,101.0,16,7,12.3984375,18.0,11.0,0.5999755859375,2905
+51,1,33,3,5.0 mg estrogen,normal activity,1,old MI,0,76.0,98.0,17,10,17.09765625,13.0,8.0,0.5,2995
+52,1,8,3,0.2 mg estrogen,normal activity,1,heart strain,0,72.0,84.0,12,8,14.798828125,15.0,8.0,0.5999755859375,3001
+53,1,10,3,1.0 mg estrogen,normal activity,1,heart strain,0,73.0,82.0,16,8,14.099609375,20.0,9.0,0.5,3022
+54,1,51,3,placebo,in bed > 50% daytime,1,old MI,0,78.0,108.0,18,8,14.798828125,24.0,9.0,0.29998779296875,3023
+55,1,7,3,0.2 mg estrogen,normal activity,1,normal,0,71.0,112.0,15,9,13.19921875,14.0,11.0,0.39996337890625,3048
+56,0,63,3,1.0 mg estrogen,normal activity,0,heart strain,0,75.0,92.0,13,8,15.19921875,41.0,,0.7999267578125,3059
+57,1,33,3,0.2 mg estrogen,normal activity,0,normal,0,64.0,130.0,13,9,14.19921875,23.0,11.0,0.199981689453125,3219
+58,1,3,3,0.2 mg estrogen,normal activity,1,heart strain,0,78.0,118.0,16,9,12.3984375,3.0,9.0,0.39996337890625,3347
+59,1,43,3,placebo,normal activity,0,normal,0,60.0,99.0,12,9,13.599609375,7.0,9.0,0.5999755859375,3375
+60,1,37,4,1.0 mg estrogen,normal activity,0,heart strain,1,68.0,104.0,14,9,14.3984375,32.0,13.0,7.2998046875,2712
+61,1,5,4,placebo,in bed < 50% daytime,0,old MI,0,77.0,93.0,21,9,12.8984375,24.0,13.0,11.69921875,2856
+62,1,6,4,0.2 mg estrogen,normal activity,1,heart strain,0,73.0,102.0,14,9,12.0,51.0,15.0,8.69921875,2856
+63,1,2,4,placebo,in bed > 50% daytime,0,normal,1,70.0,76.0,12,8,7.7998046875,26.0,11.0,2.0,2863
+64,1,5,4,0.2 mg estrogen,normal activity,0,heart strain,0,53.0,106.0,14,8,14.298828125,10.0,11.0,0.699951171875,2982
+65,0,64,4,5.0 mg estrogen,normal activity,0,heart strain,1,55.0,116.0,13,9,14.798828125,26.0,15.0,4.599609375,3043
+66,1,1,4,5.0 mg estrogen,in bed < 50% daytime,1,old MI,0,80.0,91.0,14,8,11.69921875,15.0,13.0,1.2998046875,3259
+67,1,21,4,1.0 mg estrogen,normal activity,0,heart strain,1,59.0,71.0,8,4,8.69921875,27.0,11.0,175.09375,3298
+68,1,16,4,placebo,normal activity,0,normal,1,80.0,111.0,16,9,11.298828125,34.0,15.0,1.099853515625,3345
+69,1,21,3,1.0 mg estrogen,in bed < 50% daytime,1,old MI,0,68.0,97.0,14,8,12.099609375,18.0,8.0,0.5999755859375,2660
+70,1,12,3,1.0 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,77.0,103.0,13,7,14.3984375,5.0,9.0,0.699951171875,2686
+71,0,75,3,1.0 mg estrogen,normal activity,0,benign,0,74.0,110.0,16,8,13.599609375,7.0,8.0,0.5,2686
+72,0,74,3,placebo,normal activity,0,benign,0,70.0,94.0,15,7,13.69921875,24.0,7.0,0.7999267578125,2714
+73,0,74,3,0.2 mg estrogen,in bed < 50% daytime,1,normal,0,72.0,142.0,14,13,12.599609375,,9.0,0.5,2714
+74,1,54,3,0.2 mg estrogen,normal activity,0,normal,0,65.0,90.0,14,8,14.0,47.0,9.0,0.29998779296875,2723
+75,0,73,3,5.0 mg estrogen,normal activity,1,normal,0,74.0,97.0,13,7,12.8984375,6.0,8.0,0.199981689453125,2754
+76,1,36,3,placebo,normal activity,1,old MI,0,72.0,110.0,22,13,14.69921875,5.0,10.0,0.5999755859375,2763
+77,1,59,3,placebo,normal activity,1,normal,0,69.0,97.0,13,7,14.298828125,4.0,9.0,0.29998779296875,2763
+78,1,6,3,5.0 mg estrogen,normal activity,1,normal,0,72.0,115.0,16,10,12.0,5.0,8.0,0.29998779296875,2772
+79,1,58,3,0.2 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,71.0,87.0,13,10,13.3984375,13.0,9.0,0.7999267578125,2789
+80,1,16,3,1.0 mg estrogen,normal activity,0,normal,0,73.0,93.0,11,7,13.798828125,8.0,9.0,0.29998779296875,2798
+81,1,19,3,5.0 mg estrogen,normal activity,1,old MI,0,79.0,106.0,16,7,13.599609375,13.0,9.0,0.199981689453125,2805
+82,1,39,3,5.0 mg estrogen,normal activity,1,old MI,0,63.0,86.0,16,8,16.0,7.0,9.0,0.39996337890625,2839
+83,1,26,3,0.2 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,74.0,101.0,14,9,10.599609375,14.0,8.0,0.39996337890625,2856
+84,1,60,3,placebo,normal activity,1,normal,0,72.0,118.0,17,11,15.599609375,9.0,9.0,0.5999755859375,2856
+85,1,43,3,0.2 mg estrogen,normal activity,1,heart strain,0,78.0,117.0,10,7,13.599609375,16.0,8.0,0.39996337890625,2862
+86,1,7,3,5.0 mg estrogen,normal activity,1,old MI,0,76.0,92.0,12,7,13.599609375,12.0,9.0,0.5,2903
+87,1,9,3,1.0 mg estrogen,normal activity,1,heart block or conduction def,0,70.0,72.0,16,9,12.0,17.0,8.0,0.0999908447265625,2903
+88,0,67,3,1.0 mg estrogen,normal activity,1,heart strain,0,69.0,120.0,16,10,13.599609375,21.0,10.0,0.699951171875,2938
+89,1,62,3,5.0 mg estrogen,normal activity,1,normal,0,76.0,102.0,12,8,13.19921875,13.0,8.0,0.5,2951
+90,1,17,3,placebo,normal activity,1,benign,0,84.0,104.0,15,10,13.3984375,8.0,6.0,0.39996337890625,3049
+91,1,25,3,0.2 mg estrogen,normal activity,1,normal,0,80.0,98.0,15,8,12.298828125,8.0,9.0,0.5,3049
+92,1,0,3,1.0 mg estrogen,normal activity,0,normal,0,81.0,97.0,10,7,13.3984375,11.0,9.0,0.699951171875,3087
+93,1,5,3,5.0 mg estrogen,normal activity,1,heart strain,0,81.0,76.0,13,7,14.8984375,28.0,9.0,0.5,3094
+94,1,34,3,5.0 mg estrogen,normal activity,1,heart strain,0,71.0,100.0,12,10,14.3984375,11.0,6.0,0.29998779296875,3127
+95,0,59,3,placebo,normal activity,0,normal,0,77.0,109.0,14,7,12.0,7.0,10.0,0.29998779296875,3182
+96,1,31,3,0.2 mg estrogen,normal activity,1,heart strain,0,70.0,109.0,18,8,12.0,28.0,9.0,0.5,3197
+97,0,58,3,placebo,normal activity,1,old MI,0,76.0,108.0,12,7,12.0,3.0,9.0,0.29998779296875,3204
+98,1,30,3,1.0 mg estrogen,normal activity,1,old MI,0,76.0,102.0,16,9,18.19921875,52.0,11.0,0.5999755859375,3216
+99,0,57,3,0.2 mg estrogen,normal activity,0,heart block or conduction def,0,71.0,97.0,13,7,13.3984375,19.0,9.0,0.5999755859375,3232
+100,1,5,3,0.2 mg estrogen,normal activity,1,normal,0,76.0,96.0,17,8,13.69921875,33.0,9.0,0.5999755859375,3239
+101,0,55,3,5.0 mg estrogen,normal activity,1,normal,0,64.0,100.0,16,10,13.69921875,6.0,9.0,0.199981689453125,3295
+102,0,55,3,1.0 mg estrogen,normal activity,0,normal,0,74.0,113.0,12,7,14.298828125,7.0,10.0,0.7999267578125,3317
+103,0,52,3,placebo,normal activity,1,normal,0,76.0,88.0,16,9,12.298828125,3.0,8.0,0.5999755859375,3394
+104,1,0,3,5.0 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,82.0,82.0,13,9,11.599609375,5.0,10.0,0.5999755859375,3406
+105,0,51,3,1.0 mg estrogen,normal activity,1,normal,0,65.0,87.0,16,8,14.5,2.0,9.0,0.7999267578125,3421
+106,1,17,4,0.2 mg estrogen,in bed < 50% daytime,0,normal,1,70.0,83.0,14,6,12.69921875,14.0,11.0,9.69921875,2660
+107,1,70,4,5.0 mg estrogen,normal activity,0,heart strain,1,76.0,92.0,13,6,9.69921875,6.0,10.0,6.19921875,2660
+108,0,74,4,placebo,normal activity,0,benign,0,77.0,93.0,10,6,11.0,0.0,12.0,4.8994140625,2714
+109,0,74,4,0.2 mg estrogen,normal activity,1,normal,0,77.0,99.0,17,9,12.798828125,15.0,12.0,2.39990234375,2723
+110,1,20,4,1.0 mg estrogen,normal activity,1,normal,0,70.0,103.0,12,7,13.5,23.0,11.0,10.19921875,2786
+111,1,2,4,placebo,normal activity,1,heart strain,0,73.0,80.0,13,8,12.8984375,61.0,12.0,39.6953125,2867
+112,1,8,4,0.2 mg estrogen,normal activity,1,heart strain,1,63.0,119.0,13,8,12.798828125,14.0,15.0,41.6953125,2936
+113,1,27,4,5.0 mg estrogen,normal activity,0,heart strain,0,71.0,91.0,13,6,12.0,1.0,10.0,1.199951171875,2966
+114,1,23,4,1.0 mg estrogen,in bed < 50% daytime,1,normal,1,78.0,103.0,14,8,10.0,38.0,12.0,1.7998046875,2994
+115,1,1,4,placebo,normal activity,1,old MI,0,74.0,100.0,13,8,14.3984375,1.0,11.0,1.099853515625,3294
+116,0,52,4,5.0 mg estrogen,normal activity,1,old MI,0,70.0,110.0,16,8,15.8984375,4.0,10.0,2.0,3381
+117,0,51,4,1.0 mg estrogen,normal activity,1,benign,1,73.0,106.0,11,8,11.19921875,10.0,13.0,1.199951171875,3414
+118,1,6,4,5.0 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,1,74.0,98.0,13,6,14.0,41.0,12.0,78.390625,3427
+119,1,0,4,1.0 mg estrogen,normal activity,1,heart strain,1,77.0,91.0,12,7,14.298828125,6.0,11.0,1.699951171875,3434
+120,1,26,4,5.0 mg estrogen,normal activity,1,normal,0,85.0,85.0,15,7,14.0,12.0,12.0,25.8984375,3434
+121,1,65,3,placebo,normal activity,1,normal,0,72.0,79.0,13,7,12.298828125,16.0,9.0,0.7999267578125,2813
+122,1,52,3,placebo,normal activity,0,old MI,0,74.0,106.0,14,6,13.798828125,17.0,,0.199981689453125,2813
+123,1,26,3,0.2 mg estrogen,normal activity,0,normal,0,78.0,83.0,13,7,10.298828125,25.0,11.0,0.5,2852
+124,0,70,3,5.0 mg estrogen,normal activity,0,heart strain,0,60.0,110.0,14,10,14.298828125,13.0,,0.5,2853
+125,1,6,3,placebo,normal activity,0,benign,0,72.0,76.0,11,9,10.0,16.0,10.0,0.699951171875,2868
+126,1,6,3,0.2 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,68.0,124.0,13,7,14.5,17.0,9.0,1.7998046875,2868
+127,0,68,3,1.0 mg estrogen,normal activity,0,normal,0,71.0,93.0,15,9,14.5,19.0,9.0,0.29998779296875,2902
+128,1,33,3,5.0 mg estrogen,normal activity,0,old MI,0,65.0,125.0,17,9,15.0,19.0,8.0,0.7999267578125,2924
+129,0,67,3,0.2 mg estrogen,normal activity,0,old MI,0,67.0,96.0,13,7,15.69921875,7.0,9.0,0.5,2954
+130,1,58,3,0.2 mg estrogen,normal activity,0,normal,0,76.0,94.0,12,7,14.19921875,,7.0,0.29998779296875,2985
+131,1,23,3,5.0 mg estrogen,normal activity,0,heart block or conduction def,0,74.0,98.0,15,9,14.19921875,3.0,12.0,4.099609375,2989
+132,1,6,3,5.0 mg estrogen,normal activity,0,normal,0,78.0,91.0,11,7,11.0,4.0,9.0,0.29998779296875,3021
+133,1,11,3,1.0 mg estrogen,normal activity,0,benign,0,74.0,85.0,14,8,14.0,16.0,9.0,0.89990234375,3052
+134,1,6,3,placebo,normal activity,0,heart block or conduction def,0,71.0,92.0,13,7,14.0,9.0,9.0,0.7999267578125,3079
+135,0,57,3,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,74.0,113.0,14,7,10.5,20.0,9.0,0.5,3240
+136,0,57,3,1.0 mg estrogen,normal activity,0,heart strain,0,72.0,110.0,17,10,14.5,20.0,8.0,0.39996337890625,3246
+137,1,29,3,placebo,normal activity,0,heart strain,0,57.0,97.0,14,8,14.69921875,20.0,9.0,0.699951171875,3311
+138,1,9,3,0.2 mg estrogen,normal activity,0,normal,0,74.0,104.0,14,7,13.798828125,25.0,8.0,0.7999267578125,3325
+139,0,53,3,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,72.0,105.0,12,6,13.599609375,5.0,9.0,0.699951171875,3372
+140,0,51,3,1.0 mg estrogen,normal activity,0,normal,0,65.0,99.0,13,8,14.3984375,10.0,9.0,0.5999755859375,3423
+141,1,8,3,5.0 mg estrogen,normal activity,0,heart strain,0,83.0,115.0,17,9,16.69921875,25.0,9.0,0.5999755859375,3428
+142,1,0,4,placebo,in bed > 50% daytime,1,heart strain,1,71.0,98.0,18,9,12.298828125,34.0,13.0,42.8984375,2768
+143,1,21,4,5.0 mg estrogen,normal activity,0,normal,0,73.0,103.0,12,8,12.798828125,21.0,11.0,2.7998046875,2790
+144,1,27,4,0.2 mg estrogen,normal activity,0,normal,1,71.0,102.0,14,7,10.5,30.0,13.0,367.0,2889
+145,1,22,4,1.0 mg estrogen,normal activity,0,heart strain,0,75.0,124.0,18,11,15.599609375,22.0,11.0,7.0,2889
+146,1,12,4,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,1,71.0,77.0,10,6,7.0,17.0,13.0,3.599609375,2895
+147,0,68,4,1.0 mg estrogen,normal activity,0,normal,1,56.0,69.0,13,8,10.69921875,11.0,13.0,1.39990234375,2902
+148,1,21,4,1.0 mg estrogen,normal activity,0,normal,0,83.0,88.0,13,7,13.298828125,15.0,13.0,21.69921875,2910
+149,0,68,4,0.2 mg estrogen,normal activity,0,heart strain,0,71.0,116.0,15,8,15.0,46.0,10.0,3.19970703125,2916
+150,1,0,4,5.0 mg estrogen,in bed < 50% daytime,1,rhythmic disturb & electrolyte ch,0,73.0,98.0,15,8,10.19921875,23.0,13.0,127.796875,2950
+151,1,2,4,5.0 mg estrogen,normal activity,0,heart strain,1,78.0,74.0,12,9,14.0,32.0,11.0,4.69921875,3021
+152,1,14,4,placebo,normal activity,0,normal,1,50.0,109.0,12,8,9.298828125,17.0,11.0,225.1875,3069
+153,1,18,4,placebo,normal activity,0,heart strain,0,73.0,101.0,16,11,14.0,9.0,11.0,2.69970703125,3099
+154,1,5,4,5.0 mg estrogen,normal activity,0,old MI,1,67.0,111.0,12,9,9.599609375,17.0,11.0,7.0,3149
+155,0,60,4,1.0 mg estrogen,normal activity,0,normal,1,72.0,96.0,15,9,15.298828125,2.0,15.0,43.59375,3155
+156,1,40,4,placebo,normal activity,0,benign,1,72.0,96.0,14,10,10.5,26.0,12.0,29.8984375,3156
+157,1,31,4,placebo,normal activity,0,old MI,0,68.0,98.0,18,10,15.0,,13.0,1.699951171875,3365
+158,0,51,4,0.2 mg estrogen,normal activity,0,heart strain,0,78.0,116.0,15,10,15.69921875,6.0,13.0,1.099853515625,3427
+159,1,50,3,placebo,normal activity,1,heart strain,0,72.0,91.0,19,9,12.0,16.0,8.0,0.5999755859375,2896
+160,1,46,3,0.2 mg estrogen,normal activity,1,heart strain,0,76.0,118.0,18,8,14.5,4.0,8.0,0.699951171875,2925
+161,0,65,3,0.2 mg estrogen,normal activity,0,heart block or conduction def,0,77.0,111.0,19,9,12.5,20.0,9.0,0.7999267578125,3009
+162,1,9,3,5.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,70.0,127.0,13,9,11.798828125,14.0,8.0,0.199981689453125,3051
+163,1,21,3,0.2 mg estrogen,normal activity,1,normal,0,74.0,96.0,10,7,10.19921875,18.0,9.0,0.89990234375,3097
+164,1,27,3,0.2 mg estrogen,normal activity,1,old MI,0,71.0,92.0,15,8,10.599609375,5.0,8.0,0.39996337890625,3181
+165,0,54,3,1.0 mg estrogen,normal activity,1,normal,0,69.0,89.0,12,7,13.5,4.0,8.0,0.5,3346
+166,0,52,3,1.0 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,70.0,111.0,18,8,8.19921875,22.0,9.0,0.7999267578125,3384
+167,0,75,4,1.0 mg estrogen,normal activity,0,heart strain,0,58.0,99.0,19,12,13.099609375,24.0,11.0,1.599853515625,2691
+168,0,75,4,5.0 mg estrogen,normal activity,0,normal,1,78.0,99.0,14,7,12.599609375,27.0,,4.599609375,2685
+169,1,30,4,1.0 mg estrogen,normal activity,1,old MI,0,73.0,105.0,14,6,13.798828125,9.0,15.0,5.099609375,2744
+170,0,70,4,5.0 mg estrogen,normal activity,0,normal,0,69.0,108.0,12,8,12.19921875,23.0,11.0,2.0,2852
+171,1,14,4,1.0 mg estrogen,normal activity,0,old MI,0,73.0,94.0,12,7,13.3984375,31.0,13.0,3.39990234375,2863
+172,1,0,4,placebo,normal activity,0,normal,0,73.0,93.0,14,8,7.7998046875,23.0,15.0,1.199951171875,3106
+173,1,42,4,5.0 mg estrogen,normal activity,0,heart strain,0,68.0,100.0,17,10,11.69921875,32.0,13.0,26.3984375,3112
+174,1,12,4,1.0 mg estrogen,normal activity,1,normal,1,75.0,88.0,14,6,13.3984375,31.0,13.0,21.59765625,3118
+175,1,40,4,placebo,normal activity,1,old MI,1,68.0,104.0,17,10,15.0,25.0,10.0,0.89990234375,3122
+176,1,2,4,placebo,normal activity,1,normal,0,76.0,88.0,16,7,11.19921875,32.0,13.0,26.19921875,3125
+177,1,12,4,1.0 mg estrogen,in bed < 50% daytime,1,heart strain,1,76.0,87.0,14,5,11.69921875,28.0,14.0,42.796875,3225
+178,0,53,4,0.2 mg estrogen,normal activity,1,normal,0,75.0,89.0,14,8,12.599609375,8.0,11.0,2.0,3355
+179,1,11,4,0.2 mg estrogen,normal activity,1,normal,0,59.0,116.0,10,6,12.798828125,6.0,11.0,2.39990234375,3358
+180,1,18,3,5.0 mg estrogen,normal activity,0,normal,1,72.0,96.0,11,8,10.298828125,9.0,11.0,3.2998046875,2734
+181,1,13,3,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,80.0,91.0,15,8,12.298828125,4.0,8.0,0.5999755859375,2805
+182,1,45,3,0.2 mg estrogen,normal activity,1,normal,0,78.0,112.0,16,8,15.0,7.0,9.0,0.29998779296875,2839
+183,1,8,3,1.0 mg estrogen,normal activity,1,heart strain,0,52.0,90.0,13,8,14.798828125,4.0,9.0,0.29998779296875,2841
+184,1,28,3,5.0 mg estrogen,normal activity,0,heart strain,0,75.0,87.0,9,5,12.69921875,8.0,8.0,1.0,2917
+185,0,67,3,5.0 mg estrogen,normal activity,1,normal,0,67.0,109.0,14,8,14.0,3.0,9.0,0.7999267578125,2925
+186,0,67,3,0.2 mg estrogen,normal activity,0,heart strain,0,74.0,103.0,16,6,13.0,4.0,9.0,0.39996337890625,2937
+187,1,24,3,placebo,in bed < 50% daytime,1,heart strain,0,79.0,107.0,23,10,11.599609375,2.0,9.0,0.199981689453125,2945
+188,0,64,3,0.2 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,73.0,96.0,15,10,12.0,4.0,9.0,0.5,3022
+189,1,26,3,1.0 mg estrogen,in bed > 50% daytime,0,heart strain,0,75.0,113.0,12,7,13.5,1.0,13.0,0.699951171875,3036
+190,1,57,4,0.2 mg estrogen,normal activity,0,heart strain,0,72.0,88.0,14,7,12.0,7.0,12.0,59.3984375,2796
+191,1,32,4,0.2 mg estrogen,normal activity,1,heart strain,0,55.0,96.0,15,9,10.298828125,12.0,11.0,0.199981689453125,2810
+192,0,71,4,placebo,in bed < 50% daytime,1,normal,0,68.0,,16,9,14.599609375,18.0,11.0,0.199981689453125,2812
+193,1,42,4,0.2 mg estrogen,in bed < 50% daytime,1,heart strain,0,48.0,100.0,14,10,12.298828125,3.0,11.0,1.5,2812
+194,1,20,4,placebo,normal activity,1,heart strain,0,75.0,88.0,9,5,14.0,1.0,11.0,4.7998046875,2817
+195,0,71,4,1.0 mg estrogen,normal activity,0,normal,0,56.0,94.0,12,8,14.3984375,1.0,10.0,1.099853515625,2818
+196,1,54,4,5.0 mg estrogen,normal activity,0,heart strain,0,70.0,86.0,14,9,14.3984375,4.0,11.0,1.199951171875,3030
+197,0,64,4,5.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,1,54.0,89.0,15,6,14.798828125,8.0,13.0,1.199951171875,3035
+198,1,51,4,5.0 mg estrogen,normal activity,0,normal,1,87.0,82.0,14,7,11.0,3.0,15.0,2.099609375,3035
+199,1,1,3,5.0 mg estrogen,normal activity,1,heart strain,0,73.0,94.0,14,9,13.298828125,22.0,8.0,0.7999267578125,2691
+200,1,2,3,placebo,normal activity,0,normal,0,76.0,94.0,16,10,10.69921875,8.0,9.0,0.5999755859375,2708
+201,1,0,3,5.0 mg estrogen,normal activity,0,normal,0,68.0,106.0,15,9,10.69921875,69.0,13.0,0.89990234375,2734
+202,1,54,3,placebo,normal activity,1,rhythmic disturb & electrolyte ch,0,70.0,97.0,17,10,13.798828125,10.0,9.0,0.5999755859375,2734
+203,0,69,3,0.2 mg estrogen,normal activity,0,normal,0,65.0,83.0,12,6,16.0,8.0,9.0,0.5999755859375,2877
+204,0,68,3,placebo,normal activity,0,heart strain,0,79.0,95.0,14,8,13.3984375,11.0,9.0,0.39996337890625,2894
+205,0,67,3,placebo,normal activity,0,normal,0,70.0,120.0,19,11,14.69921875,7.0,9.0,0.5,2931
+206,0,66,3,1.0 mg estrogen,normal activity,0,normal,0,70.0,99.0,12,8,16.0,8.0,9.0,0.5999755859375,2978
+207,0,64,3,placebo,normal activity,1,normal,0,59.0,90.0,14,8,10.3984375,2.0,9.0,0.29998779296875,3022
+208,0,63,3,0.2 mg estrogen,in bed > 50% daytime,0,normal,0,72.0,73.0,13,8,14.19921875,11.0,8.0,0.5999755859375,3065
+209,1,35,3,1.0 mg estrogen,normal activity,1,normal,0,76.0,88.0,14,9,15.19921875,4.0,5.0,0.5999755859375,3083
+210,0,62,3,5.0 mg estrogen,normal activity,0,benign,0,78.0,123.0,13,8,16.796875,0.0,10.0,0.89990234375,3093
+211,1,7,3,1.0 mg estrogen,normal activity,1,heart strain,0,76.0,113.0,14,6,12.798828125,3.0,8.0,0.699951171875,3119
+212,1,35,3,5.0 mg estrogen,normal activity,0,normal,0,66.0,87.0,14,9,14.298828125,3.0,8.0,0.39996337890625,3134
+213,1,24,3,1.0 mg estrogen,normal activity,1,heart block or conduction def,0,69.0,91.0,16,10,15.0,11.0,8.0,0.29998779296875,3218
+214,0,57,3,5.0 mg estrogen,normal activity,0,heart strain,0,71.0,88.0,16,8,15.3984375,3.0,9.0,0.5,3248
+215,1,1,3,0.2 mg estrogen,normal activity,0,heart strain,0,75.0,120.0,15,7,15.099609375,4.0,8.0,0.5999755859375,3287
+216,1,4,3,0.2 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,74.0,99.0,17,9,15.69921875,7.0,7.0,0.5999755859375,3330
+217,1,74,4,0.2 mg estrogen,normal activity,0,heart block or conduction def,0,72.0,103.0,15,9,16.5,4.0,10.0,1.0,2699
+218,1,0,4,0.2 mg estrogen,in bed > 50% daytime,0,heart strain,1,78.0,96.0,16,9,10.099609375,54.0,12.0,4.599609375,2700
+219,1,51,4,0.2 mg estrogen,normal activity,0,old MI,1,71.0,110.0,14,9,13.3984375,6.0,10.0,0.699951171875,2723
+220,1,36,4,5.0 mg estrogen,normal activity,1,heart strain,0,75.0,101.0,16,10,11.0,15.0,10.0,1.599853515625,2754
+221,1,16,4,0.2 mg estrogen,in bed > 50% daytime,0,heart strain,1,73.0,89.0,15,8,7.19921875,14.0,11.0,20.3984375,2770
+222,1,32,4,1.0 mg estrogen,in bed > 50% daytime,0,benign,1,79.0,79.0,15,7,13.298828125,16.0,13.0,28.8984375,2832
+223,0,68,4,5.0 mg estrogen,normal activity,0,normal,0,70.0,92.0,16,8,13.5,22.0,14.0,2.69970703125,2897
+224,1,17,4,0.2 mg estrogen,normal activity,0,normal,0,73.0,76.0,17,8,13.3984375,50.0,13.0,8.8984375,2905
+225,0,66,4,placebo,normal activity,1,normal,0,75.0,98.0,14,8,14.69921875,16.0,13.0,2.7998046875,2973
+226,0,65,4,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,1,76.0,83.0,12,6,11.3984375,13.0,11.0,596.0,2995
+227,1,19,4,placebo,in bed < 50% daytime,0,old MI,1,71.0,77.0,17,7,11.798828125,61.0,15.0,4.2998046875,3000
+228,1,41,4,1.0 mg estrogen,normal activity,0,normal,0,76.0,91.0,17,8,15.099609375,24.0,11.0,8.19921875,3003
+229,1,28,4,placebo,normal activity,1,normal,0,73.0,106.0,16,9,14.69921875,11.0,11.0,36.8984375,3017
+230,1,0,4,placebo,normal activity,1,heart strain,0,70.0,80.0,10,8,12.19921875,5.0,11.0,4.2998046875,3023
+231,1,46,4,5.0 mg estrogen,normal activity,1,old MI,1,72.0,100.0,12,7,16.0,62.0,11.0,54.796875,3038
+232,0,63,4,5.0 mg estrogen,normal activity,0,old MI,0,74.0,101.0,14,9,14.798828125,25.0,10.0,2.39990234375,3066
+233,0,60,4,1.0 mg estrogen,normal activity,0,heart strain,0,62.0,98.0,12,8,15.599609375,15.0,13.0,4.5,3139
+234,0,59,4,1.0 mg estrogen,normal activity,0,normal,0,53.0,116.0,13,8,16.3984375,7.0,12.0,1.0,3184
+235,1,46,3,5.0 mg estrogen,normal activity,0,normal,0,54.0,91.0,13,10,13.0,15.0,9.0,0.699951171875,2677
+236,1,63,3,1.0 mg estrogen,normal activity,1,heart block or conduction def,0,58.0,94.0,16,10,13.798828125,12.0,9.0,0.199981689453125,2677
+237,1,8,3,5.0 mg estrogen,normal activity,1,old MI,0,78.0,99.0,17,9,12.0,9.0,8.0,0.0999908447265625,2720
+238,0,74,3,1.0 mg estrogen,normal activity,1,heart block or conduction def,0,77.0,100.0,10,7,12.3984375,25.0,9.0,0.39996337890625,2722
+239,1,18,3,placebo,normal activity,1,heart strain,0,61.0,152.0,15,10,14.099609375,18.0,7.0,0.199981689453125,2728
+240,1,33,3,placebo,in bed < 50% daytime,1,heart strain,0,78.0,98.0,13,7,13.599609375,9.0,9.0,0.5,2811
+241,1,12,3,placebo,in bed < 50% daytime,1,heart strain,0,68.0,88.0,24,12,14.3984375,12.0,9.0,0.199981689453125,2824
+242,1,1,3,0.2 mg estrogen,in bed < 50% daytime,0,,0,62.0,76.0,10,6,11.599609375,13.0,9.0,0.29998779296875,2826
+243,0,66,3,1.0 mg estrogen,normal activity,0,normal,0,70.0,109.0,15,10,14.5,15.0,11.0,0.5999755859375,2981
+244,1,28,3,1.0 mg estrogen,normal activity,0,normal,0,75.0,81.0,16,10,13.69921875,19.0,10.0,0.5,3090
+245,1,30,3,0.2 mg estrogen,normal activity,0,heart strain,0,80.0,91.0,12,8,10.798828125,22.0,11.0,0.89990234375,3170
+246,1,57,3,0.2 mg estrogen,normal activity,1,old MI,0,76.0,99.0,13,8,11.19921875,20.0,8.0,0.5,3183
+247,1,50,3,1.0 mg estrogen,normal activity,0,normal,0,68.0,102.0,16,8,12.0,20.0,11.0,0.699951171875,3185
+248,1,39,3,placebo,normal activity,1,heart strain,0,73.0,81.0,19,4,12.5,18.0,11.0,0.29998779296875,3213
+249,1,40,3,placebo,normal activity,0,heart strain,0,79.0,96.0,15,10,14.0,16.0,6.0,0.29998779296875,3213
+250,1,24,3,0.2 mg estrogen,normal activity,1,old MI,0,78.0,81.0,14,7,11.0,4.0,9.0,0.39996337890625,3381
+251,1,6,3,5.0 mg estrogen,normal activity,1,old MI,0,79.0,94.0,11,8,12.19921875,4.0,6.0,0.39996337890625,3441
+252,1,30,4,0.2 mg estrogen,in bed < 50% daytime,1,heart strain,1,72.0,90.0,22,12,12.298828125,15.0,14.0,0.5,2782
+253,1,58,4,0.2 mg estrogen,normal activity,1,normal,0,52.0,106.0,11,7,15.0,13.0,14.0,5.2998046875,2807
+254,0,68,4,1.0 mg estrogen,normal activity,1,heart strain,0,76.0,97.0,15,10,14.599609375,19.0,11.0,353.5,2908
+255,1,24,4,0.2 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,1,74.0,85.0,16,10,10.0,19.0,13.0,13.8984375,2924
+256,1,33,4,placebo,normal activity,0,normal,1,71.0,86.0,14,8,10.19921875,8.0,11.0,0.39996337890625,2933
+257,0,65,4,5.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,72.0,96.0,14,10,12.298828125,17.0,12.0,20.0,3006
+258,1,2,4,5.0 mg estrogen,normal activity,0,normal,0,77.0,113.0,15,8,13.798828125,22.0,12.0,5.5,3006
+259,0,64,4,0.2 mg estrogen,normal activity,1,heart strain,0,73.0,100.0,16,10,13.798828125,23.0,11.0,9.69921875,3023
+260,1,19,4,placebo,normal activity,0,rhythmic disturb & electrolyte ch,0,75.0,83.0,12,7,11.798828125,17.0,13.0,2.2998046875,3077
+261,0,58,4,placebo,normal activity,0,old MI,0,73.0,,13,7,13.298828125,20.0,13.0,1.099853515625,3204
+262,1,15,4,5.0 mg estrogen,normal activity,0,heart strain,1,71.0,98.0,15,10,14.69921875,12.0,11.0,43.09375,3364
+263,1,10,4,0.2 mg estrogen,normal activity,1,normal,0,76.0,94.0,16,9,10.5,20.0,12.0,33.59375,3367
+264,1,12,4,5.0 mg estrogen,in bed < 50% daytime,0,heart strain,1,49.0,90.0,14,8,14.099609375,21.0,15.0,5.599609375,3367
+265,0,53,4,5.0 mg estrogen,in bed > 50% daytime,1,rhythmic disturb & electrolyte ch,1,74.0,91.0,13,7,13.3984375,17.0,11.0,278.25,3373
+266,0,51,4,1.0 mg estrogen,normal activity,0,normal,0,59.0,97.0,13,6,14.099609375,17.0,13.0,2.19970703125,3412
+267,1,1,4,1.0 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,79.0,116.0,15,9,12.599609375,23.0,11.0,3.7998046875,3436
+268,1,40,3,1.0 mg estrogen,normal activity,0,,0,78.0,113.0,20,10,13.19921875,36.0,11.0,0.5999755859375,2849
+269,1,40,3,placebo,normal activity,0,,0,78.0,110.0,14,8,14.798828125,15.0,9.0,0.29998779296875,2953
+270,0,66,3,1.0 mg estrogen,normal activity,0,,0,79.0,96.0,14,8,14.798828125,19.0,8.0,0.39996337890625,2960
+271,1,2,3,0.2 mg estrogen,normal activity,0,heart strain,0,72.0,82.0,13,7,9.3984375,33.0,11.0,0.5999755859375,2971
+272,1,21,3,0.2 mg estrogen,in bed < 50% daytime,1,benign,0,58.0,136.0,14,8,10.5,30.0,12.0,0.699951171875,3020
+273,1,35,3,5.0 mg estrogen,normal activity,0,normal,0,73.0,101.0,12,6,12.798828125,46.0,11.0,0.5999755859375,3023
+274,1,29,3,placebo,normal activity,1,old MI,0,75.0,113.0,19,8,10.8984375,21.0,11.0,0.39996337890625,3188
+275,1,54,3,5.0 mg estrogen,normal activity,0,normal,0,78.0,107.0,14,9,12.798828125,42.0,11.0,29.69921875,3265
+276,1,37,3,5.0 mg estrogen,normal activity,0,normal,0,60.0,94.0,15,9,13.0,10.0,9.0,0.39996337890625,3307
+277,1,10,3,0.2 mg estrogen,normal activity,0,normal,0,72.0,83.0,11,7,13.798828125,15.0,9.0,0.39996337890625,3353
+278,1,29,4,5.0 mg estrogen,confined to bed,0,normal,1,59.0,99.0,13,8,12.69921875,17.0,13.0,999.875,2673
+279,0,71,4,1.0 mg estrogen,normal activity,0,,1,84.0,107.0,14,7,13.0,15.0,11.0,37.8984375,2826
+280,1,12,4,placebo,normal activity,1,normal,0,74.0,107.0,15,8,14.599609375,18.0,11.0,8.3984375,2826
+281,1,13,4,0.2 mg estrogen,normal activity,0,normal,0,76.0,97.0,14,8,13.69921875,36.0,15.0,15.5,2848
+282,1,27,4,placebo,normal activity,1,old MI,0,80.0,135.0,11,7,12.8984375,17.0,11.0,3.7998046875,2894
+283,1,66,4,0.2 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,72.0,123.0,15,8,15.798828125,0.0,13.0,1.7998046875,2868
+284,1,28,4,placebo,normal activity,0,,0,59.0,100.0,14,8,15.798828125,21.0,11.0,5.2998046875,2981
+285,1,31,4,1.0 mg estrogen,normal activity,0,normal,0,74.0,111.0,13,8,15.19921875,25.0,13.0,4.19921875,3015
+286,1,12,4,1.0 mg estrogen,normal activity,0,normal,0,65.0,102.0,15,9,15.5,19.0,11.0,2.19970703125,3063
+287,1,9,4,placebo,normal activity,0,heart strain,1,71.0,119.0,19,10,13.599609375,24.0,13.0,25.59765625,3063
+288,1,21,4,0.2 mg estrogen,normal activity,0,normal,1,76.0,94.0,14,6,10.599609375,24.0,11.0,10.8984375,3212
+289,1,19,4,5.0 mg estrogen,confined to bed,0,heart block or conduction def,1,74.0,74.0,14,5,11.19921875,2.0,11.0,3.69970703125,3253
+290,0,51,4,1.0 mg estrogen,normal activity,0,old MI,0,75.0,114.0,18,7,13.798828125,22.0,11.0,2.2998046875,3430
+291,1,71,3,placebo,in bed < 50% daytime,1,heart strain,0,73.0,134.0,22,10,14.0,22.0,11.0,0.5999755859375,2652
+292,0,76,3,1.0 mg estrogen,normal activity,1,normal,0,74.0,99.0,17,7,11.099609375,12.0,11.0,0.39996337890625,2658
+293,1,46,3,5.0 mg estrogen,in bed < 50% daytime,1,normal,0,72.0,112.0,16,8,13.0,30.0,11.0,0.5999755859375,2667
+294,1,47,3,0.2 mg estrogen,normal activity,1,heart strain,0,75.0,107.0,15,9,16.19921875,7.0,9.0,1.099853515625,2681
+295,0,75,3,0.2 mg estrogen,in bed < 50% daytime,0,normal,0,70.0,99.0,12,7,13.8984375,7.0,9.0,0.89990234375,2681
+296,0,75,3,5.0 mg estrogen,normal activity,0,heart strain,0,61.0,94.0,12,7,12.0,4.0,9.0,0.7999267578125,2681
+297,1,49,3,1.0 mg estrogen,normal activity,1,heart strain,0,71.0,94.0,16,7,15.599609375,9.0,9.0,0.29998779296875,2681
+298,0,75,3,5.0 mg estrogen,normal activity,0,normal,0,57.0,84.0,12,8,13.8984375,6.0,8.0,0.5,2686
+299,0,75,3,5.0 mg estrogen,normal activity,0,old MI,0,65.0,111.0,14,8,13.69921875,15.0,9.0,0.7999267578125,2691
+300,1,31,3,placebo,in bed < 50% daytime,1,normal,0,78.0,96.0,17,11,14.8984375,2.0,10.0,0.199981689453125,2707
+301,1,69,3,placebo,normal activity,0,normal,0,60.0,122.0,13,9,16.09765625,26.0,9.0,0.5,2712
+302,0,74,3,0.2 mg estrogen,normal activity,0,normal,0,72.0,102.0,16,8,14.0,23.0,7.0,0.29998779296875,2730
+303,1,25,3,1.0 mg estrogen,in bed < 50% daytime,0,old MI,0,81.0,102.0,15,8,12.798828125,4.0,8.0,0.5,2747
+304,0,72,3,5.0 mg estrogen,normal activity,0,normal,0,70.0,87.0,15,8,14.599609375,5.0,10.0,0.29998779296875,2783
+305,1,28,3,0.2 mg estrogen,normal activity,1,recent MI,0,62.0,88.0,12,7,13.5,10.0,8.0,0.29998779296875,2789
+306,1,36,3,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,68.0,98.0,16,7,13.298828125,40.0,9.0,0.39996337890625,2793
+307,1,8,3,placebo,normal activity,0,heart strain,0,74.0,97.0,14,8,13.599609375,14.0,8.0,0.5,2799
+308,0,71,3,0.2 mg estrogen,normal activity,1,normal,0,65.0,117.0,15,8,16.5,9.0,9.0,0.7999267578125,2827
+309,1,60,3,placebo,normal activity,1,normal,0,74.0,95.0,18,9,9.798828125,2.0,8.0,0.699951171875,2839
+310,1,14,3,1.0 mg estrogen,normal activity,1,heart strain,0,76.0,99.0,15,9,12.0,9.0,11.0,0.7999267578125,2859
+311,1,22,3,0.2 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,70.0,78.0,14,7,14.8984375,9.0,11.0,0.199981689453125,2889
+312,1,67,3,5.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,73.0,105.0,13,6,14.8984375,39.0,9.0,0.5,2894
+313,1,62,3,placebo,normal activity,1,heart strain,0,71.0,107.0,18,10,14.5,9.0,8.0,0.29998779296875,2905
+314,0,68,3,5.0 mg estrogen,normal activity,0,heart block or conduction def,0,73.0,118.0,17,9,13.3984375,4.0,9.0,0.699951171875,2905
+315,0,68,3,placebo,normal activity,0,heart strain,0,71.0,108.0,16,12,14.099609375,7.0,9.0,0.39996337890625,2910
+316,1,27,3,1.0 mg estrogen,normal activity,0,benign,0,75.0,145.0,13,8,15.3984375,4.0,9.0,0.5,2912
+317,0,68,3,0.2 mg estrogen,normal activity,0,heart strain,0,70.0,98.0,11,7,14.19921875,19.0,10.0,0.5,2919
+318,0,68,3,1.0 mg estrogen,normal activity,0,old MI,0,77.0,98.0,12,6,15.5,9.0,9.0,0.39996337890625,2919
+319,0,67,3,placebo,normal activity,0,normal,0,71.0,87.0,15,8,15.599609375,8.0,8.0,0.5999755859375,2925
+320,0,67,3,placebo,normal activity,0,heart block or conduction def,0,75.0,101.0,14,7,13.5,18.0,7.0,0.5,2925
+321,1,3,3,0.2 mg estrogen,normal activity,1,heart strain,0,74.0,105.0,16,7,14.099609375,10.0,11.0,0.29998779296875,2925
+322,1,49,3,5.0 mg estrogen,normal activity,0,heart strain,0,72.0,100.0,11,6,15.0,8.0,11.0,0.29998779296875,2936
+323,1,12,3,5.0 mg estrogen,normal activity,1,old MI,0,89.0,92.0,13,6,13.599609375,8.0,9.0,0.699951171875,2937
+324,1,30,3,0.2 mg estrogen,normal activity,0,heart strain,0,75.0,96.0,12,6,14.298828125,10.0,12.0,0.699951171875,2937
+325,0,67,3,1.0 mg estrogen,normal activity,0,heart strain,0,71.0,101.0,14,8,14.69921875,3.0,11.0,0.5,2947
+326,1,5,3,1.0 mg estrogen,normal activity,1,heart strain,0,80.0,95.0,16,10,14.5,7.0,9.0,0.89990234375,2952
+327,1,65,3,1.0 mg estrogen,normal activity,0,normal,0,51.0,96.0,13,8,11.798828125,2.0,6.0,0.5999755859375,2964
+328,1,24,3,placebo,normal activity,0,normal,0,71.0,81.0,9,4,13.69921875,10.0,9.0,0.39996337890625,2965
+329,0,66,3,0.2 mg estrogen,normal activity,1,normal,0,72.0,95.0,10,5,14.0,8.0,8.0,0.699951171875,2971
+330,1,36,3,5.0 mg estrogen,normal activity,1,heart block or conduction def,0,70.0,91.0,16,9,15.8984375,7.0,9.0,1.0,2974
+331,0,66,3,placebo,normal activity,0,old MI,0,55.0,103.0,16,10,16.69921875,2.0,8.0,0.7999267578125,2978
+332,1,40,3,0.2 mg estrogen,normal activity,1,heart strain,0,76.0,104.0,15,7,14.599609375,3.0,9.0,0.5,2978
+333,1,13,3,0.2 mg estrogen,normal activity,0,heart strain,0,68.0,97.0,17,9,9.5,11.0,8.0,0.5,2978
+334,1,40,3,5.0 mg estrogen,normal activity,1,old MI,0,75.0,81.0,12,8,15.5,14.0,8.0,0.39996337890625,3001
+335,0,65,3,0.2 mg estrogen,normal activity,1,heart strain,0,52.0,101.0,15,10,14.0,4.0,,0.5999755859375,3007
+336,1,0,3,0.2 mg estrogen,normal activity,0,heart strain,0,75.0,91.0,20,10,11.798828125,3.0,11.0,0.199981689453125,3013
+337,1,14,3,1.0 mg estrogen,normal activity,1,heart strain,0,75.0,94.0,11,7,17.5,15.0,9.0,0.7999267578125,3023
+338,1,45,3,1.0 mg estrogen,normal activity,0,normal,0,72.0,77.0,13,7,11.0,4.0,8.0,0.5,3023
+339,0,64,3,1.0 mg estrogen,normal activity,0,normal,0,74.0,118.0,14,8,14.19921875,4.0,6.0,0.5999755859375,3023
+340,1,13,3,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,75.0,91.0,13,7,12.099609375,5.0,8.0,0.5,3023
+341,1,24,3,placebo,normal activity,1,old MI,0,75.0,79.0,13,9,10.8984375,8.0,8.0,0.39996337890625,3030
+342,1,15,3,placebo,normal activity,1,heart strain,0,71.0,96.0,12,8,17.296875,5.0,11.0,0.7999267578125,3048
+343,1,26,3,placebo,normal activity,1,heart strain,0,76.0,102.0,15,9,11.19921875,10.0,8.0,0.5,3051
+344,1,5,3,1.0 mg estrogen,normal activity,0,old MI,0,70.0,83.0,14,7,11.69921875,33.0,13.0,0.29998779296875,3051
+345,0,63,3,0.2 mg estrogen,normal activity,1,heart strain,0,73.0,129.0,21,11,16.69921875,10.0,8.0,0.699951171875,3055
+346,1,35,3,5.0 mg estrogen,normal activity,1,old MI,0,70.0,107.0,13,8,16.09765625,7.0,11.0,0.7999267578125,3111
+347,0,61,3,placebo,normal activity,0,normal,0,75.0,93.0,13,8,13.69921875,10.0,12.0,0.0999908447265625,3111
+348,0,61,3,5.0 mg estrogen,normal activity,0,normal,0,70.0,127.0,14,7,16.19921875,8.0,9.0,0.5999755859375,3122
+349,1,50,3,5.0 mg estrogen,normal activity,1,normal,0,74.0,97.0,13,7,12.298828125,1.0,8.0,0.39996337890625,3127
+350,1,57,3,5.0 mg estrogen,normal activity,0,normal,0,72.0,109.0,16,10,17.5,8.0,9.0,0.699951171875,3134
+351,1,21,3,5.0 mg estrogen,normal activity,1,heart strain,0,62.0,109.0,16,8,16.3984375,15.0,9.0,0.699951171875,3140
+352,1,26,3,placebo,normal activity,0,normal,0,72.0,111.0,14,8,15.298828125,37.0,11.0,0.5,3140
+353,1,11,3,placebo,normal activity,0,rhythmic disturb & electrolyte ch,0,77.0,74.0,12,6,12.3984375,45.0,11.0,0.5,3140
+354,0,59,3,1.0 mg estrogen,normal activity,0,heart strain,0,52.0,90.0,12,7,11.8984375,5.0,8.0,0.5,3188
+355,1,42,3,placebo,normal activity,0,normal,0,57.0,89.0,12,6,13.8984375,24.0,12.0,0.5,3190
+356,1,27,3,1.0 mg estrogen,normal activity,1,heart strain,0,80.0,90.0,14,8,14.298828125,9.0,8.0,0.5999755859375,3195
+357,1,50,3,0.2 mg estrogen,normal activity,1,normal,0,62.0,85.0,11,7,13.69921875,6.0,9.0,0.29998779296875,3253
+358,0,57,3,1.0 mg estrogen,normal activity,0,normal,0,72.0,101.0,13,8,14.599609375,8.0,10.0,0.5,3253
+359,0,57,3,1.0 mg estrogen,normal activity,0,heart strain,0,72.0,116.0,14,8,15.19921875,11.0,9.0,0.7999267578125,3253
+360,1,0,3,placebo,normal activity,1,old MI,0,77.0,91.0,14,10,14.5,5.0,9.0,0.5,3272
+361,1,1,3,0.2 mg estrogen,normal activity,1,heart strain,0,72.0,134.0,15,8,14.798828125,23.0,9.0,0.699951171875,3275
+362,0,54,3,1.0 mg estrogen,normal activity,0,old MI,0,73.0,100.0,18,10,11.69921875,8.0,9.0,0.699951171875,3346
+363,1,53,3,0.2 mg estrogen,normal activity,1,old MI,0,74.0,98.0,16,8,13.798828125,11.0,8.0,1.0,3358
+364,1,23,3,0.2 mg estrogen,normal activity,1,old MI,0,74.0,82.0,17,4,10.8984375,8.0,8.0,0.39996337890625,3359
+365,1,8,3,5.0 mg estrogen,normal activity,0,normal,0,72.0,110.0,15,8,13.099609375,4.0,9.0,0.7999267578125,3370
+366,1,51,3,5.0 mg estrogen,normal activity,1,old MI,0,76.0,85.0,14,8,15.8984375,25.0,9.0,0.89990234375,3374
+367,1,27,3,placebo,normal activity,1,heart strain,0,78.0,111.0,15,7,12.298828125,7.0,9.0,0.5,3380
+368,0,52,3,5.0 mg estrogen,normal activity,1,old MI,0,83.0,88.0,16,8,10.0,1.0,7.0,0.5999755859375,3384
+369,0,52,3,0.2 mg estrogen,normal activity,1,heart strain,0,80.0,99.0,13,7,13.0,6.0,9.0,0.5,3402
+370,0,52,3,5.0 mg estrogen,normal activity,0,heart block or conduction def,0,76.0,90.0,15,8,13.298828125,52.0,13.0,0.39996337890625,3407
+371,1,45,3,placebo,normal activity,0,old MI,0,79.0,126.0,13,8,15.3984375,7.0,11.0,0.699951171875,3407
+372,1,48,3,0.2 mg estrogen,normal activity,1,heart strain,0,76.0,116.0,13,8,16.8984375,2.0,9.0,0.39996337890625,3423
+373,1,18,3,placebo,normal activity,1,heart strain,0,71.0,110.0,14,8,13.0,7.0,11.0,0.29998779296875,3427
+374,1,2,4,placebo,normal activity,0,heart strain,1,61.0,95.0,12,8,11.5,37.0,12.0,25.59765625,2652
+375,1,2,4,5.0 mg estrogen,in bed < 50% daytime,1,heart strain,1,77.0,96.0,14,7,11.8984375,36.0,10.0,0.89990234375,2670
+376,1,35,4,1.0 mg estrogen,normal activity,0,heart strain,1,76.0,82.0,10,6,10.298828125,10.0,13.0,9.298828125,2686
+377,0,75,4,1.0 mg estrogen,normal activity,0,normal,0,71.0,106.0,15,8,14.099609375,26.0,13.0,10.0,2695
+378,0,75,4,placebo,normal activity,0,benign,0,77.0,87.0,11,6,12.5,5.0,11.0,2.19970703125,2707
+379,1,9,4,placebo,normal activity,1,rhythmic disturb & electrolyte ch,1,78.0,89.0,18,8,14.298828125,39.0,13.0,25.296875,2729
+380,1,39,4,1.0 mg estrogen,normal activity,0,heart strain,1,58.0,92.0,12,8,13.69921875,5.0,11.0,10.798828125,2772
+381,1,0,4,5.0 mg estrogen,normal activity,1,heart strain,0,74.0,113.0,11,8,14.19921875,41.0,13.0,2.2998046875,2772
+382,1,26,4,placebo,normal activity,1,rhythmic disturb & electrolyte ch,1,75.0,116.0,18,9,16.0,26.0,11.0,0.5,2835
+383,1,17,4,placebo,normal activity,0,old MI,0,62.0,102.0,18,11,14.599609375,16.0,13.0,10.099609375,2854
+384,1,43,4,0.2 mg estrogen,normal activity,0,heart strain,0,80.0,92.0,15,9,13.099609375,0.0,13.0,1.099853515625,2887
+385,1,53,4,5.0 mg estrogen,in bed < 50% daytime,0,normal,0,61.0,79.0,13,8,10.298828125,14.0,11.0,4.0,2894
+386,1,47,4,1.0 mg estrogen,normal activity,1,old MI,0,76.0,98.0,17,9,13.3984375,19.0,11.0,3.7998046875,2919
+387,1,11,4,0.2 mg estrogen,in bed < 50% daytime,0,heart strain,1,79.0,99.0,16,8,9.099609375,38.0,13.0,31.3984375,3009
+388,0,65,4,0.2 mg estrogen,normal activity,0,normal,0,66.0,116.0,12,8,14.8984375,18.0,12.0,58.09375,3009
+389,1,16,4,1.0 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,1,61.0,83.0,12,6,13.599609375,4.0,15.0,38.5,3010
+390,1,21,4,5.0 mg estrogen,normal activity,0,heart strain,0,79.0,99.0,17,9,16.09765625,4.0,13.0,6.099609375,3010
+391,0,64,4,0.2 mg estrogen,normal activity,1,normal,0,70.0,99.0,13,7,14.19921875,11.0,11.0,1.099853515625,3035
+392,1,7,4,0.2 mg estrogen,normal activity,1,heart block or conduction def,0,73.0,105.0,15,7,15.599609375,10.0,9.0,1.099853515625,3111
+393,1,38,4,5.0 mg estrogen,normal activity,0,heart strain,0,72.0,90.0,11,8,14.798828125,11.0,15.0,1.5,3115
+394,1,55,4,1.0 mg estrogen,normal activity,1,normal,1,81.0,98.0,13,6,11.19921875,38.0,12.0,8.69921875,3097
+395,1,5,4,placebo,normal activity,0,heart strain,0,77.0,92.0,15,9,11.5,6.0,10.0,0.5999755859375,3097
+396,1,28,4,0.2 mg estrogen,normal activity,0,heart strain,0,76.0,76.0,11,6,14.798828125,29.0,13.0,1.7998046875,3143
+397,1,38,4,placebo,normal activity,1,rhythmic disturb & electrolyte ch,1,75.0,113.0,10,6,13.298828125,9.0,13.0,0.39996337890625,3150
+398,1,20,4,0.2 mg estrogen,normal activity,0,normal,1,72.0,79.0,14,7,12.19921875,24.0,11.0,7.19921875,3150
+399,1,24,4,5.0 mg estrogen,normal activity,0,normal,0,74.0,108.0,16,9,12.599609375,12.0,13.0,1.099853515625,3155
+400,1,27,4,5.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,70.0,85.0,16,8,16.3984375,9.0,13.0,1.7998046875,3157
+401,1,31,4,1.0 mg estrogen,normal activity,1,benign,1,61.0,91.0,14,8,10.69921875,25.0,13.0,152.1875,3195
+402,1,9,4,placebo,normal activity,1,rhythmic disturb & electrolyte ch,0,77.0,116.0,14,8,15.19921875,7.0,13.0,47.0,3196
+403,1,9,4,1.0 mg estrogen,normal activity,0,,1,60.0,73.0,11,8,14.099609375,46.0,13.0,17.0,3204
+404,1,11,4,1.0 mg estrogen,in bed < 50% daytime,0,rhythmic disturb & electrolyte ch,0,72.0,86.0,12,7,14.0,50.0,15.0,1.099853515625,3238
+405,1,56,4,5.0 mg estrogen,normal activity,0,normal,1,64.0,104.0,17,7,12.0,43.0,13.0,2.39990234375,3253
+406,1,36,4,placebo,normal activity,0,heart strain,0,78.0,95.0,15,9,13.798828125,55.0,10.0,3.19970703125,3261
+407,0,56,4,0.2 mg estrogen,normal activity,1,old MI,0,74.0,108.0,14,8,10.599609375,4.0,15.0,1.099853515625,3272
+408,1,15,4,5.0 mg estrogen,normal activity,1,heart strain,0,73.0,83.0,12,7,11.19921875,0.0,11.0,4.19921875,3272
+409,0,51,4,5.0 mg estrogen,normal activity,0,heart block or conduction def,1,71.0,104.0,15,7,16.0,26.0,11.0,0.7999267578125,3429
+410,1,33,3,placebo,normal activity,1,heart strain,0,75.0,113.0,17,9,13.798828125,9.0,9.0,0.699951171875,2824
+411,0,70,3,1.0 mg estrogen,normal activity,0,normal,0,72.0,105.0,13,8,13.798828125,3.0,9.0,0.7999267578125,2838
+412,1,32,3,5.0 mg estrogen,normal activity,1,heart strain,0,68.0,89.0,19,10,13.798828125,3.0,9.0,0.5999755859375,2895
+413,1,5,3,1.0 mg estrogen,normal activity,0,normal,0,74.0,91.0,15,8,15.099609375,3.0,9.0,0.39996337890625,2965
+414,1,23,3,5.0 mg estrogen,normal activity,1,heart strain,0,72.0,93.0,16,8,16.59765625,4.0,9.0,0.199981689453125,3000
+415,0,63,3,placebo,normal activity,0,old MI,0,79.0,110.0,15,9,16.8984375,2.0,9.0,0.699951171875,3056
+416,1,30,3,0.2 mg estrogen,normal activity,1,heart strain,0,62.0,104.0,12,8,16.0,32.0,11.0,0.39996337890625,3078
+417,1,12,3,0.2 mg estrogen,normal activity,1,old MI,0,69.0,92.0,17,7,15.5,22.0,,0.89990234375,3083
+418,1,53,3,placebo,normal activity,0,heart strain,0,62.0,119.0,19,11,16.3984375,14.0,9.0,0.5,3113
+419,1,12,3,placebo,normal activity,0,heart strain,0,72.0,128.0,15,8,16.3984375,15.0,9.0,0.5999755859375,3176
+420,0,58,3,placebo,normal activity,0,heart strain,0,72.0,109.0,13,8,13.298828125,12.0,9.0,0.5999755859375,3203
+421,0,54,3,1.0 mg estrogen,normal activity,0,normal,0,51.0,112.0,13,9,15.798828125,7.0,8.0,0.7999267578125,3322
+422,1,36,3,placebo,normal activity,0,normal,0,72.0,104.0,18,10,16.3984375,4.0,9.0,0.5999755859375,3337
+423,1,20,3,0.2 mg estrogen,normal activity,0,normal,0,81.0,104.0,15,8,16.8984375,16.0,13.0,0.7999267578125,3364
+424,0,74,4,5.0 mg estrogen,normal activity,0,old MI,0,71.0,81.0,11,7,13.099609375,29.0,11.0,11.798828125,2714
+425,1,34,4,placebo,normal activity,0,rhythmic disturb & electrolyte ch,0,77.0,103.0,14,7,14.298828125,35.0,11.0,1.2998046875,2726
+426,0,70,4,0.2 mg estrogen,normal activity,1,normal,0,73.0,114.0,14,8,14.69921875,26.0,11.0,0.5,2832
+427,1,25,4,placebo,normal activity,0,heart strain,1,56.0,100.0,17,8,13.798828125,30.0,11.0,50.59375,2973
+428,0,65,4,0.2 mg estrogen,normal activity,0,heart strain,0,77.0,107.0,14,9,14.69921875,1.0,13.0,1.599853515625,2987
+429,1,4,4,placebo,normal activity,0,heart block or conduction def,0,78.0,104.0,16,9,12.69921875,27.0,11.0,22.59765625,3022
+430,1,10,4,1.0 mg estrogen,normal activity,0,old MI,1,76.0,96.0,12,7,13.798828125,34.0,11.0,36.0,3119
+431,0,58,4,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,68.0,79.0,18,9,13.3984375,9.0,11.0,1.199951171875,3205
+432,1,37,4,placebo,normal activity,0,benign,0,73.0,90.0,14,9,9.3984375,21.0,13.0,5.099609375,3223
+433,0,56,4,5.0 mg estrogen,normal activity,0,normal,0,56.0,135.0,16,9,14.69921875,10.0,10.0,3.19970703125,3279
+434,1,6,4,1.0 mg estrogen,normal activity,1,heart strain,1,74.0,112.0,20,10,13.099609375,9.0,11.0,21.296875,3392
+435,1,54,3,5.0 mg estrogen,normal activity,1,normal,0,76.0,84.0,15,8,12.599609375,19.0,,0.39996337890625,2720
+436,1,0,3,5.0 mg estrogen,normal activity,1,normal,0,69.0,113.0,13,8,11.298828125,1.0,9.0,0.0999908447265625,2813
+437,0,70,3,1.0 mg estrogen,normal activity,1,benign,0,73.0,84.0,10,6,15.599609375,1.0,9.0,0.5,2853
+438,0,70,3,1.0 mg estrogen,normal activity,0,normal,0,71.0,105.0,12,8,13.599609375,2.0,10.0,0.199981689453125,2859
+439,1,28,3,0.2 mg estrogen,normal activity,1,old MI,0,75.0,97.0,14,8,10.798828125,2.0,9.0,0.199981689453125,2875
+440,1,40,3,1.0 mg estrogen,normal activity,0,old MI,0,69.0,85.0,15,7,5.8994140625,2.0,9.0,0.29998779296875,2917
+441,0,67,3,1.0 mg estrogen,normal activity,0,normal,0,73.0,95.0,11,7,13.798828125,7.0,8.0,0.39996337890625,2943
+442,1,36,3,0.2 mg estrogen,normal activity,0,normal,0,59.0,81.0,15,10,16.0,2.0,9.0,0.39996337890625,3076
+443,1,23,3,placebo,normal activity,0,normal,0,68.0,93.0,13,7,12.5,2.0,8.0,0.89990234375,3076
+444,1,23,3,placebo,normal activity,1,heart block or conduction def,0,78.0,115.0,14,7,13.0,2.0,8.0,0.0999908447265625,3076
+445,0,62,3,placebo,normal activity,0,normal,0,63.0,95.0,12,9,13.19921875,3.0,8.0,0.29998779296875,3076
+446,0,62,3,0.2 mg estrogen,normal activity,0,heart block or conduction def,0,74.0,85.0,12,9,14.099609375,2.0,9.0,0.39996337890625,3087
+447,0,62,3,placebo,normal activity,0,heart strain,0,72.0,103.0,16,7,14.298828125,0.0,5.0,0.39996337890625,3100
+448,1,2,3,5.0 mg estrogen,normal activity,0,old MI,0,78.0,103.0,11,7,11.19921875,0.0,6.0,0.5999755859375,3140
+449,1,34,3,0.2 mg estrogen,normal activity,0,benign,0,70.0,85.0,14,9,14.8984375,2.0,12.0,0.5999755859375,3170
+450,1,4,3,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,72.0,101.0,14,10,16.3984375,1.0,9.0,0.7999267578125,3205
+451,1,12,3,0.2 mg estrogen,normal activity,1,old MI,0,76.0,103.0,13,7,12.5,4.0,8.0,0.5,3213
+452,0,56,3,placebo,normal activity,0,old MI,0,66.0,106.0,12,9,15.5,4.0,9.0,0.5,3260
+453,1,1,3,5.0 mg estrogen,normal activity,1,old MI,0,88.0,99.0,13,6,14.099609375,17.0,9.0,0.699951171875,3275
+454,1,7,3,5.0 mg estrogen,normal activity,1,old MI,0,78.0,88.0,11,6,10.8984375,5.0,9.0,0.29998779296875,3413
+455,1,4,4,placebo,normal activity,0,normal,0,79.0,105.0,12,7,12.19921875,5.0,12.0,3.0,2740
+456,0,70,4,placebo,normal activity,1,rhythmic disturb & electrolyte ch,0,77.0,106.0,15,8,16.0,1.0,9.0,2.19970703125,2841
+457,0,65,4,5.0 mg estrogen,normal activity,0,normal,0,71.0,101.0,12,7,12.69921875,2.0,10.0,1.5,3006
+458,1,7,4,0.2 mg estrogen,normal activity,1,normal,0,74.0,91.0,15,8,12.599609375,8.0,13.0,11.298828125,3100
+459,1,30,4,1.0 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,75.0,124.0,15,10,13.19921875,3.0,13.0,1.699951171875,3132
+460,1,40,4,0.2 mg estrogen,normal activity,1,heart block or conduction def,0,77.0,90.0,10,6,14.69921875,2.0,12.0,8.19921875,3176
+461,1,13,4,placebo,normal activity,1,normal,0,75.0,74.0,15,9,15.798828125,4.0,11.0,1.099853515625,3275
+462,1,22,4,0.2 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,1,64.0,110.0,16,10,9.298828125,6.0,11.0,6.2998046875,3332
+463,1,0,4,1.0 mg estrogen,normal activity,0,heart block or conduction def,1,79.0,89.0,17,10,10.298828125,19.0,13.0,2.0,3332
+464,1,18,4,placebo,in bed > 50% daytime,1,old MI,0,60.0,134.0,16,8,14.099609375,9.0,13.0,1.199951171875,3367
+465,1,64,3,0.2 mg estrogen,normal activity,0,heart strain,0,70.0,107.0,14,9,14.099609375,8.0,9.0,0.199981689453125,2806
+466,1,13,3,5.0 mg estrogen,normal activity,1,heart strain,0,73.0,111.0,15,8,17.0,4.0,9.0,0.699951171875,2856
+467,1,26,3,placebo,normal activity,0,rhythmic disturb & electrolyte ch,0,61.0,109.0,14,9,14.298828125,3.0,11.0,0.39996337890625,2898
+468,1,1,3,5.0 mg estrogen,in bed < 50% daytime,1,heart strain,0,79.0,97.0,16,8,13.599609375,3.0,9.0,0.5999755859375,2943
+469,1,16,3,placebo,normal activity,0,,0,78.0,88.0,12,7,11.3984375,4.0,9.0,0.39996337890625,2985
+470,1,33,3,0.2 mg estrogen,normal activity,1,old MI,0,72.0,106.0,13,8,16.5,17.0,11.0,0.5999755859375,3267
+471,1,16,3,placebo,normal activity,0,rhythmic disturb & electrolyte ch,0,76.0,90.0,13,8,12.0,5.0,,1.099853515625,3336
+472,1,22,4,0.2 mg estrogen,normal activity,0,normal,0,51.0,100.0,16,9,14.599609375,5.0,13.0,0.5999755859375,2698
+473,1,30,4,0.2 mg estrogen,normal activity,1,normal,0,59.0,87.0,15,9,15.099609375,32.0,13.0,3.0,2713
+474,1,53,4,5.0 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,73.0,91.0,16,9,14.599609375,4.0,10.0,3.19970703125,2761
+475,1,53,4,0.2 mg estrogen,normal activity,1,rhythmic disturb & electrolyte ch,0,74.0,90.0,13,7,11.798828125,5.0,13.0,1.2998046875,2806
+476,1,7,4,placebo,in bed > 50% daytime,1,old MI,1,77.0,93.0,14,9,11.798828125,43.0,11.0,43.0,2806
+477,1,61,4,0.2 mg estrogen,normal activity,0,rhythmic disturb & electrolyte ch,0,74.0,95.0,15,7,13.5,5.0,11.0,24.3984375,2841
+478,1,40,4,placebo,normal activity,0,normal,0,60.0,125.0,11,7,14.0,9.0,11.0,1.2998046875,2852
+479,1,9,4,placebo,normal activity,1,rhythmic disturb & electrolyte ch,1,72.0,83.0,14,8,12.8984375,18.0,13.0,1.39990234375,2943
+480,1,14,4,1.0 mg estrogen,normal activity,1,old MI,0,79.0,88.0,12,7,8.599609375,20.0,,1.39990234375,3002
+481,0,59,4,1.0 mg estrogen,normal activity,0,normal,0,50.0,117.0,12,8,15.298828125,,13.0,10.298828125,3169
+482,0,59,4,1.0 mg estrogen,normal activity,0,normal,1,73.0,71.0,16,8,13.3984375,3.0,11.0,0.699951171875,3192
+483,1,7,4,5.0 mg estrogen,normal activity,0,normal,0,72.0,110.0,14,6,13.69921875,4.0,11.0,2.099609375,3220
+484,1,12,4,5.0 mg estrogen,in bed > 50% daytime,1,old MI,1,80.0,105.0,14,7,8.5,6.0,5.0,160.0,3435
+485,1,46,4,5.0 mg estrogen,in bed < 50% daytime,1,old MI,1,69.0,71.0,11,8,13.69921875,5.0,13.0,1.39990234375,3465
+486,0,50,4,1.0 mg estrogen,normal activity,0,normal,0,75.0,116.0,14,8,16.0,1.0,11.0,4.5,3465
+487,1,0,4,5.0 mg estrogen,in bed < 50% daytime,1,heart block or conduction def,0,71.0,99.0,14,8,14.099609375,1.0,11.0,1.699951171875,3465
+488,0,52,3,5.0 mg estrogen,normal activity,1,heart strain,0,73.0,114.0,14,8,13.599609375,8.0,8.0,0.5,3387
+489,1,19,3,1.0 mg estrogen,normal activity,1,heart block or conduction def,0,76.0,99.0,15,9,16.0,7.0,9.0,0.199981689453125,3407
+490,0,52,3,placebo,normal activity,0,normal,0,73.0,114.0,15,7,11.69921875,5.0,9.0,0.29998779296875,3407
+491,0,51,3,1.0 mg estrogen,normal activity,1,heart strain,0,76.0,114.0,30,18,11.599609375,6.0,9.0,0.5,3440
+492,0,51,3,5.0 mg estrogen,normal activity,0,normal,0,68.0,98.0,14,8,13.3984375,6.0,9.0,0.699951171875,3440
+493,1,14,4,0.2 mg estrogen,in bed < 50% daytime,0,normal,0,64.0,100.0,14,7,14.0,23.0,11.0,0.5999755859375,3395
+494,1,27,4,0.2 mg estrogen,normal activity,0,normal,0,75.0,102.0,16,8,14.19921875,5.0,11.0,29.59765625,3430
+495,0,51,4,1.0 mg estrogen,normal activity,1,heart strain,1,60.0,123.0,14,10,14.5,6.0,8.0,0.5,3429
+496,1,5,4,5.0 mg estrogen,normal activity,1,normal,0,73.0,100.0,19,10,16.796875,2.0,11.0,2.89990234375,3433
+497,1,0,3,1.0 mg estrogen,normal activity,0,normal,0,78.0,108.0,11,6,15.798828125,9.0,13.0,0.5999755859375,3297
+498,1,41,3,0.2 mg estrogen,normal activity,1,heart strain,0,78.0,127.0,16,10,15.798828125,5.0,9.0,0.5,3349
+499,0,53,3,1.0 mg estrogen,normal activity,0,heart block or conduction def,0,77.0,93.0,17,10,16.0,11.0,9.0,0.7999267578125,3357
+500,1,19,4,5.0 mg estrogen,normal activity,1,heart strain,0,82.0,96.0,12,6,12.3984375,32.0,13.0,8.3984375,3311
+501,1,4,4,1.0 mg estrogen,in bed < 50% daytime,0,normal,1,74.0,97.0,15,6,21.19921875,33.0,,22.19921875,3428
