@@ -17,7 +17,7 @@ dependencies = [
   "omegaconf",
   "numpy",
   "pandas",
-  "scikit-learn>=1.4",
+  "scikit-learn>=1.4,<1.7",
   "statsmodels",
   "matplotlib",
   "mrmr_selection",
